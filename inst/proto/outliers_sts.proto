@@ -1,0 +1,31 @@
+syntax = "proto3";
+import public "toolkit.proto";
+import public "outliers.proto";
+import public "sts.proto";
+
+package outliers;
+option java_package = "demetra.sts.outliers.io.protobuf";
+option java_outer_classname = "StsOutliersProtos";
+
+
+message StsSolution{
+	
+	repeated double bsm_initial = 1;
+	repeated double bsm_final = 2;
+	
+	jd3.LikelihoodStatistics likelihood_initial = 3;
+	jd3.LikelihoodStatistics likelihood_final = 4;
+	
+	repeated Outlier outliers = 5;
+	
+	repeated double coefficients = 6;
+	jd3.Matrix covariance = 7;
+	
+	jd3.Matrix regressors = 8;
+	repeated double residuals = 9;
+	
+	jd3.Matrix components = 10;
+	jd3.Matrix tau_initial = 11;
+	jd3.Matrix tau_final = 12;
+	
+}

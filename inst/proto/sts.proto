@@ -1,0 +1,69 @@
+syntax = "proto3";
+import public "toolkit.proto";
+import public "modelling.proto";
+import public "sa.proto";
+
+package sts;
+option java_package = "demetra.sts.io.protobuf";
+option java_outer_classname = "StsProtos";
+
+
+enum SeasonalModel{
+	SEAS_NONE = 0;
+	SEAS_DUMMY = 1;
+	SEAS_TRIGONOMETRIC = 2;
+	SEAS_HARRISONSTEVENS = 3;
+	SEAS_CRUDE = 4;
+}
+
+message BsmSpec{
+	jd3.Parameter noise = 1;
+	jd3.Parameter level = 2;
+	jd3.Parameter slope = 3;
+	jd3.Parameter seas = 4;
+	SeasonalModel seasonal_model = 5;
+	jd3.Parameter cycle = 6;
+	jd3.Parameter cycle_period = 7;
+	jd3.Parameter cycle_factor = 8;
+}
+
+message Bsm{
+	message Description{
+		jd3.TsData series = 1;
+		bool log = 2;
+		modelling.LengthOfPeriod preadjustment = 3;
+		repeated modelling.RegressionVariable variables = 4;
+		BsmSpec bsm = 5;
+	}
+	
+	message Estimation{
+		/* Model  y = Xb + u */
+		repeated double y =1;
+		jd3.Matrix x = 2;
+		repeated double b = 3;
+		jd3.Matrix bcovariance = 4;
+		jd3.ParametersEstimation parameters = 5;
+		jd3.DiffuseLikelihoodStatistics likelihood = 6;
+		repeated double residuals = 7;
+		repeated modelling.MissingEstimation missings = 8;
+	}
+	
+	/* State space estimation */
+	message Components{
+		modelling.Component series = 10;
+		modelling.Component level = 11;
+		modelling.Component slope = 12;
+		modelling.Component cycle = 13;
+		modelling.Component seasonal = 14;
+		modelling.Component noise = 15;
+	}
+	
+	Description description = 1;
+	Estimation estimation = 2;
+	Components components = 3;
+	sa.SaDecomposition final = 4;
+	
+	modelling.Diagnostics diagnostics = 5;	
+}
+
+
