@@ -16,10 +16,10 @@ Imports:
   methods
 SystemRequirements: Java JRE 17 or higher
 License: EUPL
-URL: https://github.com/palatej/rjd3sts
+URL: https://github.com/rjdemetra/rjd3sts
 LazyData: TRUE
 RoxygenNote: 7.2.3
-BugReports: https://github.com/palatej/rjd3sts/issues
+BugReports: https://github.com/rjdemetra/rjd3sts/issues
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 Collate: 
