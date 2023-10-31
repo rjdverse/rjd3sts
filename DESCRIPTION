@@ -1,7 +1,7 @@
 Package: rjd3sts
 Type: Package
 Title: State Space Framework and Structural Time Series with 'JDemetra+ 3.0'
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: c(
   person("Jean", "Palate", role = c("aut", "cre"),
                 email = "jean.palate@nbb.be"))
@@ -12,7 +12,7 @@ Depends:
 Imports:
   rJava (>= 1.0-6),
   RProtoBuf (>= 0.4.17),
-  rjd3toolkit (>= 3.0.1),
+  rjd3toolkit (>= 3.1.1),
   methods
 SystemRequirements: Java JRE 17 or higher
 License: EUPL
