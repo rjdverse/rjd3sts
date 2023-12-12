@@ -13,7 +13,7 @@ sts(
   cycle = -1,
   noise = 1,
   seasonal = c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"),
-  diffuse.regs = T,
+  diffuse.regs = TRUE,
   tol = 1e-09
 )
 }

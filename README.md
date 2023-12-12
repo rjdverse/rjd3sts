@@ -5,9 +5,17 @@
 
 ## Installation
 
+To get the current stable version (from the latest release):
+
 ``` r
-# Install development version from GitHub
 # install.packages("remotes")
-remotes::install_github("rjdemetra/rjd3toolkit")
+remotes::install_github("rjdemetra/rjd3toolkit@*release")
+remotes::install_github("rjdemetra/rjd3sts@*release")
+```
+
+To get the current development version from GitHub:
+
+``` r
+# install.packages("remotes")
 remotes::install_github("rjdemetra/rjd3sts")
 ```
