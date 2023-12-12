@@ -15,7 +15,7 @@ NULL
 #'  x<-rjd3toolkit::retail$BookStores
 #'  sts(x)
 sts<-function(y, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
-              , seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"), diffuse.regs=T, tol=1e-9){
+              , seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"), diffuse.regs=TRUE, tol=1e-9){
   
   if (!is.ts(y)){
     stop("y must be a time series")
@@ -25,9 +25,9 @@ sts<-function(y, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
     td<-rjd3toolkit::td(s = y, groups = X.td)
     X<-cbind(X, td)
   }
-  jts<-rjd3toolkit::.r2jd_ts(y)
+  jts<-rjd3toolkit::.r2jd_tsdata(y)
   jx<-rjd3toolkit::.r2jd_matrix(X)
-  jsts<-.jcall("jdplus/sts/base/r/Bsm", "Ljdplus/sts/base/core/BasicStructuralModel;", "process", jts, jx,
+  jsts<-.jcall("jdplus/sts/base/r/Bsm", "Ljdplus/sts/base/core/LightBasicStructuralModel;", "process", jts, jx,
               as.integer(level), as.integer(slope), as.integer(cycle), as.integer(noise), seasonal, as.logical(diffuse.regs), tol)
   buffer<-.jcall("jdplus/sts/base/r/Bsm", "[B", "toBuffer", jsts)
   p<-RProtoBuf::read(sts.Bsm, buffer)
@@ -118,7 +118,7 @@ sts_forecast<-function(y, model=c("none", "td2", "td3", "td7", "full"), nf=12){
   if (!is.ts(y)){
     stop("y must be a time series")
   }
-  jf<-.jcall("jdplus/sts/base/r/Bsm", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "forecast", rjd3toolkit::.r2jd_ts(y), model, as.integer((nf)))
+  jf<-.jcall("jdplus/sts/base/r/Bsm", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "forecast", rjd3toolkit::.r2jd_tsdata(y), model, as.integer((nf)))
   return (rjd3toolkit::.jd2r_matrix(jf))
   
 }
@@ -140,7 +140,7 @@ p2r_sts_estimation<-function(p){
     parameters=rjd3toolkit::.p2r_parameters_estimation(p$parameters),
     b=p$b,
     bvar=rjd3toolkit::.p2r_matrix(p$bcovariance),
-    likelihood=p2r_diffuselikelihood(p$likelihood),
+    likelihood=.p2r_likelihood(p$likelihood),
     res=p$residuals))
 }
 

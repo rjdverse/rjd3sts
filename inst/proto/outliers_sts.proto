@@ -4,7 +4,7 @@ import public "outliers.proto";
 import public "sts.proto";
 
 package outliers;
-option java_package = "demetra.sts.outliers.io.protobuf";
+option java_package = "jdplus.sts.base.io.outliers.protobuf";
 option java_outer_classname = "StsOutliersProtos";
 
 
