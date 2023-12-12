@@ -71,8 +71,8 @@ sts_outliers<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, noise=
   n1<-rjd3toolkit::.proc_numeric(jsts, "finalbsm.noisevar")
   tau1=rjd3toolkit::.proc_matrix(jsts, "finaltau")
   
-  ll0<-.proc_diffuselikelihood(jsts, "initiallikelihood.")
-  ll1<-.proc_diffuselikelihood(jsts, "finallikelihood.")
+  ll0<-rjd3toolkit::.proc_likelihood(jsts, "initiallikelihood.")
+  ll1<-rjd3toolkit::.proc_likelihood(jsts, "finallikelihood.")
   
   return(structure(list(
     model=model,

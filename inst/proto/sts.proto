@@ -4,7 +4,7 @@ import public "modelling.proto";
 import public "sa.proto";
 
 package sts;
-option java_package = "demetra.sts.io.protobuf";
+option java_package = "jdplus.sts.base.io.protobuf";
 option java_outer_classname = "StsProtos";
 
 
@@ -43,7 +43,7 @@ message Bsm{
 		repeated double b = 3;
 		jd3.Matrix bcovariance = 4;
 		jd3.ParametersEstimation parameters = 5;
-		jd3.DiffuseLikelihoodStatistics likelihood = 6;
+		jd3.LikelihoodStatistics likelihood = 6;
 		repeated double residuals = 7;
 		repeated modelling.MissingEstimation missings = 8;
 	}
