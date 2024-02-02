@@ -38,5 +38,3 @@ likelihood<-function(nobs, neffectiveobs=NA, nparams=0, ll, adjustedll=NA, aic, 
                      p$log_likelihood, p$adjusted_log_likelihood,
                      p$aic, p$aicc, p$bic, p$bicc, p$ssq))
 }
-
-
