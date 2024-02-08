@@ -168,7 +168,7 @@ add<-function(model, item){
 estimate<-function(model, data, marginal=FALSE, concentrated=TRUE,
               initialization=c("Augmented_Robust", "Diffuse", "SqrtDiffuse", "Augmented", "Augmented_NoCollapsing"), optimizer=c("LevenbergMarquardt", "MinPack", "BFGS", "LBFGS"), precision=1e-15, initialParameters=NULL){
   initialization <- match.arg(initialization)
-  optimize <- =match.arg(optimizer)
+  optimize <- match.arg(optimizer)
   if (! is(model, MODEL))
     stop("Not a model")
   if ( is.jnull(model$internal) ){
