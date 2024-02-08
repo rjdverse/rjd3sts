@@ -96,7 +96,7 @@ msignal<-function(object, m, pos=NULL, stdev=FALSE){
         stop("Invalid input")
       jpos<-.jarray(as.integer(pos-1))
     }
-    jm=rjd3toolkit::.r2jd_matrix(m)
+    jm <- rjd3toolkit::.r2jd_matrix(m)
     if (stdev){
       return (.jcall(object$internal, "[D", "stdevSignal", jm, jpos))
     }else{
@@ -167,8 +167,8 @@ add<-function(model, item){
 #' @examples
 estimate<-function(model, data, marginal=FALSE, concentrated=TRUE,
               initialization=c("Augmented_Robust", "Diffuse", "SqrtDiffuse", "Augmented", "Augmented_NoCollapsing"), optimizer=c("LevenbergMarquardt", "MinPack", "BFGS", "LBFGS"), precision=1e-15, initialParameters=NULL){
-  initialization=match.arg(initialization)
-  optimizer=match.arg(optimizer)
+  initialization <- match.arg(initialization)
+  optimize <- =match.arg(optimizer)
   if (! is(model, MODEL))
     stop("Not a model")
   if ( is.jnull(model$internal) ){
@@ -389,7 +389,7 @@ locallineartrend<-function(name, levelVariance=.01, slopevariance=.01, fixedLeve
 #'
 #' @examples
 seasonal<-function(name, period, type=c("Trigonometric", "Crude", "HarrisonStevens", "Dummy"), variance=.01, fixed=FALSE){
-  type=match.arg(type)
+  type <- match.arg(type)
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "seasonalComponent", name, type, as.integer(period), variance, fixed)
   return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
@@ -483,7 +483,7 @@ var_locallineartrend<-function(name, lstd, sstd=NULL, levelScale=1, slopeScale=1
 #' @examples
 var_seasonal<-function(name, period, type=c("Trigonometric", "Crude", "HarrisonStevens", "Dummy"), std, scale=1, fixed=FALSE){
   
-  type=match.arg(type)
+  type <- match.arg(type)
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "seasonalComponent", name, type, as.integer(period), as.double(std), scale, fixed)
   
   
@@ -915,7 +915,7 @@ parameters<-function(model){
   if ( is.jnull(model$internal) ){
     return(NULL)
   }
-  res = rjd3toolkit::result(model, "parameters")
+  res <- rjd3toolkit::result(model, "parameters")
   names(res) <- rjd3toolkit::result(model, "parametersnames")
   return()
 }
