@@ -4,7 +4,7 @@
 \alias{var_reg}
 \title{Time Varying Regressor}
 \usage{
-var_reg(name, x, stderr, scale = 1, fixed = F)
+var_reg(name, x, stderr, scale = 1, fixed = FALSE)
 }
 \arguments{
 \item{name}{}

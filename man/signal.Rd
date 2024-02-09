@@ -4,7 +4,7 @@
 \alias{signal}
 \title{Title}
 \usage{
-signal(object, obs = 1, pos = NULL, loading = NULL, stdev = F)
+signal(object, obs = 1, pos = NULL, loading = NULL, stdev = FALSE)
 }
 \arguments{
 \item{object}{}
