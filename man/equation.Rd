@@ -4,7 +4,7 @@
 \alias{equation}
 \title{Create equation}
 \usage{
-equation(name, variance = 0, fixed = T)
+equation(name, variance = 0, fixed = TRUE)
 }
 \arguments{
 \item{name}{}

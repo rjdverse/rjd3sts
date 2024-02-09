@@ -8,7 +8,7 @@ cycle(
   name,
   factor = 0.9,
   period = 60,
-  fixed = F,
+  fixed = FALSE,
   variance = 0.01,
   fixedvariance = FALSE
 )

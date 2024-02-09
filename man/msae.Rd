@@ -8,9 +8,9 @@
 \usage{
 msae(name, nwaves, ar, fixedar = TRUE, lag = 1)
 
-msae2(name, vars, fixedvars = F, ar, fixedar = T, lag = 1)
+msae2(name, vars, fixedvars = FALSE, ar, fixedar = TRUE, lag = 1)
 
-msae3(name, vars, fixedvars = F, ar, fixedar = T, k, lag = 1)
+msae3(name, vars, fixedvars = FALSE, ar, fixedar = TRUE, k, lag = 1)
 }
 \arguments{
 \item{name}{name of the component.}
