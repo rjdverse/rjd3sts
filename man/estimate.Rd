@@ -7,8 +7,8 @@
 estimate(
   model,
   data,
-  marginal = F,
-  concentrated = T,
+  marginal = FALSE,
+  concentrated = TRUE,
   initialization = c("Augmented_Robust", "Diffuse", "SqrtDiffuse", "Augmented",
     "Augmented_NoCollapsing"),
   optimizer = c("LevenbergMarquardt", "MinPack", "BFGS", "LBFGS"),

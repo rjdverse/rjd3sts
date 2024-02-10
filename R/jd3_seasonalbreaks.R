@@ -49,4 +49,3 @@ seasonalbreaks<-function(y, period=NA, level=1, slope=1, noise=1, seasonal=c("Ha
     return (so)
   }
 }
-  

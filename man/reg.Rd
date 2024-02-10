@@ -4,7 +4,7 @@
 \alias{reg}
 \title{Time Varying Regressors}
 \usage{
-reg(name, x, var = NULL, fixed = F)
+reg(name, x, var = NULL, fixed = FALSE)
 }
 \arguments{
 \item{name}{}
