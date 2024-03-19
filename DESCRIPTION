@@ -18,7 +18,8 @@ Remotes:
   github::rjdemetra/rjd3toolkit
 SystemRequirements: Java JRE 17 or higher
 License: EUPL
-URL: https://github.com/palatej/rjd3sts
+URL: https://github.com/palatej/rjd3sts,
+    https://rjdemetra.github.io/rjd3sts/
 LazyData: TRUE
 RoxygenNote: 7.2.3
 BugReports: https://github.com/palatej/rjd3sts/issues
