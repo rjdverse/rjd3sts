@@ -26,7 +26,7 @@ sts_outliers<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, noise=
   data<-as.numeric(y)
   if (is.ts(y)){
     period<-frequency(y)
-  }else{
+  } else{
     if (! is.null(X.td)){
       stop("y must be a time series when X.td is used")
     }
