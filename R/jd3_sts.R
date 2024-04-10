@@ -58,7 +58,7 @@ sts_raw<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, n
   data<-as.numeric(y)
   if (is.ts(y)){
     period<-frequency(y)
-  }else{
+  } else{
     if (! is.null(X.td)){
       stop("y must be a time series when X.td is used")
     }
@@ -226,7 +226,7 @@ print.JD3STS<-function(x, ...){
     xregs$t[sel]<-t
     xregs$pvalue[sel]<-pval
     print(xregs[-2])
-  }else{
+  } else{
     cat("No regression variable\n")
   }
 }

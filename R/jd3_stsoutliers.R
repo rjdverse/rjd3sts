@@ -26,7 +26,7 @@ sts_outliers<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, noise=
   data<-as.numeric(y)
   if (is.ts(y)){
     period<-frequency(y)
-  }else{
+  } else{
     if (! is.null(X.td)){
       stop("y must be a time series when X.td is used")
     }
@@ -62,14 +62,14 @@ sts_outliers<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, noise=
   s0<-rjd3toolkit::.proc_numeric(jsts, "initialbsm.slopevar")
   seas0<-rjd3toolkit::.proc_numeric(jsts, "initialbsm.seasvar")
   n0<-rjd3toolkit::.proc_numeric(jsts, "initialbsm.noisevar")
-  tau0=rjd3toolkit::.proc_matrix(jsts, "initialtau")
+  tau0 <- rjd3toolkit::.proc_matrix(jsts, "initialtau")
   
   
   l1<-rjd3toolkit::.proc_numeric(jsts, "finalbsm.levelvar")
   s1<-rjd3toolkit::.proc_numeric(jsts, "finalbsm.slopevar")
   seas1<-rjd3toolkit::.proc_numeric(jsts, "finalbsm.seasvar")
   n1<-rjd3toolkit::.proc_numeric(jsts, "finalbsm.noisevar")
-  tau1=rjd3toolkit::.proc_matrix(jsts, "finaltau")
+  tau1 <- rjd3toolkit::.proc_matrix(jsts, "finaltau")
   
   ll0<-rjd3toolkit::.proc_likelihood(jsts, "initiallikelihood.")
   ll1<-rjd3toolkit::.proc_likelihood(jsts, "finallikelihood.")
