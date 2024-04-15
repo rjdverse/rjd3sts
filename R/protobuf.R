@@ -24,8 +24,8 @@ p2r_diffuselikelihood<-function(p){
 
 likelihood<-function(nobs, neffectiveobs=NA, nparams=0, ll, adjustedll=NA, aic, aicc, bic, bicc, ssq){
   
-  if (is.na(neffectiveobs)) neffectiveobs=nobs
-  if (is.na(adjustedll)) adjustedll=ll
+  if (is.na(neffectiveobs)) neffectiveobs <- nobs
+  if (is.na(adjustedll)) adjustedll <- ll
   
   return (structure(list(nobs=nobs, neffectiveobs=neffectiveobs, nparams=nparams,
                          ll=ll, adjustedll=adjustedll,
