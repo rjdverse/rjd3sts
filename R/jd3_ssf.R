@@ -801,6 +801,53 @@ reg_td<-function(name, period, start, length, groups=c(1,2,3,4,5,6,0), contrast=
 
 #' Title
 #'
+#' @param name 
+#' @param period 
+#' @param nnodes 
+#' @param nodes 
+#' @param start 
+#' @param variance 
+#' @param fixed 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=1, fixed=FALSE){
+  if (is.null(nodes)){
+    if (nnodes == 0)
+      stop('Invalid parameters. nnodes should be greater than 0 or nodes should be defined')
+    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines", 
+                  name, period, as.integer(nnodes), as.integer(start-1), variance, fixed)
+  }else{
+    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines", 
+                  name, period, as.numeric(nodes), as.integer(start-1), variance, fixed)
+  }
+  return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
+}
+
+
+#' Title
+#'
+#' @param name 
+#' @param startYear 
+#' @param nodes 
+#' @param start 
+#' @param variance 
+#' @param fixed 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+splines_daily<-function(name, startYear, nodes, start=1, variance=1, fixed=FALSE){
+  jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "dailySplines", 
+                  name, as.integer(startYear), as.integer(nodes-1), as.integer(start-1), variance, fixed)
+  return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
+}
+
+#' Title
+#'
 #' @param model 
 #'
 #' @return
@@ -815,6 +862,47 @@ smoothed_states<-function(model){
   }
   return(rjd3toolkit::result(model, "ssf.smoothing.states"))
 }
+
+#' Title
+#'
+#' @param model 
+#' @param equation 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+smoothed_components<-function(model, equation=1, fast=TRUE){
+  if (! is(model, MODELESTIMATION))
+    stop("Not a model")
+  if ( is.jnull(model$internal) ){
+    return(NULL)
+  }
+  if (fast)
+    return(rjd3toolkit::result(model,paste0("ssf.smoothing.fastcomponents(",equation-1,')')))
+  else
+    return(rjd3toolkit::result(model,paste0("ssf.smoothing.components(",equation-1,')')))
+}
+
+#' Title
+#'
+#' @param model 
+#' @param equation 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+smoothed_components_stdev<-function(model, equation=1){
+  if (! is(model, MODELESTIMATION))
+    stop("Not a model")
+  if ( is.jnull(model$internal) ){
+    return(NULL)
+  }
+  return(sqrt(rjd3toolkit::result(model,paste0("ssf.smoothing.vcomponents(",equation-1,')'))))
+}
+
+
 
 #' Title
 #'
