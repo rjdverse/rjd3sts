@@ -7,18 +7,6 @@
 arma(name, ar, fixedar = FALSE, ma, fixedma = FALSE, var = 1, fixedvar = FALSE)
 }
 \arguments{
-\item{name}{}
-
-\item{ar}{}
-
-\item{fixedar}{}
-
-\item{ma}{}
-
-\item{fixedma}{}
-
-\item{var}{}
-
 \item{fixedvar}{}
 }
 \description{

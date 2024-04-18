@@ -7,14 +7,6 @@
 signal(object, obs = 1, pos = NULL, loading = NULL, stdev = FALSE)
 }
 \arguments{
-\item{object}{}
-
-\item{obs}{}
-
-\item{pos}{}
-
-\item{loading}{}
-
 \item{stdev}{}
 }
 \description{

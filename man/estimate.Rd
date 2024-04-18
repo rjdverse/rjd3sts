@@ -29,8 +29,6 @@ on a non-stationary latent variable and the loading coefficient needs to be esti
 
 \item{initialization}{initialization method.}
 
-\item{optimizer}{}
-
 \item{precision}{indicating the largest likelihood deviations that make the algorithm stop.}
 
 \item{initialParameters}{}

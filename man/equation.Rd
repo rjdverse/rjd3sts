@@ -7,10 +7,6 @@
 equation(name, variance = 0, fixed = TRUE)
 }
 \arguments{
-\item{name}{}
-
-\item{variance}{}
-
 \item{fixed}{}
 }
 \description{
