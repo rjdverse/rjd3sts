@@ -7,14 +7,6 @@
 var_locallevel(name, std, scale = 1, fixed = FALSE, initial = NaN)
 }
 \arguments{
-\item{name}{}
-
-\item{std}{}
-
-\item{scale}{}
-
-\item{fixed}{}
-
 \item{initial}{}
 }
 \description{

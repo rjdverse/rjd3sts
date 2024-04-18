@@ -14,16 +14,6 @@ var_seasonal(
 )
 }
 \arguments{
-\item{name}{}
-
-\item{period}{}
-
-\item{type}{}
-
-\item{std}{}
-
-\item{scale}{}
-
 \item{fixed}{}
 }
 \description{

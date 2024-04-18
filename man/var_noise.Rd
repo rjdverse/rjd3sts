@@ -7,12 +7,6 @@
 var_noise(name, std, scale = 1, fixed = FALSE)
 }
 \arguments{
-\item{name}{}
-
-\item{std}{}
-
-\item{scale}{}
-
 \item{fixed}{}
 }
 \description{

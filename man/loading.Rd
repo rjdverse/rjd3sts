@@ -14,8 +14,6 @@ loading(pos = NULL, weights = NULL)
 
 \item{weights}{defines the weights associated to each one of the state variables included in the block.}
 
-\item{object}{}
-
 \item{obs}{}
 }
 \description{

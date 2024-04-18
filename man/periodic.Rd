@@ -7,14 +7,6 @@
 periodic(name, period, harmonics, variance = 0.01, fixedvariance = FALSE)
 }
 \arguments{
-\item{name}{}
-
-\item{period}{}
-
-\item{harmonics}{}
-
-\item{variance}{}
-
 \item{fixedvariance}{}
 }
 \description{

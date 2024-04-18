@@ -7,16 +7,6 @@
 splines_daily(name, startYear, nodes, start = 1, variance = 1, fixed = FALSE)
 }
 \arguments{
-\item{name}{}
-
-\item{startYear}{}
-
-\item{nodes}{}
-
-\item{start}{}
-
-\item{variance}{}
-
 \item{fixed}{}
 }
 \description{

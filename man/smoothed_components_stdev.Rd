@@ -2,15 +2,20 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{smoothed_components_stdev}
 \alias{smoothed_components_stdev}
-\title{Title}
+\title{Retrieves the stdev of the components of the model (univariate case) or of the
+components corresponding to a given equation (multivariate case)}
 \usage{
 smoothed_components_stdev(model, equation = 1)
 }
 \arguments{
-\item{model}{}
+\item{model}{Estimated state space model}
 
-\item{equation}{}
+\item{equation}{Equation containing the components}
+}
+\value{
+A matrix with the stdev of the components
 }
 \description{
-Title
+Retrieves the stdev of the components of the model (univariate case) or of the
+components corresponding to a given equation (multivariate case)
 }

@@ -2,15 +2,23 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{smoothed_components}
 \alias{smoothed_components}
-\title{Title}
+\title{Retrieves the components of the model (univariate case) or the
+components corresponding to a given equation (multivariate case)}
 \usage{
-smoothed_components(model, equation = 1)
+smoothed_components(model, equation = 1, fast = TRUE)
 }
 \arguments{
-\item{model}{}
+\item{model}{Estimated state space model}
 
-\item{equation}{}
+\item{equation}{Equation containing the components}
+
+\item{fast}{if true, only the components are computed. Otherwise, their stdev
+are also computed (not returned but available for future use).}
+}
+\value{
+A matrix with the components
 }
 \description{
-Title
+Retrieves the components of the model (univariate case) or the
+components corresponding to a given equation (multivariate case)
 }

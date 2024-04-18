@@ -14,16 +14,6 @@ cycle(
 )
 }
 \arguments{
-\item{name}{}
-
-\item{factor}{}
-
-\item{period}{}
-
-\item{fixed}{}
-
-\item{variance}{}
-
 \item{fixedvariance}{}
 }
 \description{

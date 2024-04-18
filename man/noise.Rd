@@ -7,10 +7,6 @@
 noise(name, variance = 0.01, fixed = FALSE)
 }
 \arguments{
-\item{name}{}
-
-\item{variance}{}
-
 \item{fixed}{}
 }
 \description{

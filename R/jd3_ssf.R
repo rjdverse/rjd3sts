@@ -11,16 +11,16 @@ STATEBLOCK<-'JD3_SsfStateBlock'
 #' Add Latent variable
 #'
 #' @param equation the equation
-#' @param item 
+#' @param item
 #' @param coeff the value of the coefficient associated to the block of latent variables defined by `item`.
 #' @param fixed logical that triggers estimation of coeff (FALSE) or fixes it (TRUE) to a pre-specified value
-#' @param loading 
+#' @param loading
 #'
 #' @return
 #' @export
 #'
 #' @examples
-#' 
+#'
 add_equation<-function(equation, item, coeff=1, fixed=TRUE, loading=NULL){
   if (! is(equation, EQUATION))
     stop("Not an equation")
@@ -35,11 +35,11 @@ add_equation<-function(equation, item, coeff=1, fixed=TRUE, loading=NULL){
 
 #' Title
 #'
-#' @param object 
-#' @param obs 
-#' @param pos 
-#' @param loading 
-#' @param stdev 
+#' @param object
+#' @param obs
+#' @param pos
+#' @param loading
+#' @param stdev
 #'
 #' @return
 #' @export
@@ -71,10 +71,10 @@ signal<-function(object, obs=1, pos=NULL, loading=NULL, stdev=FALSE){
 
 #' Title
 #'
-#' @param object 
-#' @param m 
-#' @param pos 
-#' @param stdev 
+#' @param object
+#' @param m
+#' @param pos
+#' @param stdev
 #'
 #' @return
 #' @export
@@ -107,8 +107,8 @@ msignal<-function(object, m, pos=NULL, stdev=FALSE){
 
 #' Title
 #'
-#' @param object 
-#' @param obs 
+#' @param object
+#' @param obs
 #'
 #' @return
 #' @export
@@ -127,8 +127,8 @@ loading<-function(object, obs=1){
 
 #' Title
 #'
-#' @param model 
-#' @param item 
+#' @param model
+#' @param item
 #'
 #' @return
 #' @export
@@ -152,14 +152,14 @@ add<-function(model, item){
 #'
 #' @param model the model
 #' @param data a matrix containing the data (one time series per column, time series dimension on the rows)
-#' @param marginal logical value used to specify whether the marginal likelihood definition is used (TRUE) or 
-#' not (FALSE) during the optimization. The marginal likelihood is recommended when there is at least one variable that loads 
+#' @param marginal logical value used to specify whether the marginal likelihood definition is used (TRUE) or
+#' not (FALSE) during the optimization. The marginal likelihood is recommended when there is at least one variable that loads
 #' on a non-stationary latent variable and the loading coefficient needs to be estimated.
 #' @param concentrated logical value used to specify whether the likelihood is concentrated (TRUE) or not (FALSE) during the optimization
 #' @param initialization initialization method.
-#' @param optimizer 
+#' @param optimizer
 #' @param precision indicating the largest likelihood deviations that make the algorithm stop.
-#' @param initialParameters 
+#' @param initialParameters
 #'
 #' @return
 #' @export
@@ -168,7 +168,7 @@ add<-function(model, item){
 estimate<-function(model, data, marginal=FALSE, concentrated=TRUE,
               initialization=c("Augmented_Robust", "Diffuse", "SqrtDiffuse", "Augmented", "Augmented_NoCollapsing"), optimizer=c("LevenbergMarquardt", "MinPack", "BFGS", "LBFGS"), precision=1e-15, initialParameters=NULL){
   initialization <- match.arg(initialization)
-  optimize <- match.arg(optimizer)
+  optimizer <- match.arg(optimizer)
   if (! is(model, MODEL))
     stop("Not a model")
   if ( is.jnull(model$internal) ){
@@ -198,8 +198,8 @@ compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
 
 
 #' Autoregressive model
-#' 
-#' Functions to create an autoregressive model (`ar`) or a 
+#'
+#' Functions to create an autoregressive model (`ar`) or a
 #' modified autoregressive model (`ar2`)
 #'
 #' @param ar vector of the AR coefficients (\eqn{\varphi_1, \dots, \varphi_p}).
@@ -209,19 +209,19 @@ compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
 #' @param fixedvariance boolean that triggers the estimation of the variance (`FALSE`)
 #' or fixed it (`TRUE`) to a pre-specified value set by the parameter `variance`.
 #' @param nlags integer specifying how many lags of the state variable are needed
-#' @param zeroinit boolean determining the initial condition for the state variable, 
-#' which is equal to zero if `zeroinit = TRUE`. 
-#' The default (`zeroinit = FAKSE`) triggers the an initialization based on the 
+#' @param zeroinit boolean determining the initial condition for the state variable,
+#' which is equal to zero if `zeroinit = TRUE`.
+#' The default (`zeroinit = FAKSE`) triggers the an initialization based on the
 #' unconditional mean and variance of the AR(p) process.
 #'
-#' @details 
+#' @details
 #' The AR process is defined by
-#' \deqn{\Phi\left(B\right)y_t=\epsilon_t} 
+#' \deqn{\Phi\left(B\right)y_t=\epsilon_t}
 #' where
-#' \deqn{\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p}  
-#' is an auto-regressive polynomial. 
+#' \deqn{\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p}
+#' is an auto-regressive polynomial.
 #' @return
-#' 
+#'
 #' @export
 #'
 #' @examples
@@ -241,12 +241,12 @@ ar2<-function(name, ar, fixedar=FALSE, variance=.01, fixedvariance=FALSE, nlags=
 
 #' Title
 #'
-#' @param name 
-#' @param factor 
-#' @param period 
-#' @param fixed 
-#' @param variance 
-#' @param fixedvariance 
+#' @param name
+#' @param factor
+#' @param period
+#' @param fixed
+#' @param variance
+#' @param fixedvariance
 #'
 #' @return
 #' @export
@@ -259,11 +259,11 @@ cycle<-function(name, factor=.9, period=60, fixed=FALSE, variance=.01, fixedvari
 
 #' Title
 #'
-#' @param name 
-#' @param period 
-#' @param harmonics 
-#' @param variance 
-#' @param fixedvariance 
+#' @param name
+#' @param period
+#' @param harmonics
+#' @param variance
+#' @param fixedvariance
 #'
 #' @return
 #' @export
@@ -277,11 +277,11 @@ periodic<-function(name, period, harmonics, variance=.01, fixedvariance=FALSE){
 
 #' Title
 #'
-#' @param name 
-#' @param ar 
-#' @param fixedar 
-#' @param lag 
-#' @param zeroinit 
+#' @param name
+#' @param ar
+#' @param fixedar
+#' @param lag
+#' @param zeroinit
 #'
 #' @return
 #' @export
@@ -297,11 +297,11 @@ sae<-function(name, ar, fixedar=FALSE, lag=1, zeroinit=FALSE){
 #' @inheritParams locallevel
 #' @param nwaves integer representing the number of waves
 #' @param ar matrix representing the covariance structure of the wave specific survey error.
-#' @param fixedar logical that triggers the estimation of the correlation patterns (`TRUE`) or 
+#' @param fixedar logical that triggers the estimation of the correlation patterns (`TRUE`) or
 #' fixes them to the values given by the entries `ar` (`FALSE`)
-#' @param lag integer specifying the number of time periods (in the base frequency) that compose the survey period. 
-#' This coincides with the number of time periods an individual has to wait between two different waves. 
-#' Note that if the survey period is one quarter, all of them have already responded in the previous wave exactly 3 months ago 
+#' @param lag integer specifying the number of time periods (in the base frequency) that compose the survey period.
+#' This coincides with the number of time periods an individual has to wait between two different waves.
+#' Note that if the survey period is one quarter, all of them have already responded in the previous wave exactly 3 months ago
 #' (because individuals are always interviewed at the same stint during each survey period).
 #'
 #' @return
@@ -320,7 +320,7 @@ msae2<-function(name, vars, fixedvars=FALSE, ar, fixedar=TRUE, lag=1){
   return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
-#' @param k 
+#' @param k
 #' @rdname msae
 #' @export
 msae3<-function(name, vars, fixedvars=FALSE, ar, fixedar=TRUE, k, lag=1){
@@ -332,11 +332,11 @@ msae3<-function(name, vars, fixedvars=FALSE, ar, fixedar=TRUE, k, lag=1){
 #'
 #' @param name name of the component.
 #' @param variance the value of the variance (\eqn{\sigma^2_l}).
-#' @param fixed boolean that triggers estimation of \eqn{\sigma^2_l} (`FALSE`) or  
+#' @param fixed boolean that triggers estimation of \eqn{\sigma^2_l} (`FALSE`) or
 #' fixes it (`TRUE`) to a pre-specified  value set by the parameter `variance`.
 #' @param initial initial value of the level (\eqn{l_0}).
-#' 
-#' @details 
+#'
+#' @details
 #' \deqn{\begin{cases}l_{t+1} = l_t + \mu_t \\
 #'  \mu_t \sim N(0, \sigma^2 \sigma^2_l)
 #'  \end{cases}
@@ -357,11 +357,11 @@ locallevel<-function(name, variance=.01, fixed=FALSE, initial=NaN){
 #' @inheritParams locallevel
 #' @param levelVariance variance of the level (\eqn{\sigma^2_l})
 #' @param slopevariance variance of the slope (\eqn{\sigma^2_n$)
-#' @param fixedLevelVariance,fixedSlopeVariance boolean that triggers 
-#' the estimation of the variances \eqn{\sigma^2_l} and \eqn{\sigma^2_n} (`FALSE`) or  
+#' @param fixedLevelVariance,fixedSlopeVariance boolean that triggers
+#' the estimation of the variances \eqn{\sigma^2_l} and \eqn{\sigma^2_n} (`FALSE`) or
 #' fixes it (`TRUE`) to a pre-specified value set by the parameters `levelVariance` and `slopevariance`.
-#' @details 
-#' 
+#' @details
+#'
 #' \deqn{\begin{cases}l_{t+1} = l_t + n_t +  \xi_t \\
 #'  n_{t+1} = n_t + \mu_t \\
 #'  \xi_t \sim N(0, \sigma^2\sigma^2_l)\\
@@ -378,11 +378,11 @@ locallineartrend<-function(name, levelVariance=.01, slopevariance=.01, fixedLeve
 
 #' Title
 #'
-#' @param name 
-#' @param period 
-#' @param type 
-#' @param variance 
-#' @param fixed 
+#' @param name
+#' @param period
+#' @param type
+#' @param variance
+#' @param fixed
 #'
 #' @return
 #' @export
@@ -396,9 +396,9 @@ seasonal<-function(name, period, type=c("Trigonometric", "Crude", "HarrisonSteve
 
 #' Title
 #'
-#' @param name 
-#' @param variance 
-#' @param fixed 
+#' @param name
+#' @param variance
+#' @param fixed
 #'
 #' @return
 #' @export
@@ -411,10 +411,10 @@ noise<-function(name, variance=.01, fixed=FALSE){
 
 #' Title
 #'
-#' @param name 
-#' @param std 
-#' @param scale 
-#' @param fixed 
+#' @param name
+#' @param std
+#' @param scale
+#' @param fixed
 #'
 #' @return
 #' @export
@@ -427,11 +427,11 @@ var_noise<-function(name, std, scale=1, fixed=FALSE){
 
 #' Title
 #'
-#' @param name 
-#' @param std 
-#' @param scale 
-#' @param fixed 
-#' @param initial 
+#' @param name
+#' @param std
+#' @param scale
+#' @param fixed
+#' @param initial
 #'
 #' @return
 #' @export
@@ -444,20 +444,20 @@ var_locallevel<-function(name, std, scale=1, fixed=FALSE, initial=NaN){
 
 #' Title
 #'
-#' @param name 
-#' @param lstd 
-#' @param sstd 
-#' @param levelScale 
-#' @param slopeScale 
-#' @param fixedLevelScale 
-#' @param fixedSlopeScale 
+#' @param name
+#' @param lstd
+#' @param sstd
+#' @param levelScale
+#' @param slopeScale
+#' @param fixedLevelScale
+#' @param fixedSlopeScale
 #'
 #' @return
 #' @export
 #'
 #' @examples
 var_locallineartrend<-function(name, lstd, sstd=NULL, levelScale=1, slopeScale=1, fixedLevelScale=FALSE, fixedSlopeScale=FALSE ){
-  
+
   if (is.null(sstd)){
     jsstd<-.jnull("[D")
   } else{
@@ -470,23 +470,23 @@ var_locallineartrend<-function(name, lstd, sstd=NULL, levelScale=1, slopeScale=1
 
 #' Title
 #'
-#' @param name 
-#' @param period 
-#' @param type 
-#' @param std 
-#' @param scale 
-#' @param fixed 
+#' @param name
+#' @param period
+#' @param type
+#' @param std
+#' @param scale
+#' @param fixed
 #'
 #' @return
 #' @export
 #'
 #' @examples
 var_seasonal<-function(name, period, type=c("Trigonometric", "Crude", "HarrisonStevens", "Dummy"), std, scale=1, fixed=FALSE){
-  
+
   type <- match.arg(type)
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "seasonalComponent", name, type, as.integer(period), as.double(std), scale, fixed)
-  
-  
+
+
   return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
@@ -503,9 +503,9 @@ model<-function(){
 
 #' Create equation
 #'
-#' @param name 
-#' @param variance 
-#' @param fixed 
+#' @param name
+#' @param variance
+#' @param fixed
 #'
 #' @return
 #' @export
@@ -531,7 +531,7 @@ loading<-function(pos=NULL, weights=NULL){
     jrslt<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "fromPosition", as.integer(0))
     return (rjd3toolkit::.jd3_object(jrslt, LOADING))
   }
-  else if (length(pos) == 1){ 
+  else if (length(pos) == 1){
     if (is.null(weights)){
       jrslt<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "fromPosition", as.integer(pos))
     } else{
@@ -555,8 +555,8 @@ loading<-function(pos=NULL, weights=NULL){
 
 #' Title
 #'
-#' @param pos 
-#' @param weights 
+#' @param pos
+#' @param weights
 #'
 #' @return
 #' @export
@@ -577,7 +577,7 @@ var_loading<-function(pos, weights){
 
 #' Title
 #'
-#' @param length 
+#' @param length
 #'
 #' @return
 #' @export
@@ -593,8 +593,8 @@ loading_sum<-function(length=0){
 
 #' Title
 #'
-#' @param period 
-#' @param startpos 
+#' @param period
+#' @param startpos
 #'
 #' @return
 #' @export
@@ -607,8 +607,8 @@ loading_cyclical<-function(period, startpos){
 
 #' Title
 #'
-#' @param period 
-#' @param startpos 
+#' @param period
+#' @param startpos
 #'
 #' @return
 #' @export
@@ -621,9 +621,9 @@ loading_periodic<-function(period, startpos){
 
 #' Title
 #'
-#' @param initialization 
-#' @param dynamics 
-#' @param measurement 
+#' @param initialization
+#' @param dynamics
+#' @param measurement
 #'
 #' @return
 #' @export
@@ -636,13 +636,13 @@ ssf<-function(initialization, dynamics, measurement){
 
 #' Autoregressive Moving Average (ARMA) Model
 #'
-#' @param name 
-#' @param ar 
-#' @param fixedar 
-#' @param ma 
-#' @param fixedma 
-#' @param var 
-#' @param fixedvar 
+#' @param name
+#' @param ar
+#' @param fixedar
+#' @param ma
+#' @param fixedma
+#' @param var
+#' @param fixedvar
 #'
 #' @return
 #' @export
@@ -656,12 +656,12 @@ arma<-function(name, ar, fixedar=FALSE, ma, fixedma=FALSE, var=1, fixedvar =FALS
 
 #' Autoregressive Integrated Moving Average (ARIMA) Model
 #'
-#' @param name 
-#' @param ar 
-#' @param diff 
-#' @param ma 
-#' @param var 
-#' @param fixed 
+#' @param name
+#' @param ar
+#' @param diff
+#' @param ma
+#' @param var
+#' @param fixed
 #'
 #' @return
 #' @export
@@ -674,14 +674,14 @@ arima<-function(name, ar, diff, ma, var=1, fixed =FALSE){
 
 #' Title
 #'
-#' @param name 
-#' @param period 
-#' @param orders 
-#' @param seasonal 
-#' @param parameters 
-#' @param fixedparameters 
-#' @param var 
-#' @param fixedvariance 
+#' @param name
+#' @param period
+#' @param orders
+#' @param seasonal
+#' @param parameters
+#' @param fixedparameters
+#' @param var
+#' @param fixedvariance
 #'
 #' @return
 #' @export
@@ -698,10 +698,10 @@ sarima<-function(name, period, orders, seasonal, parameters=NULL, fixedparameter
 
 #' Title
 #'
-#' @param name 
-#' @param core 
-#' @param period 
-#' @param start 
+#' @param name
+#' @param core
+#' @param period
+#' @param start
 #'
 #' @return
 #' @export
@@ -715,8 +715,8 @@ cumul<-function(name, core, period, start=0){
 
 #' Title
 #'
-#' @param name 
-#' @param components 
+#' @param name
+#' @param components
 #'
 #' @return
 #' @export
@@ -736,17 +736,17 @@ aggregation<-function(name, components){
 
 #' Time Varying Regressors
 #'
-#' @param name 
+#' @param name
 #' @param x matrix containing the regressors
-#' @param var 
-#' @param fixed 
+#' @param var
+#' @param fixed
 #'
 #' @return
 #' @export
 #'
 #' @examples
 reg<-function(name, x, var=NULL, fixed=FALSE){
-  
+
   if (is.null(var)){
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regression", name, rjd3toolkit::.r2jd_matrix(x))
   } else{
@@ -757,8 +757,8 @@ reg<-function(name, x, var=NULL, fixed=FALSE){
 
 #' Time Varying Regressor
 #'
-#' @param name 
-#' @param x Regression variable. Numerics 
+#' @param name
+#' @param x Regression variable. Numerics
 #' @param stderr Standard error of the innovations of the coefficient (1 in extrapolation)
 #' @param scale Scaling factor
 #' @param fixed Fixed scaling factor
@@ -772,7 +772,7 @@ reg<-function(name, x, var=NULL, fixed=FALSE){
 #'  std[c(20, 50, 150)]<-5
 #'  v<-var_reg("vx", x, std, 0.1)
 var_reg<-function(name, x, stderr, scale=1, fixed=FALSE){
-  
+
    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "timeVaryingRegression", name
                  , as.numeric(x), as.numeric(stderr), as.numeric(scale), fixed)
    return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
@@ -780,14 +780,14 @@ var_reg<-function(name, x, stderr, scale=1, fixed=FALSE){
 
 #' Title
 #'
-#' @param name 
-#' @param period 
-#' @param start 
-#' @param length 
-#' @param groups 
-#' @param contrast 
-#' @param variance 
-#' @param fixed 
+#' @param name
+#' @param period
+#' @param start
+#' @param length
+#' @param groups
+#' @param contrast
+#' @param variance
+#' @param fixed
 #'
 #' @return
 #' @export
@@ -801,13 +801,13 @@ reg_td<-function(name, period, start, length, groups=c(1,2,3,4,5,6,0), contrast=
 
 #' Title
 #'
-#' @param name 
-#' @param period 
-#' @param nnodes 
-#' @param nodes 
-#' @param start 
-#' @param variance 
-#' @param fixed 
+#' @param name
+#' @param period
+#' @param nnodes
+#' @param nodes
+#' @param start
+#' @param variance
+#' @param fixed
 #'
 #' @return
 #' @export
@@ -817,10 +817,10 @@ splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=
   if (is.null(nodes)){
     if (nnodes == 0)
       stop('Invalid parameters. nnodes should be greater than 0 or nodes should be defined')
-    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines", 
+    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines",
                   name, period, as.integer(nnodes), as.integer(start-1), variance, fixed)
   }else{
-    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines", 
+    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines",
                   name, period, as.numeric(nodes), as.integer(start-1), variance, fixed)
   }
   return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
@@ -829,26 +829,26 @@ splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=
 
 #' Title
 #'
-#' @param name 
-#' @param startYear 
-#' @param nodes 
-#' @param start 
-#' @param variance 
-#' @param fixed 
+#' @param name
+#' @param startYear
+#' @param nodes
+#' @param start
+#' @param variance
+#' @param fixed
 #'
 #' @return
 #' @export
 #'
 #' @examples
 splines_daily<-function(name, startYear, nodes, start=1, variance=1, fixed=FALSE){
-  jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "dailySplines", 
+  jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "dailySplines",
                   name, as.integer(startYear), as.integer(nodes-1), as.integer(start-1), variance, fixed)
   return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
 #' Title
 #'
-#' @param model 
+#' @param model
 #'
 #' @return
 #' @export
@@ -863,12 +863,14 @@ smoothed_states<-function(model){
   return(rjd3toolkit::result(model, "ssf.smoothing.states"))
 }
 
-#' Title
+#' Retrieves the components of the model (univariate case) or the
+#' components corresponding to a given equation (multivariate case)
 #'
-#' @param model 
-#' @param equation 
-#'
-#' @return
+#' @param model Estimated state space model
+#' @param equation Equation containing the components
+#' @param fast if true, only the components are computed. Otherwise, their stdev
+#'  are also computed (not returned but available for future use).
+#' @return A matrix with the components
 #' @export
 #'
 #' @examples
@@ -884,12 +886,13 @@ smoothed_components<-function(model, equation=1, fast=TRUE){
     return(rjd3toolkit::result(model,paste0("ssf.smoothing.components(",equation-1,')')))
 }
 
-#' Title
+#' Retrieves the stdev of the components of the model (univariate case) or of the
+#' components corresponding to a given equation (multivariate case)
 #'
-#' @param model 
-#' @param equation 
+#' @param model Estimated state space model
+#' @param equation Equation containing the components
 #'
-#' @return
+#' @return A matrix with the stdev of the components
 #' @export
 #'
 #' @examples
@@ -906,7 +909,7 @@ smoothed_components_stdev<-function(model, equation=1){
 
 #' Title
 #'
-#' @param model 
+#' @param model
 #'
 #' @return
 #' @export
@@ -923,7 +926,7 @@ smoothed_states_stdev<-function(model){
 
 #' Title
 #'
-#' @param model 
+#' @param model
 #'
 #' @return
 #' @export
@@ -940,7 +943,7 @@ filtered_states<-function(model){
 
 #' Title
 #'
-#' @param model 
+#' @param model
 #'
 #' @return
 #' @export
@@ -957,7 +960,7 @@ filtered_states_stdev<-function(model){
 
 #' Title
 #'
-#' @param model 
+#' @param model
 #'
 #' @return
 #' @export
@@ -974,7 +977,7 @@ filtering_states_stdev<-function(model){
 
 #' Title
 #'
-#' @param model 
+#' @param model
 #'
 #' @return
 #' @export
@@ -991,7 +994,7 @@ filtering_states<-function(model){
 
 #' Get Parameters of SSF Model
 #'
-#' @param model 
+#' @param model
 #'
 #' @return
 #' @export

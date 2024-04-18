@@ -7,8 +7,6 @@
 aggregation(name, components)
 }
 \arguments{
-\item{name}{}
-
 \item{components}{}
 }
 \description{
