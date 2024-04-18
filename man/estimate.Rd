@@ -7,8 +7,8 @@
 estimate(
   model,
   data,
-  marginal = F,
-  concentrated = T,
+  marginal = FALSE,
+  concentrated = TRUE,
   initialization = c("Augmented_Robust", "Diffuse", "SqrtDiffuse", "Augmented",
     "Augmented_NoCollapsing"),
   optimizer = c("LevenbergMarquardt", "MinPack", "BFGS", "LBFGS"),
@@ -28,8 +28,6 @@ on a non-stationary latent variable and the loading coefficient needs to be esti
 \item{concentrated}{logical value used to specify whether the likelihood is concentrated (TRUE) or not (FALSE) during the optimization}
 
 \item{initialization}{initialization method.}
-
-\item{optimizer}{}
 
 \item{precision}{indicating the largest likelihood deviations that make the algorithm stop.}
 

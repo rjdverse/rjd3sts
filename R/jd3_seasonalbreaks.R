@@ -26,7 +26,7 @@ seasonalbreaks<-function(y, period=NA, level=1, slope=1, noise=1, seasonal=c("Ha
   data<-as.numeric(y)
   if (is.ts(y)){
     period<-frequency(y)
-  }else{
+  } else{
     if (! is.null(X.td)){
       stop("y must be a time series when X.td is used")
     }
@@ -45,8 +45,7 @@ seasonalbreaks<-function(y, period=NA, level=1, slope=1, noise=1, seasonal=c("Ha
   
   if (is.ts(y)){
     return (ts(so, frequency = period, start=start(y)))
-  }else{
+  } else{
     return (so)
   }
 }
-  

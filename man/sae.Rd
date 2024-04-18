@@ -7,14 +7,6 @@
 sae(name, ar, fixedar = FALSE, lag = 1, zeroinit = FALSE)
 }
 \arguments{
-\item{name}{}
-
-\item{ar}{}
-
-\item{fixedar}{}
-
-\item{lag}{}
-
 \item{zeroinit}{}
 }
 \description{

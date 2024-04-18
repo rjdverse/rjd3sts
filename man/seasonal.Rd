@@ -13,14 +13,6 @@ seasonal(
 )
 }
 \arguments{
-\item{name}{}
-
-\item{period}{}
-
-\item{type}{}
-
-\item{variance}{}
-
 \item{fixed}{}
 }
 \description{

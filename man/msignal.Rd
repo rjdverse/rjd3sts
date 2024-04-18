@@ -4,15 +4,9 @@
 \alias{msignal}
 \title{Title}
 \usage{
-msignal(object, m, pos = NULL, stdev = F)
+msignal(object, m, pos = NULL, stdev = FALSE)
 }
 \arguments{
-\item{object}{}
-
-\item{m}{}
-
-\item{pos}{}
-
 \item{stdev}{}
 }
 \description{

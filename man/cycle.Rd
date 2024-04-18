@@ -8,22 +8,12 @@ cycle(
   name,
   factor = 0.9,
   period = 60,
-  fixed = F,
+  fixed = FALSE,
   variance = 0.01,
   fixedvariance = FALSE
 )
 }
 \arguments{
-\item{name}{}
-
-\item{factor}{}
-
-\item{period}{}
-
-\item{fixed}{}
-
-\item{variance}{}
-
 \item{fixedvariance}{}
 }
 \description{

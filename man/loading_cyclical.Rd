@@ -7,8 +7,6 @@
 loading_cyclical(period, startpos)
 }
 \arguments{
-\item{period}{}
-
 \item{startpos}{}
 }
 \description{

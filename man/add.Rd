@@ -7,8 +7,6 @@
 add(model, item)
 }
 \arguments{
-\item{model}{}
-
 \item{item}{}
 }
 \description{

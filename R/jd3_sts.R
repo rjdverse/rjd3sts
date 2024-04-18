@@ -53,12 +53,12 @@ sts<-function(y, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
 #'
 #' @examples
 sts_raw<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
-                  , seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"), diffuse.regs=T, tol=1e-9){
+                  , seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"), diffuse.regs=TRUE, tol=1e-9){
   
   data<-as.numeric(y)
   if (is.ts(y)){
     period<-frequency(y)
-  }else{
+  } else{
     if (! is.null(X.td)){
       stop("y must be a time series when X.td is used")
     }
@@ -89,7 +89,7 @@ sts_raw<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, n
   }
   add(bsm, eq)
   #estimate the model
-  rslt<-estimate(bsm, data, marginal=T, concentrated=TRUE, precision = 1e-9)
+  rslt<-estimate(bsm, data, marginal=TRUE, concentrated=TRUE, precision = 1e-9)
   return(rslt)
 }
 
@@ -221,12 +221,12 @@ print.JD3STS<-function(x, ...){
     sel<-xregs$type=='ESTIMATED'
     t<-xregs$value[sel]/stde
     ndf<-x$estimation$likelihood$nobs-x$estimation$likelihood$ndiffuse-x$estimation$likelihood$nparams+1
-    pval<-2*pt(abs(t), ndf, lower.tail = F)
+    pval<-2*pt(abs(t), ndf, lower.tail = FALSE)
     xregs$stde[sel]<-stde
     xregs$t[sel]<-t
     xregs$pvalue[sel]<-pval
     print(xregs[-2])
-  }else{
+  } else{
     cat("No regression variable\n")
   }
 }

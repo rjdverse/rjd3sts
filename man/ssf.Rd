@@ -7,10 +7,6 @@
 ssf(initialization, dynamics, measurement)
 }
 \arguments{
-\item{initialization}{}
-
-\item{dynamics}{}
-
 \item{measurement}{}
 }
 \description{

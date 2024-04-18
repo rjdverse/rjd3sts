@@ -4,14 +4,10 @@
 \alias{reg}
 \title{Time Varying Regressors}
 \usage{
-reg(name, x, var = NULL, fixed = F)
+reg(name, x, var = NULL, fixed = FALSE)
 }
 \arguments{
-\item{name}{}
-
 \item{x}{matrix containing the regressors}
-
-\item{var}{}
 
 \item{fixed}{}
 }

@@ -7,8 +7,6 @@
 var_loading(pos, weights)
 }
 \arguments{
-\item{pos}{}
-
 \item{weights}{}
 }
 \description{

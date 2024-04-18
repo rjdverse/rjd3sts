@@ -7,12 +7,6 @@
 cumul(name, core, period, start = 0)
 }
 \arguments{
-\item{name}{}
-
-\item{core}{}
-
-\item{period}{}
-
 \item{start}{}
 }
 \description{
