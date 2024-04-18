@@ -121,10 +121,22 @@
     <loc>https://rjdemetra.github.io/rjd3sts/reference/signal.html</loc>
   </url>
   <url>
+    <loc>https://rjdemetra.github.io/rjd3sts/reference/smoothed_components.html</loc>
+  </url>
+  <url>
+    <loc>https://rjdemetra.github.io/rjd3sts/reference/smoothed_components_stdev.html</loc>
+  </url>
+  <url>
     <loc>https://rjdemetra.github.io/rjd3sts/reference/smoothed_states.html</loc>
   </url>
   <url>
     <loc>https://rjdemetra.github.io/rjd3sts/reference/smoothed_states_stdev.html</loc>
+  </url>
+  <url>
+    <loc>https://rjdemetra.github.io/rjd3sts/reference/splines_daily.html</loc>
+  </url>
+  <url>
+    <loc>https://rjdemetra.github.io/rjd3sts/reference/splines_regular.html</loc>
   </url>
   <url>
     <loc>https://rjdemetra.github.io/rjd3sts/reference/ssf.html</loc>
