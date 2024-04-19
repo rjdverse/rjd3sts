@@ -7,16 +7,6 @@
 arima(name, ar, diff, ma, var = 1, fixed = FALSE)
 }
 \arguments{
-\item{name}{}
-
-\item{ar}{}
-
-\item{diff}{}
-
-\item{ma}{}
-
-\item{var}{}
-
 \item{fixed}{}
 }
 \description{

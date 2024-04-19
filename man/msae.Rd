@@ -26,8 +26,6 @@ fixes them to the values given by the entries \code{ar} (\code{FALSE})}
 This coincides with the number of time periods an individual has to wait between two different waves.
 Note that if the survey period is one quarter, all of them have already responded in the previous wave exactly 3 months ago
 (because individuals are always interviewed at the same stint during each survey period).}
-
-\item{k}{}
 }
 \description{
 Modeling errors in surveys with overlapping panels

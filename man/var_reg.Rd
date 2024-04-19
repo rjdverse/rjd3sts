@@ -7,8 +7,6 @@
 var_reg(name, x, stderr, scale = 1, fixed = FALSE)
 }
 \arguments{
-\item{name}{}
-
 \item{x}{Regression variable. Numerics}
 
 \item{stderr}{Standard error of the innovations of the coefficient (1 in extrapolation)}
