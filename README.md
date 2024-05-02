@@ -5,6 +5,10 @@
 
 ## Installation
 
+Running rjd3 packages requires **Java 17 or higher**. How to set up such
+a configuration in R is explained
+[here](https://jdemetra-new-documentation.netlify.app/#Rconfig)
+
 To get the current stable version (from the latest release):
 
 ``` r
