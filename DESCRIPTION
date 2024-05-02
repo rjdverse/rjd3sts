@@ -15,7 +15,7 @@ Imports:
   rjd3toolkit (>= 3.2.2),
   methods
 Remotes:
-  github::rjdemetra/rjd3sts
+  github::rjdemetra/rjd3toolkit
 SystemRequirements: Java (>= 17)
 License: EUPL
 URL: https://github.com/rjdemetra/rjd3sts, https://rjdemetra.github.io/rjd3sts
