@@ -8,19 +8,23 @@ MODELESTIMATION<-'JD3_SsfModelEstimation'
 MODEL<-'JD3_SsfModel'
 STATEBLOCK<-'JD3_SsfStateBlock'
 
-#' Add Latent variable
+#' Add a building block to the considered equation
 #'
 #' @param equation the equation
-#' @param item
+#' @param item the block of the state array that will be linked to the observation corresponding to this equation through the specified loading and coefficient
 #' @param coeff the value of the coefficient associated to the block of latent variables defined by `item`.
 #' @param fixed logical that triggers estimation of coeff (FALSE) or fixes it (TRUE) to a pre-specified value
-#' @param loading
+#' @param loading the loading that links the block to the observation
 #'
 #' @return
 #' @export
 #'
 #' @examples
-#'
+#' model<- equation('eq1)
+#' ll<-locallevel('ll')
+#' n<-noise('n')
+#' add_equation(model, ll)
+#' add_equation(model, n)
 add_equation<-function(equation, item, coeff=1, fixed=TRUE, loading=NULL){
   if (! is(equation, EQUATION))
     stop("Not an equation")
@@ -394,7 +398,7 @@ seasonal<-function(name, period, type=c("Trigonometric", "Crude", "HarrisonSteve
   return (rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
-#' Title
+#' Noise component
 #'
 #' @param name
 #' @param variance
