@@ -2,7 +2,7 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{noise}
 \alias{noise}
-\title{Title}
+\title{Noise component}
 \usage{
 noise(name, variance = 0.01, fixed = FALSE)
 }
@@ -10,5 +10,5 @@ noise(name, variance = 0.01, fixed = FALSE)
 \item{fixed}{}
 }
 \description{
-Title
+Noise component
 }
