@@ -1,28 +1,27 @@
 Package: rjd3sts
 Type: Package
-Title: State Space Framework and Structural Time Series with 'JDemetra+ 3.0'
+Title: State Space Framework and Structural Time Series with 'JDemetra+ 3.x'
 Version: 2.1.1
 Authors@R: c(
   person("Jean", "Palate", role = c("aut", "cre"),
-                email = "jean.palate@nbb.be"))
-Description: Interface around 'JDemetra+ 3.x' (<https://github.com/jdemetra/jdemetra-core>) seasonal adjustment software, STACE project.
- It offers access to several functions around state space modelss and structural time series.
+                email = "palatejean@gmail.com"))
+Description: R Interface to 'JDemetra+ 3.x' (<https://github.com/jdemetra>) time series analysis software.
+ It offers access to several functions on state space models and structural time series.
 Depends:
-  R (>= 3.6.0)
+  R (>= 4.1.0)
 Imports:
   rJava (>= 1.0-6),
   RProtoBuf (>= 0.4.17),
   rjd3toolkit (>= 3.2.2),
   methods
 Remotes:
-  github::rjdemetra/rjd3toolkit
+  github::rjdverse/rjd3toolkit
 SystemRequirements: Java (>= 17)
 License: EUPL
-URL: https://github.com/palatej/rjd3sts,
-    https://rjdemetra.github.io/rjd3sts/
+URL: https://github.com/rjdverse/rjd3sts, https://rjdverse.github.io/rjd3sts
 LazyData: TRUE
 RoxygenNote: 7.3.1
-BugReports: https://github.com/palatej/rjd3sts/issues
+BugReports: https://github.com/rjdverse/rjd3sts
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 Collate: 
