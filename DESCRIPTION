@@ -1,6 +1,6 @@
 Package: rjd3sts
 Type: Package
-Title: State Space Framework and Structural Time Series with 'JDemetra+ 3.0'
+Title: State Space Framework and Structural Time Series with 'JDemetra+ 3.x'
 Version: 2.1.1
 Authors@R: c(
   person("Jean", "Palate", role = c("aut", "cre"),
