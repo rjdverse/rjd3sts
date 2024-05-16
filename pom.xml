@@ -11,14 +11,14 @@
 	<description>Usage: mvn -Pcopy-jars</description>
 
 	<properties>
-		<jdplus-sts.version>2.1.0</jdplus-sts.version>
+		<jdplus-incubator.version>2.1.0</jdplus-incubator.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>eu.europa.ec.joinup.sat</groupId>
 			<artifactId>jdplus-sts-base-r</artifactId>
-			<version>${jdplus-sts.version}</version>
+			<version>${jdplus-incubator.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId>
@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>eu.europa.ec.joinup.sat</groupId>
 			<artifactId>jdplus-sts-base-io</artifactId>
-			<version>${jdplus-sts.version}</version>
+			<version>${jdplus-incubator.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId>
