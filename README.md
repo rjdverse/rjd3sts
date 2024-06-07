@@ -1,7 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rjd3sts
+# `rjd3sts` <a href="https://rjdverse.github.io/rjd3sts/"><img src="man/figures/logo.png" align="right" height="150" style="float:right; height:150px;"/></a>
+
+<!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/rjd3sts)](https://CRAN.R-project.org/package=rjd3sts)
+
+[![R-CMD-check](https://github.com/rjdverse/rjd3sts/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/R-CMD-check.yaml)
+[![lint](https://github.com/rjdverse/rjd3sts/actions/workflows/lint.yaml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/lint.yaml)
+
+[![GH Pages
+built](https://github.com/rjdverse/rjd3sts/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/pkgdown.yaml)
+<!-- badges: end -->
 
 ## Installation
 
@@ -33,6 +45,9 @@ library("rjd3sts")
 #> The following objects are masked from 'package:stats':
 #> 
 #>     ar, arima, cycle
+```
+
+``` r
 
 y <- log(rjd3toolkit::ABS$X0.2.09.10.M)
 days<-c(1,1,1,1,2,3,0)

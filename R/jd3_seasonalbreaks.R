@@ -44,8 +44,8 @@ seasonalbreaks<-function(y, period=NA, level=1, slope=1, noise=1, seasonal=c("Ha
                as.integer(level), as.integer(slope), as.integer(noise), seasonal, rjd3toolkit::.r2jd_matrix(X))
   
   if (is.ts(y)){
-    return (ts(so, frequency = period, start=start(y)))
+    return(ts(so, frequency = period, start=start(y)))
   } else{
-    return (so)
+    return(so)
   }
 }
