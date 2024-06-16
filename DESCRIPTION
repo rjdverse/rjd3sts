@@ -4,7 +4,9 @@ Title: State Space Framework and Structural Time Series with 'JDemetra+ 3.x'
 Version: 2.1.1
 Authors@R: c(
   person("Jean", "Palate", role = c("aut", "cre"),
-                email = "palatejean@gmail.com"))
+                email = "palatejean@gmail.com"),
+  person("Tanguy", "Barthelemy", role = c("art"),
+                 email ="tanguy.barthelemy@insee.fr"))
 Description: R Interface to 'JDemetra+ 3.x' (<https://github.com/jdemetra>) time series analysis software.
  It offers access to several functions on state space models and structural time series.
 Depends:
