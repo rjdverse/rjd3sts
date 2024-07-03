@@ -22,7 +22,7 @@ model<-rjd3sts::model()
 # create the components and add them to the model
 rjd3sts::add(model, rjd3sts::sarima("airline", 12, c(0,1,1), c(0,1,1)))
 
-rjd3sts::add(model, vtd<-rjd3sts::reg_td("td", 12, start(s), length(s), contrast = F))
+rjd3sts::add(model, vtd<-rjd3sts::reg_td("td", 12, start(s), length(s), contrast = FALSE))
 #estimate the model
 rslt<-rjd3sts::estimate(model, s)
 
@@ -62,7 +62,7 @@ n<-rjd3sts::noise('n')
 rjd3sts::add(model, llt)
 rjd3sts::add(model, seas)
 rjd3sts::add(model, n)
-rjd3sts::add(model, vtd<-rjd3sts::reg_td("td", 12, start(s), length(s), contrast = F))
+rjd3sts::add(model, vtd<-rjd3sts::reg_td("td", 12, start(s), length(s), contrast = FALSE))
 #estimate the model
 rslt<-rjd3sts::estimate(model, s)
 

@@ -17,7 +17,7 @@ bsm<-model()
 add(bsm, locallineartrend("ll"))
 add(bsm, seasonal("s", 12, type="HarrisonStevens"))
 add(bsm, noise("n"))
-rslt<-estimate(bsm, log(s), marginal=T)
+rslt<-estimate(bsm, log(s), marginal=TRUE)
 
 
 
@@ -29,11 +29,11 @@ bsm<-model()
 add(bsm, locallineartrend("ll"))
 add(bsm, seasonal("s", 12, type="HarrisonStevens"))
   # create the equation (fix the variance to 1)
-eq<-equation("eq", 1,T)
+eq<-equation("eq", 1,TRUE)
 add_equation(eq, "ll")
 add_equation(eq, "s")
 add(bsm, eq)
-rslt<-estimate(bsm, log(s), marginal=T)
+rslt<-estimate(bsm, log(s), marginal=TRUE)
 
 ## ----bsm3---------------------------------------------------------------------
 

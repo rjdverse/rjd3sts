@@ -360,7 +360,7 @@ likelihood.</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">add</span>(bsm, <span class="fu">locallineartrend</span>(<span class="st">&quot;ll&quot;</span>))</span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">add</span>(bsm, <span class="fu">seasonal</span>(<span class="st">&quot;s&quot;</span>, <span class="dv">12</span>, <span class="at">type=</span><span class="st">&quot;HarrisonStevens&quot;</span>))</span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">add</span>(bsm, <span class="fu">noise</span>(<span class="st">&quot;n&quot;</span>))</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>rslt<span class="ot">&lt;-</span><span class="fu">estimate</span>(bsm, <span class="fu">log</span>(s), <span class="at">marginal=</span>T)</span></code></pre></div>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>rslt<span class="ot">&lt;-</span><span class="fu">estimate</span>(bsm, <span class="fu">log</span>(s), <span class="at">marginal=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <ul>
 <li>Likelihood = 747.8184945</li>
 <li>Parameters = 0.160016, 0.000396, 0.243922, 1.000000</li>
@@ -374,11 +374,11 @@ likelihood.</p>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">add</span>(bsm, <span class="fu">locallineartrend</span>(<span class="st">&quot;ll&quot;</span>))</span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">add</span>(bsm, <span class="fu">seasonal</span>(<span class="st">&quot;s&quot;</span>, <span class="dv">12</span>, <span class="at">type=</span><span class="st">&quot;HarrisonStevens&quot;</span>))</span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="co"># create the equation (fix the variance to 1)</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>eq<span class="ot">&lt;-</span><span class="fu">equation</span>(<span class="st">&quot;eq&quot;</span>, <span class="dv">1</span>,T)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>eq<span class="ot">&lt;-</span><span class="fu">equation</span>(<span class="st">&quot;eq&quot;</span>, <span class="dv">1</span>,<span class="cn">TRUE</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">add_equation</span>(eq, <span class="st">&quot;ll&quot;</span>)</span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="fu">add_equation</span>(eq, <span class="st">&quot;s&quot;</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="fu">add</span>(bsm, eq)</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>rslt<span class="ot">&lt;-</span><span class="fu">estimate</span>(bsm, <span class="fu">log</span>(s), <span class="at">marginal=</span>T)</span></code></pre></div>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>rslt<span class="ot">&lt;-</span><span class="fu">estimate</span>(bsm, <span class="fu">log</span>(s), <span class="at">marginal=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <ul>
 <li>Likelihood = 747.8184945</li>
 <li>Parameters = 0.160016, 0.000396, 0.243922, 1.000000</li>
