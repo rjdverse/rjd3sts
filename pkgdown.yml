@@ -3,9 +3,10 @@ pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   bsm: bsm.html
+  regsplines: regsplines.html
   sts: sts.html
   tdvar: tdvar.html
-last_built: 2024-07-03T12:01Z
+last_built: 2024-07-03T13:38Z
 urls:
   reference: https://rjdverse.github.io/rjd3sts/reference
   article: https://rjdverse.github.io/rjd3sts/articles
