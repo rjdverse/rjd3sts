@@ -33,14 +33,14 @@ We illustrate the various methods using two sets of time series:
 * The **retail** data set contains monthly figures over US retail activity of various categories of goods and services from 1992 to 2010.
 * The **ABS** data set contains long monthly series over Australian retail trade.
 
-```{r data}
-s<-log(retail$BookStores)
-```
-
 
 # Examples
 
+## [Basic structural models](bsm.html)
 
+## [Time varying trading days](tdvar.html)
+
+## [Regular period cubic splines](regsplines.html)
 
 
 
