@@ -24,8 +24,6 @@ suppressPackageStartupMessages(library(rjd3sts))
 library(knitr)
 ```
 
-
-
 # Data
 
 We illustrate the various methods using two sets of time series:
@@ -33,6 +31,67 @@ We illustrate the various methods using two sets of time series:
 * The **retail** data set contains monthly figures over US retail activity of various categories of goods and services from 1992 to 2010.
 * The **ABS** data set contains long monthly series over Australian retail trade.
 
+
+# Overview of the supported state space forms
+
+# Description of the state blocks
+
+## ar
+
+### Introduction
+
+The AR process is defined by
+
+$$\Phi\left(B\right)y_t=\epsilon_t $$ 
+
+where:  
+
+$$\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p $$   
+
+is an auto-regressive polynomial. 
+
+Let $\gamma_i$ be the autocovariances of the model.
+
+Using those notations, the state-space model can be written as follows :
+
+### State block: 
+
+$$ \alpha_t= \begin{pmatrix} y_t \\ y_{t-1} \\ \vdots \\ y_{t-p+1} \end{pmatrix}$$  
+The state block can be extended with additional lags. That can be useful in complex (multi-variate) models
+
+### Dynamics
+
+$$ T_t = \begin{pmatrix}-\varphi_1 & \cdots & \cdots  & -\varphi_p  \\
+                        1          & \cdots &  \cdots &  0          \\ 
+						\vdots     & \ddots &  \ddots & \vdots\\ 
+						0          &   0    &  1      & 0  \end{pmatrix}$$
+
+$$ S_t = \sigma_{ar} \begin{pmatrix} 1 \\ 0 \\ \vdots\\ 0 \end{pmatrix} $$  
+
+$$ V_t = S S' $$
+
+### Measurement
+
+$$ Z_t = \begin{pmatrix} 1 & 0 & \cdots & 0\end{pmatrix}$$
+
+$$ h_t = 0 $$
+
+### Initialization 
+
+$$ \alpha_{-1} = \begin{pmatrix}0 \\ 0 \\ \vdots\\ 0 \end{pmatrix} $$  
+
+$$ P_{*} = \Omega $$
+$\Omega$ is the unconditional covariance of the state array; it can be easily derived using the MA representation. We have:
+
+$$ \Omega\left(i,0\right) = \gamma_i $$  
+
+$$ \Omega\left(i,j\right) = \Omega\left(i-1,j-1\right)-\psi_i \psi_j $$  
+
+```{r }
+b_ar<-ar("ar", c(-.2, .4, -.05), nlags=5)
+knit_print(block_t(b_ar))
+
+```
 
 # Examples
 
