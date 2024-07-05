@@ -52,21 +52,21 @@ signal<-function(object, obs=1, pos=NULL, loading=NULL, stdev=FALSE){
     stop("Not a model estimation")
   if ( is.jnull(object$internal)){
     return(NULL)
-  } else{
+  } else {
     if (! is.null(loading)){
       if (stdev){
         return(.jcall(object$internal, "[D", "stdevSignal", rjd3toolkit::.r2jd_matrix(loading)))
-      } else{
+      } else {
         return(.jcall(object$internal, "[D", "signal", rjd3toolkit::.r2jd_matrix(loading)))
       }
-    } else{
+    } else {
       if (is.null(pos))
         jpos<-.jnull("[I")
       else
         jpos<-.jarray(as.integer(pos-1))
       if (stdev){
         return(.jcall(object$internal, "[D", "stdevSignal", as.integer(obs-1), jpos))
-      } else{
+      } else {
         return(.jcall(object$internal, "[D", "signal", as.integer(obs-1), jpos))
       }
     }
@@ -92,10 +92,10 @@ msignal<-function(object, m, pos=NULL, stdev=FALSE){
   }
   if (! is.matrix(m)){
     stop("Invalid matrix")
-  } else{
+  } else {
     if (is.null(pos))
       jpos<-.jnull("[I")
-    else{
+    else {
       if (length(pos) != dim(m)[2])
         stop("Invalid input")
       jpos<-.jarray(as.integer(pos-1))
@@ -103,7 +103,7 @@ msignal<-function(object, m, pos=NULL, stdev=FALSE){
     jm <- rjd3toolkit::.r2jd_matrix(m)
     if (stdev){
       return(.jcall(object$internal, "[D", "stdevSignal", jm, jpos))
-    } else{
+    } else {
       return(.jcall(object$internal, "[D", "signal", jm, jpos))
     }
   }
@@ -123,7 +123,7 @@ loading<-function(object, obs=1){
     stop("Not a model estimation")
   if ( is.jnull(object$internal)){
     return
-  } else{
+  } else {
       jm<-.jcall(object$internal, "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "loading", as.integer(obs-1))
       return(rjd3toolkit::.jd2r_matrix(jm))
   }
@@ -147,7 +147,7 @@ add<-function(model, item){
   if (is(item, EQUATION) || is(item, STATEBLOCK)){
     if (! is.jnull(item$internal))
       .jcall(model$internal, "V", "add", item$internal )
-  } else{
+  } else {
     stop("Invalid item")
   }
 }
@@ -177,7 +177,7 @@ estimate<-function(model, data, marginal=FALSE, concentrated=TRUE,
     stop("Not a model")
   if ( is.jnull(model$internal) ){
     return(NULL)
-  } else{
+  } else {
     jparams<-.jnull("[D")
     if (! is.null(initialParameters))
       jparams<-.jarray(initialParameters)
@@ -192,7 +192,7 @@ compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
     stop("Not a model")
   if ( is.jnull(model$internal) ){
     return(NULL)
-  } else{
+  } else {
     jdata<-rjd3toolkit::.r2jd_matrix(data)
     jrslt<-.jcall("jdplus/sts/base/r/CompositeModels", "Ljdplus/sts/base/r/CompositeModels$Results;", "compute", model$internal, jdata, .jarray(parameters), marginal, concentrated)
     return(rjd3toolkit::.jd3_object(jrslt, MODELESTIMATION, TRUE))
@@ -464,7 +464,7 @@ var_locallineartrend<-function(name, lstd, sstd=NULL, levelScale=1, slopeScale=1
 
   if (is.null(sstd)){
     jsstd<-.jnull("[D")
-  } else{
+  } else {
     jsstd<-.jarray(sstd)
   }
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "localLinearTrend", name, lstd, jsstd, levelScale, slopeScale,
@@ -538,17 +538,17 @@ loading<-function(pos=NULL, weights=NULL){
   else if (length(pos) == 1){
     if (is.null(weights)){
       jrslt<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "fromPosition", as.integer(pos))
-    } else{
+    } else {
       if (length(pos) != length(weights)){
         return(NULL)
       }
       jrslt<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "from", as.integer(pos), weights[1])
     }
     return(rjd3toolkit::.jd3_object(jrslt, LOADING))
-  } else{
+  } else {
     if (is.null(weights))
       jrslt<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "fromPositions", as.integer(pos))
-    else{
+    else {
       if (length(pos) != length(weights))
         return(NULL)
       jrslt<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "from", as.integer(pos), weights)
@@ -572,7 +572,7 @@ var_loading<-function(pos, weights){
   }
   else if (length(pos) == 1){
     jl<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "fromPosition", as.integer(pos))
-  } else{
+  } else {
     jl<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "fromPositions", as.integer(pos))
   }
   jrslt<-.jcall("jdplus/toolkit/base/core/ssf/basic/Loading", "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "rescale", jl, as.numeric(weights))
@@ -753,7 +753,7 @@ reg<-function(name, x, var=NULL, fixed=FALSE){
 
   if (is.null(var)){
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regression", name, rjd3toolkit::.r2jd_matrix(x))
-  } else{
+  } else {
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "timeVaryingRegression", name, rjd3toolkit::.r2jd_matrix(x), as.numeric(var), fixed)
   }
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
@@ -823,7 +823,7 @@ splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=
       stop('Invalid parameters. nnodes should be greater than 0 or nodes should be defined')
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines",
                   name, period, as.integer(nnodes), as.integer(start-1), variance, fixed)
-  }else{
+  } else {
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines",
                   name, period, as.numeric(nodes), as.integer(start-1), variance, fixed)
   }

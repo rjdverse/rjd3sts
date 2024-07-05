@@ -53,4 +53,3 @@ sa3<-result(rslt, "ssf.smoothing.components")
 
 
 matplot(cbind(sa1[301:336,2],sa2[301:336,2],sa3[301:336,2]), type='l', ylab="Seasonal")
-
