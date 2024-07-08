@@ -28,9 +28,12 @@ STATEBLOCK<-'JD3_SsfStateBlock'
 add_equation<-function(equation, item, coeff=1, fixed=TRUE, loading=NULL){
   if (! is(equation, EQUATION))
     stop("Not an equation")
-  if (is.null(loading))
-    .jcall(equation$internal, "V", "add", item, coeff, as.logical(fixed), .jnull("jdplus/toolkit/base/core/ssf/ISsfLoading"))
-  else if (is(loading, LOADING))
+  if (is.null(loading)){
+      if (is(item, STATEBLOCK))
+        .jcall(equation$internal, "V", "add", item$internal, coeff, as.logical(fixed))
+      else
+        .jcall(equation$internal, "V", "add", item, coeff, as.logical(fixed), .jnull("jdplus/toolkit/base/core/ssf/ISsfLoading"))
+  }else if (is(loading, LOADING))
     .jcall(equation$internal, "V", "add", item, coeff, as.logical(fixed), loading$internal)
   else
     stop("Not a loading")

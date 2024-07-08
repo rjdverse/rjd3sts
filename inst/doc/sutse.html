@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Jean Palate" />
+
+<meta name="date" content="2024-07-08" />
+
+<title>SUTSE model</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">SUTSE model</h1>
+<h4 class="author">Jean Palate</h4>
+<h4 class="date">2024-07-08</h4>
+
+
+
+<div id="sutse-models" class="section level2">
+<h2>SUTSE models</h2>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>Simple SUTSE models can be easily tackled by the state space
+framework provided in rjd3sts</p>
+<p>The <em>sutse</em> function computes simple SUTSE models for wo
+series</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>sutse<span class="ot">&lt;-</span><span class="cf">function</span>(st){</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span> <span class="fu">inherits</span>(st, <span class="st">&quot;ts&quot;</span>) <span class="sc">||</span> <span class="sc">!</span> <span class="fu">inherits</span>(st, <span class="st">&quot;matrix&quot;</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>        <span class="fu">stop</span>(st, <span class="st">&quot; is not a ts matrix&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">dim</span>(st)[<span class="dv">2</span>]<span class="sc">!=</span> <span class="dv">2</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>        <span class="fu">stop</span>(st, <span class="st">&quot; must have two columns&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    s<span class="ot">&lt;-</span>st[,<span class="dv">1</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    t<span class="ot">&lt;-</span>st[,<span class="dv">2</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    freq<span class="ot">&lt;-</span><span class="fu">frequency</span>(st)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    start<span class="ot">&lt;-</span><span class="fu">start</span>(st)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    <span class="co"># re-scaling of the series to minimize numerical problems</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    vs<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">var</span>(s))</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    vt<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">var</span>(t))</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    es<span class="ot">&lt;-</span><span class="fu">sqrt</span>(vs)</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    et<span class="ot">&lt;-</span><span class="fu">sqrt</span>(vt)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    s<span class="ot">&lt;-</span>s<span class="sc">/</span>es</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    t<span class="ot">&lt;-</span>t<span class="sc">/</span>et</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    model<span class="ot">&lt;-</span><span class="fu">model</span>()</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    <span class="co"># create the components and add them to the model</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    l1<span class="ot">&lt;-</span><span class="fu">locallevel</span>(<span class="st">&quot;l1&quot;</span>, <span class="at">initial =</span> <span class="dv">0</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    lt1<span class="ot">&lt;-</span><span class="fu">locallineartrend</span>(<span class="st">&quot;lt1&quot;</span>, <span class="at">levelVariance =</span> <span class="dv">0</span>, <span class="at">fixedLevelVariance =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    s1<span class="ot">&lt;-</span><span class="fu">seasonal</span>(<span class="st">&quot;s1&quot;</span>, freq, <span class="at">type=</span><span class="st">&quot;HarrisonStevens&quot;</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>    n1<span class="ot">&lt;-</span><span class="fu">noise</span>(<span class="st">&quot;n1&quot;</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>    l2<span class="ot">&lt;-</span><span class="fu">locallevel</span>(<span class="st">&quot;l2&quot;</span>, <span class="at">initial =</span> <span class="dv">0</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>    lt2<span class="ot">&lt;-</span><span class="fu">locallineartrend</span>(<span class="st">&quot;lt2&quot;</span>, <span class="at">levelVariance =</span> <span class="dv">0</span>, <span class="at">fixedLevelVariance =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    s2<span class="ot">&lt;-</span><span class="fu">seasonal</span>(<span class="st">&quot;s2&quot;</span>, freq, <span class="at">type=</span><span class="st">&quot;HarrisonStevens&quot;</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>    n2<span class="ot">&lt;-</span><span class="fu">noise</span>(<span class="st">&quot;n2&quot;</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>    <span class="fu">add</span>(model, l1)</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>    <span class="fu">add</span>(model, lt1)</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>    <span class="fu">add</span>(model, s1)</span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>    <span class="fu">add</span>(model, n1)</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>    <span class="fu">add</span>(model, l2)</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>    <span class="fu">add</span>(model, lt2)</span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>    <span class="fu">add</span>(model, s2)</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>    <span class="fu">add</span>(model, n2)</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>    <span class="co"># create the equation (fix the variance to 0)</span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>    eq1<span class="ot">&lt;-</span><span class="fu">equation</span>(<span class="st">&quot;eq1&quot;</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq1, l1)</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq1, lt1)</span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq1, s1)</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq1, n1)</span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a>    <span class="fu">add</span>(model, eq1)</span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a>    eq2<span class="ot">&lt;-</span><span class="fu">equation</span>(<span class="st">&quot;eq2&quot;</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq2, l2)</span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq2, l1, <span class="dv">0</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq2, lt2)</span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq2, lt1, <span class="dv">0</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq2, s2)</span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq2, s1, <span class="dv">0</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq2, n2)</span>
+<span id="cb1-52"><a href="#cb1-52" tabindex="-1"></a>    <span class="fu">add_equation</span>(eq2, n1, <span class="dv">0</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" tabindex="-1"></a>    <span class="fu">add</span>(model, eq2)</span>
+<span id="cb1-54"><a href="#cb1-54" tabindex="-1"></a>    rslt<span class="ot">&lt;-</span><span class="fu">estimate</span>(model, <span class="fu">cbind</span>(s,t), <span class="at">marginal=</span><span class="cn">TRUE</span>, <span class="at">initialization=</span><span class="st">&quot;Augmented_Robust&quot;</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" tabindex="-1"></a>    p<span class="ot">&lt;-</span><span class="fu">result</span>(rslt, <span class="st">&quot;parameters&quot;</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" tabindex="-1"></a>    factor<span class="ot">&lt;-</span><span class="fu">result</span>(rslt, <span class="st">&quot;scalingfactor&quot;</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" tabindex="-1"></a>    cl<span class="ot">&lt;-</span>p[<span class="dv">11</span>]</span>
+<span id="cb1-59"><a href="#cb1-59" tabindex="-1"></a>    csl<span class="ot">&lt;-</span>p[<span class="dv">12</span>]</span>
+<span id="cb1-60"><a href="#cb1-60" tabindex="-1"></a>    cs<span class="ot">&lt;-</span>p[<span class="dv">13</span>]</span>
+<span id="cb1-61"><a href="#cb1-61" tabindex="-1"></a>    cn<span class="ot">&lt;-</span>p[<span class="dv">14</span>]</span>
+<span id="cb1-62"><a href="#cb1-62" tabindex="-1"></a>    names<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;level&quot;</span>, <span class="st">&quot;slope&quot;</span>, <span class="st">&quot;seasonal&quot;</span>, <span class="st">&quot;noise&quot;</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" tabindex="-1"></a>    variable1<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">variance=</span><span class="fu">c</span>(factor<span class="sc">*</span>p[<span class="dv">1</span>]<span class="sc">*</span>vs,factor<span class="sc">*</span>p[<span class="dv">3</span>]<span class="sc">*</span>vs, factor<span class="sc">*</span>p[<span class="dv">4</span>]<span class="sc">*</span>vs, factor<span class="sc">*</span>p[<span class="dv">5</span>]<span class="sc">*</span>vs),</span>
+<span id="cb1-64"><a href="#cb1-64" tabindex="-1"></a>                          <span class="at">row.names =</span> names)</span>
+<span id="cb1-65"><a href="#cb1-65" tabindex="-1"></a>    variable2<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">variance=</span><span class="fu">c</span>(factor<span class="sc">*</span>vt<span class="sc">*</span>(p[<span class="dv">1</span>]<span class="sc">*</span>cl<span class="sc">*</span>cl<span class="sc">+</span>p[<span class="dv">6</span>]),</span>
+<span id="cb1-66"><a href="#cb1-66" tabindex="-1"></a>                                     factor<span class="sc">*</span>vt<span class="sc">*</span>(p[<span class="dv">3</span>]<span class="sc">*</span>csl<span class="sc">*</span>csl<span class="sc">+</span>p[<span class="dv">8</span>]),</span>
+<span id="cb1-67"><a href="#cb1-67" tabindex="-1"></a>                                     factor<span class="sc">*</span>vt<span class="sc">*</span>(p[<span class="dv">4</span>]<span class="sc">*</span>cs<span class="sc">*</span>cs<span class="sc">+</span>p[<span class="dv">9</span>]),</span>
+<span id="cb1-68"><a href="#cb1-68" tabindex="-1"></a>                                     factor<span class="sc">*</span>vt<span class="sc">*</span>(p[<span class="dv">5</span>]<span class="sc">*</span>cn<span class="sc">*</span>cn<span class="sc">+</span>p[<span class="dv">10</span>])),</span>
+<span id="cb1-69"><a href="#cb1-69" tabindex="-1"></a>                          <span class="at">row.names =</span> names)</span>
+<span id="cb1-70"><a href="#cb1-70" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" tabindex="-1"></a>    <span class="cf">if</span> (p[<span class="dv">1</span>]<span class="sc">==</span><span class="dv">0</span>){</span>
+<span id="cb1-72"><a href="#cb1-72" tabindex="-1"></a>        lc<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb1-73"><a href="#cb1-73" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span> (p[<span class="dv">6</span>] <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb1-74"><a href="#cb1-74" tabindex="-1"></a>        lc<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb1-75"><a href="#cb1-75" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb1-76"><a href="#cb1-76" tabindex="-1"></a>        lc<span class="ot">&lt;-</span><span class="fu">sign</span>(cl)<span class="sc">/</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">+</span>p[<span class="dv">6</span>]<span class="sc">/</span>(cl<span class="sc">*</span>cl<span class="sc">*</span>p[<span class="dv">1</span>])))</span>
+<span id="cb1-77"><a href="#cb1-77" tabindex="-1"></a>    }</span>
+<span id="cb1-78"><a href="#cb1-78" tabindex="-1"></a>    <span class="cf">if</span> (p[<span class="dv">3</span>]<span class="sc">==</span><span class="dv">0</span>){</span>
+<span id="cb1-79"><a href="#cb1-79" tabindex="-1"></a>        sc<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb1-80"><a href="#cb1-80" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span> (p[<span class="dv">8</span>] <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb1-81"><a href="#cb1-81" tabindex="-1"></a>        sc<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb1-82"><a href="#cb1-82" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb1-83"><a href="#cb1-83" tabindex="-1"></a>        sc<span class="ot">&lt;-</span><span class="fu">sign</span>(csl)<span class="sc">/</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">+</span>p[<span class="dv">8</span>]<span class="sc">/</span>(csl<span class="sc">*</span>csl<span class="sc">*</span>p[<span class="dv">3</span>])))</span>
+<span id="cb1-84"><a href="#cb1-84" tabindex="-1"></a>    }</span>
+<span id="cb1-85"><a href="#cb1-85" tabindex="-1"></a>    <span class="cf">if</span> (p[<span class="dv">4</span>]<span class="sc">==</span><span class="dv">0</span>){</span>
+<span id="cb1-86"><a href="#cb1-86" tabindex="-1"></a>        ssc<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb1-87"><a href="#cb1-87" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span> (p[<span class="dv">9</span>] <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb1-88"><a href="#cb1-88" tabindex="-1"></a>        ssc<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb1-89"><a href="#cb1-89" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb1-90"><a href="#cb1-90" tabindex="-1"></a>        ssc<span class="ot">&lt;-</span><span class="fu">sign</span>(cs)<span class="sc">/</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">+</span>p[<span class="dv">9</span>]<span class="sc">/</span>(cs<span class="sc">*</span>cs<span class="sc">*</span>p[<span class="dv">4</span>])))</span>
+<span id="cb1-91"><a href="#cb1-91" tabindex="-1"></a>    }</span>
+<span id="cb1-92"><a href="#cb1-92" tabindex="-1"></a>    <span class="cf">if</span> (p[<span class="dv">5</span>]<span class="sc">==</span><span class="dv">0</span>){</span>
+<span id="cb1-93"><a href="#cb1-93" tabindex="-1"></a>        nc<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb1-94"><a href="#cb1-94" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span> (p[<span class="dv">10</span>] <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb1-95"><a href="#cb1-95" tabindex="-1"></a>        nc<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb1-96"><a href="#cb1-96" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb1-97"><a href="#cb1-97" tabindex="-1"></a>        nc<span class="ot">&lt;-</span><span class="fu">sign</span>(cn)<span class="sc">/</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">+</span>p[<span class="dv">10</span>]<span class="sc">/</span>(cn<span class="sc">*</span>cn<span class="sc">*</span>p[<span class="dv">5</span>])))</span>
+<span id="cb1-98"><a href="#cb1-98" tabindex="-1"></a>    }</span>
+<span id="cb1-99"><a href="#cb1-99" tabindex="-1"></a>    correlations<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">variance=</span><span class="fu">c</span>(lc, sc, ssc, nc),</span>
+<span id="cb1-100"><a href="#cb1-100" tabindex="-1"></a>                             <span class="at">row.names =</span> names)</span>
+<span id="cb1-101"><a href="#cb1-101" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" tabindex="-1"></a>    models<span class="ot">&lt;-</span><span class="fu">list</span>(</span>
+<span id="cb1-103"><a href="#cb1-103" tabindex="-1"></a>        <span class="at">variable1=</span>variable1,</span>
+<span id="cb1-104"><a href="#cb1-104" tabindex="-1"></a>        <span class="at">variable2=</span>variable2,</span>
+<span id="cb1-105"><a href="#cb1-105" tabindex="-1"></a>        <span class="at">correlations=</span>correlations</span>
+<span id="cb1-106"><a href="#cb1-106" tabindex="-1"></a>    )</span>
+<span id="cb1-107"><a href="#cb1-107" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" tabindex="-1"></a>    ll<span class="ot">&lt;-</span><span class="fu">result</span>(rslt, <span class="st">&quot;likelihood.ll&quot;</span>)</span>
+<span id="cb1-109"><a href="#cb1-109" tabindex="-1"></a>    ser<span class="ot">&lt;-</span><span class="fu">result</span>(rslt, <span class="st">&quot;likelihood.ser&quot;</span>)</span>
+<span id="cb1-110"><a href="#cb1-110" tabindex="-1"></a>    res<span class="ot">&lt;-</span><span class="fu">result</span>(rslt, <span class="st">&quot;likelihood.residuals&quot;</span>)</span>
+<span id="cb1-111"><a href="#cb1-111" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" tabindex="-1"></a>    likelihood<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">loglikelihood=</span>ll, <span class="at">ser=</span>ser, <span class="at">residuals=</span>res)</span>
+<span id="cb1-113"><a href="#cb1-113" tabindex="-1"></a></span>
+<span id="cb1-114"><a href="#cb1-114" tabindex="-1"></a>    sm<span class="ot">&lt;-</span><span class="fu">smoothed_states</span>(rslt)</span>
+<span id="cb1-115"><a href="#cb1-115" tabindex="-1"></a>    decomposition1<span class="ot">&lt;-</span><span class="fu">list</span>(</span>
+<span id="cb1-116"><a href="#cb1-116" tabindex="-1"></a>        <span class="at">series=</span>es<span class="sc">*</span>s,</span>
+<span id="cb1-117"><a href="#cb1-117" tabindex="-1"></a>        <span class="at">level=</span>es<span class="sc">*</span><span class="fu">ts</span>(sm[,<span class="dv">1</span>]<span class="sc">+</span>sm[,<span class="dv">2</span>], <span class="at">frequency =</span> freq, <span class="at">start =</span> start),</span>
+<span id="cb1-118"><a href="#cb1-118" tabindex="-1"></a>        <span class="at">seas=</span>es<span class="sc">*</span><span class="fu">ts</span>(sm[,<span class="dv">4</span>], <span class="at">frequency =</span> freq, <span class="at">start =</span> start),</span>
+<span id="cb1-119"><a href="#cb1-119" tabindex="-1"></a>        <span class="at">noise=</span>es<span class="sc">*</span><span class="fu">ts</span>(sm[,<span class="dv">15</span>], <span class="at">frequency =</span> freq, <span class="at">start =</span> start)</span>
+<span id="cb1-120"><a href="#cb1-120" tabindex="-1"></a>    )</span>
+<span id="cb1-121"><a href="#cb1-121" tabindex="-1"></a>    decomposition2<span class="ot">&lt;-</span><span class="fu">list</span>(</span>
+<span id="cb1-122"><a href="#cb1-122" tabindex="-1"></a>        <span class="at">series=</span>et<span class="sc">*</span>t,</span>
+<span id="cb1-123"><a href="#cb1-123" tabindex="-1"></a>        <span class="at">level=</span>et<span class="sc">*</span><span class="fu">ts</span>(sm[,<span class="dv">1</span>]<span class="sc">*</span>cl<span class="sc">+</span>sm[,<span class="dv">2</span>]<span class="sc">*</span>csl<span class="sc">+</span>sm[,<span class="dv">16</span>]<span class="sc">+</span>sm[,<span class="dv">17</span>], <span class="at">frequency =</span> freq, <span class="at">start =</span> start),</span>
+<span id="cb1-124"><a href="#cb1-124" tabindex="-1"></a>        <span class="at">seas=</span>et<span class="sc">*</span><span class="fu">ts</span>(sm[,<span class="dv">4</span>]<span class="sc">*</span>cs<span class="sc">+</span>sm[,<span class="dv">19</span>], <span class="at">frequency =</span> freq, <span class="at">start =</span> start),</span>
+<span id="cb1-125"><a href="#cb1-125" tabindex="-1"></a>        <span class="at">noise=</span>et<span class="sc">*</span><span class="fu">ts</span>(sm[,<span class="dv">15</span>]<span class="sc">*</span>cn<span class="sc">+</span>sm[,<span class="dv">30</span>], <span class="at">frequency =</span> freq, <span class="at">start =</span> start)</span>
+<span id="cb1-126"><a href="#cb1-126" tabindex="-1"></a>    )</span>
+<span id="cb1-127"><a href="#cb1-127" tabindex="-1"></a>    e<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">decomposition1=</span>decomposition1,</span>
+<span id="cb1-128"><a href="#cb1-128" tabindex="-1"></a>            <span class="at">decomposition2=</span>decomposition2)</span>
+<span id="cb1-129"><a href="#cb1-129" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" tabindex="-1"></a>    <span class="fu">return</span> (<span class="fu">structure</span>(</span>
+<span id="cb1-131"><a href="#cb1-131" tabindex="-1"></a>        <span class="fu">list</span>(<span class="at">model=</span>models,</span>
+<span id="cb1-132"><a href="#cb1-132" tabindex="-1"></a>             <span class="at">estimation=</span>e,</span>
+<span id="cb1-133"><a href="#cb1-133" tabindex="-1"></a>             <span class="at">likelihood=</span>likelihood,</span>
+<span id="cb1-134"><a href="#cb1-134" tabindex="-1"></a>             <span class="at">internal=</span>rslt)</span>
+<span id="cb1-135"><a href="#cb1-135" tabindex="-1"></a>        , <span class="at">class=</span><span class="st">&quot;JD3_SUTSE&quot;</span>))</span>
+<span id="cb1-136"><a href="#cb1-136" tabindex="-1"></a>}</span>
+<span id="cb1-137"><a href="#cb1-137" tabindex="-1"></a></span>
+<span id="cb1-138"><a href="#cb1-138" tabindex="-1"></a>plot.JD3_SUTSE<span class="ot">&lt;-</span><span class="cf">function</span>(q){</span>
+<span id="cb1-139"><a href="#cb1-139" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span> <span class="fu">inherits</span>(q, <span class="st">&quot;JD3_SUTSE&quot;</span>))</span>
+<span id="cb1-140"><a href="#cb1-140" tabindex="-1"></a>        <span class="fu">stop</span>(sutse, <span class="st">&quot; should be of class JD3_SUTSE&quot;</span>)</span>
+<span id="cb1-141"><a href="#cb1-141" tabindex="-1"></a>    <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb1-142"><a href="#cb1-142" tabindex="-1"></a>    d<span class="ot">&lt;-</span>q<span class="sc">$</span>estimation<span class="sc">$</span>decomposition1</span>
+<span id="cb1-143"><a href="#cb1-143" tabindex="-1"></a>    <span class="fu">ts.plot</span>(<span class="fu">ts.union</span>(d<span class="sc">$</span>series, d<span class="sc">$</span>series<span class="sc">-</span>d<span class="sc">$</span>seas, d<span class="sc">$</span>level), <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;gray&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb1-144"><a href="#cb1-144" tabindex="-1"></a>    <span class="fu">ts.plot</span>(<span class="fu">ts.union</span>(d<span class="sc">$</span>seas, d<span class="sc">$</span>noise), <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;magenta&quot;</span>, <span class="st">&quot;green&quot;</span>))</span>
+<span id="cb1-145"><a href="#cb1-145" tabindex="-1"></a>    d<span class="ot">&lt;-</span>q<span class="sc">$</span>estimation<span class="sc">$</span>decomposition2</span>
+<span id="cb1-146"><a href="#cb1-146" tabindex="-1"></a>    <span class="fu">ts.plot</span>(<span class="fu">ts.union</span>(d<span class="sc">$</span>series, d<span class="sc">$</span>series<span class="sc">-</span>d<span class="sc">$</span>seas, d<span class="sc">$</span>level), <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;gray&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</span>
+<span id="cb1-147"><a href="#cb1-147" tabindex="-1"></a>    <span class="fu">ts.plot</span>(<span class="fu">ts.union</span>(d<span class="sc">$</span>seas, d<span class="sc">$</span>noise), <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;magenta&quot;</span>, <span class="st">&quot;green&quot;</span>))</span>
+<span id="cb1-148"><a href="#cb1-148" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" tabindex="-1"></a>    <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb1-150"><a href="#cb1-150" tabindex="-1"></a>}</span>
+<span id="cb1-151"><a href="#cb1-151" tabindex="-1"></a></span>
+<span id="cb1-152"><a href="#cb1-152" tabindex="-1"></a>logLik.JD3_SUTSE<span class="ot">&lt;-</span><span class="cf">function</span>(q){</span>
+<span id="cb1-153"><a href="#cb1-153" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span> <span class="fu">inherits</span>(q, <span class="st">&quot;JD3_SUTSE&quot;</span>))</span>
+<span id="cb1-154"><a href="#cb1-154" tabindex="-1"></a>        <span class="fu">stop</span>(q, <span class="st">&quot; should be of class JD3_SUTSE&quot;</span>)</span>
+<span id="cb1-155"><a href="#cb1-155" tabindex="-1"></a>    <span class="fu">return</span> (q<span class="sc">$</span>likelihood<span class="sc">$</span>loglikelihood)</span>
+<span id="cb1-156"><a href="#cb1-156" tabindex="-1"></a>}</span>
+<span id="cb1-157"><a href="#cb1-157" tabindex="-1"></a></span>
+<span id="cb1-158"><a href="#cb1-158" tabindex="-1"></a>print.JD3_SUTSE<span class="ot">&lt;-</span><span class="cf">function</span>(q){</span>
+<span id="cb1-159"><a href="#cb1-159" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span> <span class="fu">inherits</span>(q, <span class="st">&quot;JD3_SUTSE&quot;</span>))</span>
+<span id="cb1-160"><a href="#cb1-160" tabindex="-1"></a>        <span class="fu">stop</span>(q, <span class="st">&quot; should be of class JD3_SUTSE&quot;</span>)</span>
+<span id="cb1-161"><a href="#cb1-161" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;SUTSE model</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-162"><a href="#cb1-162" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;Max likelihood = &quot;</span>, q<span class="sc">$</span>likelihood<span class="sc">$</span>loglikelihood, <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-163"><a href="#cb1-163" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;Variances of series 1</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-164"><a href="#cb1-164" tabindex="-1"></a>    <span class="fu">print</span>(q<span class="sc">$</span>model<span class="sc">$</span>variable1)</span>
+<span id="cb1-165"><a href="#cb1-165" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">Variances of series 2</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-166"><a href="#cb1-166" tabindex="-1"></a>    <span class="fu">print</span>(q<span class="sc">$</span>model<span class="sc">$</span>variable2)</span>
+<span id="cb1-167"><a href="#cb1-167" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">Correlations between innovations of the two series</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-168"><a href="#cb1-168" tabindex="-1"></a>    <span class="fu">print</span>(q<span class="sc">$</span>model<span class="sc">$</span>correlations)</span>
+<span id="cb1-169"><a href="#cb1-169" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>q<span class="ot">&lt;-</span><span class="fu">sutse</span>(<span class="fu">ts.union</span>(<span class="fu">log</span>(retail<span class="sc">$</span>RetailSalesTotal), <span class="fu">log</span>(retail<span class="sc">$</span>BookStores)))</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">print</span>(q)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; SUTSE model</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; Max likelihood =  334.5012 </span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; Variances of series 1</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt;              variance</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; level    9.697070e-05</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; slope    3.047011e-08</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; seasonal 2.005309e-06</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; noise    1.860063e-04</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt; Variances of series 2</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt;              variance</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; level    5.169902e-05</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; slope    1.539889e-07</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co">#&gt; seasonal 1.130950e-04</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt; noise    5.416549e-04</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="co">#&gt; Correlations between innovations of the two series</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co">#&gt;           variance</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="co">#&gt; level    0.5106506</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="co">#&gt; slope    1.0000000</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="co">#&gt; seasonal 0.5894694</span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="co">#&gt; noise    0.2847937</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">plot</span>(q)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
