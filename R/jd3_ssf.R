@@ -1036,3 +1036,67 @@ block_t<-function(block, pos = 0){
                block$internal, as.integer(pos))
     return (rjd3toolkit::.jd2r_matrix(jt))
 }
+
+
+#' Title
+#'
+#' @param block
+#'
+#' @return
+#' @export
+#'
+#' @examples
+block_v<-function(block, pos = 0){
+    if (! is(block, STATEBLOCK))
+        stop("Not a state block")
+    if ( is.jnull(block$internal) ){
+        return(NULL)
+    }
+
+    jt<-.jcall("jdplus/sts/base/r/SsfTools", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "innovationMatrix",
+               block$internal, as.integer(pos))
+    return (rjd3toolkit::.jd2r_matrix(jt))
+}
+
+#' Title
+#'
+#' @param block
+#'
+#' @return
+#' @export
+#'
+#' @examples
+block_p0<-function(block, pos = 0){
+    if (! is(block, STATEBLOCK))
+        stop("Not a state block")
+    if ( is.jnull(block$internal) ){
+        return(NULL)
+    }
+
+    jt<-.jcall("jdplus/sts/base/r/SsfTools", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "stationaryInitialVariance",
+               block$internal)
+    return (rjd3toolkit::.jd2r_matrix(jt))
+}
+
+#' Title
+#'
+#' @param block
+#' @param pos
+#'
+#' @return
+#' @export
+#'
+#' @examples
+block_d0<-function(block, pos = 0){
+    if (! is(block, STATEBLOCK))
+        stop("Not a state block")
+    if ( is.jnull(block$internal) ){
+        return(NULL)
+    }
+
+    jt<-.jcall("jdplus/sts/base/r/SsfTools", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "diffuseInitialConstraint",
+               block$internal)
+    return (rjd3toolkit::.jd2r_matrix(jt))
+}
+
+
