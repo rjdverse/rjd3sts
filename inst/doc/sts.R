@@ -8,4 +8,3 @@ knitr::opts_chunk$set(
 suppressPackageStartupMessages(library(rjd3toolkit))
 suppressPackageStartupMessages(library(rjd3sts))
 library(knitr)
-

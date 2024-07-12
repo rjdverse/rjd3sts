@@ -40,9 +40,9 @@ rslt<-estimate(bsm, log(s), marginal=TRUE)
 # create the model
 bsm<-model()
   # create the components, with fixed variances, and add them to the model
-add(bsm, locallineartrend("ll", 
+add(bsm, locallineartrend("ll",
                              levelVariance = 1, fixedLevelVariance = TRUE) )
-add(bsm, seasonal("s", 12, type="HarrisonStevens", 
+add(bsm, seasonal("s", 12, type="HarrisonStevens",
                      variance = 1, fixed = TRUE))
 add(bsm, noise("n", 1, fixed=TRUE))
   # create the equation (fix the variance to 1)
@@ -60,7 +60,7 @@ p<-result(rslt, "parameters")
 bsm<-model()
   # create the components and add them to the model
 add(bsm, locallevel("l", initial = 0) )
-add(bsm, locallineartrend("lt", levelVariance = 0, 
+add(bsm, locallineartrend("lt", levelVariance = 0,
                              fixedLevelVariance = TRUE) )
 add(bsm, seasonal("s", 12, type="HarrisonStevens"))
 add(bsm, noise("n", 1, fixed=TRUE))
@@ -72,4 +72,3 @@ rslt<-estimate(bsm, log(s), marginal=TRUE)
 ss<-smoothed_states(rslt)
 plot(ss[,1]+ss[,2], type='l', col='blue', ylab='trends')
 lines(ss[, 2], col='red')
-
