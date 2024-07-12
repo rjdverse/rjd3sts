@@ -4,9 +4,9 @@ NULL
 #' Title
 #'
 #' @inheritParams seasonalbreaks
-#' @param cycle 
-#' @param diffuse.regs 
-#' @param tol 
+#' @param cycle
+#' @param diffuse.regs
+#' @param tol
 #'
 #' @return
 #' @export
@@ -16,7 +16,7 @@ NULL
 #'  sts(x)
 sts<-function(y, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
               , seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"), diffuse.regs=TRUE, tol=1e-9){
-  
+
   if (!is.ts(y)){
     stop("y must be a time series")
   }
@@ -31,22 +31,22 @@ sts<-function(y, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
               as.integer(level), as.integer(slope), as.integer(cycle), as.integer(noise), seasonal, as.logical(diffuse.regs), tol)
   buffer<-.jcall("jdplus/sts/base/r/Bsm", "[B", "toBuffer", jsts)
   p<-RProtoBuf::read(sts.Bsm, buffer)
-  return (p2r_sts_rslts(p))
+  return(p2r_sts_rslts(p))
 }
 
 #' Title
 #'
-#' @param y 
-#' @param period 
-#' @param X 
-#' @param X.td 
-#' @param level 
-#' @param slope 
-#' @param cycle 
-#' @param noise 
-#' @param seasonal 
-#' @param diffuse.regs 
-#' @param tol 
+#' @param y
+#' @param period
+#' @param X
+#' @param X.td
+#' @param level
+#' @param slope
+#' @param cycle
+#' @param noise
+#' @param seasonal
+#' @param diffuse.regs
+#' @param tol
 #'
 #' @return
 #' @export
@@ -54,11 +54,11 @@ sts<-function(y, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
 #' @examples
 sts_raw<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
                   , seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"), diffuse.regs=TRUE, tol=1e-9){
-  
+
   data<-as.numeric(y)
   if (is.ts(y)){
     period<-frequency(y)
-  } else{
+  } else {
     if (! is.null(X.td)){
       stop("y must be a time series when X.td is used")
     }
@@ -79,7 +79,7 @@ sts_raw<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, n
   if (! is.null(X)){
     add(bsm, reg("X", X))
   }
-  # create the equation 
+  # create the equation
   eq<-equation("eq")
   add_equation(eq, "ll")
   add_equation(eq, "s")
@@ -102,7 +102,7 @@ sts_raw<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, n
 #' \itemize{
 #'   \item{td2: }{leap year + week days (week-end derived)}
 #'   \item{td3: }{leap year + week days + saturdays (sundays derived)}
-#'   \item{td7: }{leap year + all days (sundays derived)} 
+#'   \item{td7: }{leap year + all days (sundays derived)}
 #'   \item{full: }{td3 + easter effect}
 #'   \item{none: }{no calendar effect}
 #'   }
@@ -119,13 +119,13 @@ sts_forecast<-function(y, model=c("none", "td2", "td3", "td7", "full"), nf=12){
     stop("y must be a time series")
   }
   jf<-.jcall("jdplus/sts/base/r/Bsm", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "forecast", rjd3toolkit::.r2jd_tsdata(y), model, as.integer((nf)))
-  return (rjd3toolkit::.jd2r_matrix(jf))
-  
+  return(rjd3toolkit::.jd2r_matrix(jf))
+
 }
 
 p2r_sts_rslts<-function(p){
-  
-  return (structure(list(
+
+  return(structure(list(
     description=p2r_sts_description(p$description),
     estimation=p2r_sts_estimation(p$estimation),
     decomposition=p2r_sts_components(p$components)),
@@ -134,7 +134,7 @@ p2r_sts_rslts<-function(p){
 }
 
 p2r_sts_estimation<-function(p){
-  return (list(
+  return(list(
     y=p$y,
     X=rjd3toolkit::.p2r_matrix(p$x),
     parameters=rjd3toolkit::.p2r_parameters_estimation(p$parameters),
@@ -145,7 +145,7 @@ p2r_sts_estimation<-function(p){
 }
 
 p2r_sts_description<-function(p){
-  return (list(
+  return(list(
     log=p$log,
     preadjustment = rjd3toolkit::.enum_extract(modelling.LengthOfPeriod, p$preadjustment),
     bsm=p2r_spec_bsm(p$bsm),
@@ -153,7 +153,7 @@ p2r_sts_description<-function(p){
 }
 
 p2r_sts_components<-function(p){
-  return (list(
+  return(list(
     level=p2r_sts_component(p$level),
     slope=p2r_sts_component(p$slope),
     cycle=p2r_sts_component(p$cycle),
@@ -163,14 +163,14 @@ p2r_sts_components<-function(p){
 }
 
 p2r_sts_component<-function(p){
-  if (is.null(p)) return (NULL) else return (p$as.list())
+  if (is.null(p)) return(NULL) else return(p$as.list())
 }
 
 
 
 
 p2r_spec_bsm<-function(p){
-  return (list(
+  return(list(
     level=rjd3toolkit::.p2r_parameter(p$level),
     slope=rjd3toolkit::.p2r_parameter(p$slope),
     seas=rjd3toolkit::.p2r_parameter(p$seas),
@@ -180,13 +180,13 @@ p2r_spec_bsm<-function(p){
     cyclelength=rjd3toolkit::.p2r_parameter(p$cycle_period),
     cyclefactor=rjd3toolkit::.p2r_parameter(p$cycle_factor)
   ))
-  
+
 }
 
 #' Title
 #'
-#' @param x 
-#' @param ... 
+#' @param x
+#' @param ...
 #'
 #' @return
 #' @export
@@ -207,12 +207,12 @@ print.JD3STS<-function(x, ...){
   if (! is.null(s)) {
     cat("cycle: ", format(round(s$value, 6), scientific = FALSE), "\n\n")
   }
-  
+
   s<-x$estimation$likelihood$ll
   cat("LogLikelihood: ", format(round(s, 5), scientific = FALSE), "\n")
   s<-x$estimation$likelihood$aic
   cat("AIC: ", format(round(s, 5), scientific = FALSE), "\n\n")
-  
+
   if (length(x$description$variables) > 0){
     cat("Regression:\n")
     regs<-do.call("rbind", lapply(x$description$variables, function(z){z$coeff}))
@@ -226,7 +226,7 @@ print.JD3STS<-function(x, ...){
     xregs$t[sel]<-t
     xregs$pvalue[sel]<-pval
     print(xregs[-2])
-  } else{
+  } else {
     cat("No regression variable\n")
   }
 }
