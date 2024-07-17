@@ -83,5 +83,3 @@ lines(ss[,pos[4]+4], col=colors[4])
 lines(ss[,pos[4]]+5, col=colors[5])
 lines(ss[,pos[4]+6], col=colors[6])
 lines(-rowSums(ss[,pos[4]+(1:6)]), col=colors[7])
-
-

@@ -23,10 +23,10 @@ p2r_diffuselikelihood<-function(p){
 # TO SUPPRESS IN NEXT RELEASE (EXPORTED FROM RJD3TOOLKIT 3.2.2)
 
 likelihood<-function(nobs, neffectiveobs=NA, nparams=0, ll, adjustedll=NA, aic, aicc, bic, bicc, ssq){
-  
+
   if (is.na(neffectiveobs)) neffectiveobs <- nobs
   if (is.na(adjustedll)) adjustedll <- ll
-  
+
   return(structure(list(nobs=nobs, neffectiveobs=neffectiveobs, nparams=nparams,
                          ll=ll, adjustedll=adjustedll,
                          aic=aic, aicc=aicc, bic=bic, bicc=bicc, ssq=ssq),
