@@ -50,7 +50,7 @@ add_equation<-function(equation, item, coeff=1, fixed=TRUE, loading=NULL){
 signal<-function(object, obs=1, pos=NULL, loading=NULL, stdev=FALSE){
   if (! is(object, MODELESTIMATION))
     stop("Not a model estimation")
-  if ( is.jnull(object$internal)){
+  if (is.jnull(object$internal)){
     return(NULL)
   } else {
     if (! is.null(loading)){
@@ -87,7 +87,7 @@ signal<-function(object, obs=1, pos=NULL, loading=NULL, stdev=FALSE){
 msignal<-function(object, m, pos=NULL, stdev=FALSE){
   if (! is(object, MODELESTIMATION))
     stop("Not a model estimation")
-  if ( is.jnull(object$internal)){
+  if (is.jnull(object$internal)){
     return(NULL)
   }
   if (! is.matrix(m)){
@@ -121,7 +121,7 @@ msignal<-function(object, m, pos=NULL, stdev=FALSE){
 loading<-function(object, obs=1){
   if (! is(object, MODELESTIMATION))
     stop("Not a model estimation")
-  if ( is.jnull(object$internal)){
+  if (is.jnull(object$internal)){
     return
   } else {
       jm<-.jcall(object$internal, "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "loading", as.integer(obs-1))
@@ -142,11 +142,11 @@ loading<-function(object, obs=1){
 add<-function(model, item){
   if (! is(model, MODEL))
     stop("Not a model")
-  if ( is.jnull(model$internal))
+  if (is.jnull(model$internal))
     return(NULL)
   if (is(item, EQUATION) || is(item, STATEBLOCK)){
     if (! is.jnull(item$internal))
-      .jcall(model$internal, "V", "add", item$internal )
+      .jcall(model$internal, "V", "add", item$internal)
   } else {
     stop("Invalid item")
   }
@@ -175,7 +175,7 @@ estimate<-function(model, data, marginal=FALSE, concentrated=TRUE,
   optimizer <- match.arg(optimizer)
   if (! is(model, MODEL))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   } else {
     jparams<-.jnull("[D")
@@ -190,7 +190,7 @@ estimate<-function(model, data, marginal=FALSE, concentrated=TRUE,
 compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
   if (! is(model, MODEL))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   } else {
     jdata<-rjd3toolkit::.r2jd_matrix(data)
@@ -375,7 +375,7 @@ locallevel<-function(name, variance=.01, fixed=FALSE, initial=NaN){
 #' @export
 #'
 #' @examples
-locallineartrend<-function(name, levelVariance=.01, slopevariance=.01, fixedLevelVariance=FALSE, fixedSlopeVariance=FALSE ){
+locallineartrend<-function(name, levelVariance=.01, slopevariance=.01, fixedLevelVariance=FALSE, fixedSlopeVariance=FALSE){
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "localLinearTrend", name, levelVariance, slopevariance, fixedLevelVariance, fixedSlopeVariance)
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
@@ -460,7 +460,7 @@ var_locallevel<-function(name, std, scale=1, fixed=FALSE, initial=NaN){
 #' @export
 #'
 #' @examples
-var_locallineartrend<-function(name, lstd, sstd=NULL, levelScale=1, slopeScale=1, fixedLevelScale=FALSE, fixedSlopeScale=FALSE ){
+var_locallineartrend<-function(name, lstd, sstd=NULL, levelScale=1, slopeScale=1, fixedLevelScale=FALSE, fixedSlopeScale=FALSE){
 
   if (is.null(sstd)){
     jsstd<-.jnull("[D")
@@ -727,10 +727,10 @@ cumul<-function(name, core, period, start=0){
 #'
 #' @examples
 aggregation<-function(name, components){
-  if (!is.list(components) || length(components)<2 ) {
+  if (!is.list(components) || length(components)<2) {
     stop("incorrect argument, components should be a list of at least 2 items")}
   plist<-list()
-  for (i in 1:length(components)){
+  for (i in seq_along(components)){
     plist[[i]]<-components[[i]]$internal
   }
   jcmps<-.jarray(plist, contents.class = "jdplus/sts/base/core/msts/StateItem")
@@ -861,7 +861,7 @@ splines_daily<-function(name, startYear, nodes, start=1, variance=1, fixed=FALSE
 smoothed_states<-function(model){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   return(rjd3toolkit::result(model, "ssf.smoothing.states"))
@@ -881,7 +881,7 @@ smoothed_states<-function(model){
 smoothed_components<-function(model, equation=1, fast=TRUE){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   if (fast)
@@ -903,7 +903,7 @@ smoothed_components<-function(model, equation=1, fast=TRUE){
 smoothed_components_stdev<-function(model, equation=1){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   return(sqrt(rjd3toolkit::result(model,paste0("ssf.smoothing.vcomponents(",equation-1,')'))))
@@ -922,7 +922,7 @@ smoothed_components_stdev<-function(model, equation=1){
 smoothed_states_stdev<-function(model){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   return(sqrt(rjd3toolkit::result(model, "ssf.smoothing.vstates")))
@@ -939,7 +939,7 @@ smoothed_states_stdev<-function(model){
 filtered_states<-function(model){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   return(rjd3toolkit::result(model, "ssf.filtered.states"))
@@ -956,7 +956,7 @@ filtered_states<-function(model){
 filtered_states_stdev<-function(model){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   return(sqrt(rjd3toolkit::result(model, "ssf.filtered.vstates")))
@@ -973,7 +973,7 @@ filtered_states_stdev<-function(model){
 filtering_states_stdev<-function(model){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   return(sqrt(rjd3toolkit::result(model, "ssf.filtering.vstates")))
@@ -990,7 +990,7 @@ filtering_states_stdev<-function(model){
 filtering_states<-function(model){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   return(rjd3toolkit::result(model, "ssf.filtering.states"))
@@ -1007,7 +1007,7 @@ filtering_states<-function(model){
 parameters<-function(model){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
-  if ( is.jnull(model$internal) ){
+  if (is.jnull(model$internal)){
     return(NULL)
   }
   res <- rjd3toolkit::result(model, "parameters")
