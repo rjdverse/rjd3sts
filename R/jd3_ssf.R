@@ -810,8 +810,8 @@ reg_td<-function(name, period, start, length, groups=c(1,2,3,4,5,6,0), contrast=
 #'
 #' @param name
 #' @param period
-#' @param nnodes
-#' @param nodes
+#' @param nknots
+#' @param knots
 #' @param start
 #' @param variance
 #' @param fixed
@@ -820,17 +820,38 @@ reg_td<-function(name, period, start, length, groups=c(1,2,3,4,5,6,0), contrast=
 #' @export
 #'
 #' @examples
-splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=1, fixed=FALSE){
-  if (is.null(nodes)){
-    if (nnodes == 0)
-      stop('Invalid parameters. nnodes should be greater than 0 or nodes should be defined')
+splines_regular<-function(name, period, nknots=0, knots=NULL, start=1, variance=1, fixed=FALSE){
+  if (is.null(knots)){
+    if (nknots == 0)
+      stop('Invalid parameters. nknots should be greater than 0 or knots should be defined')
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines",
-                  name, period, as.integer(nnodes), as.integer(start-1), variance, fixed)
+                  name, period, as.integer(nknots), as.integer(start-1), variance, fixed)
   } else {
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines",
-                  name, period, as.numeric(nodes), as.integer(start-1), variance, fixed)
+                  name, period, as.numeric(knots), as.integer(start-1), variance, fixed)
   }
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
+}
+
+#' Title
+#'
+#' @param name
+#' @param period
+#' @param knots
+#' @param order
+#' @param start
+#' @param variance
+#' @param fixed
+#'
+#' @return
+#' @export
+#'
+#' @examples
+splines_generic<-function(name, period, knots, order=4, start=1, variance=1, fixed=FALSE){
+
+        jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "genericSplines",
+                      name, period, as.numeric(knots), as.integer(order), as.integer(start-1), variance, fixed)
+        return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
 
@@ -838,7 +859,7 @@ splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=
 #'
 #' @param name
 #' @param startYear
-#' @param nodes
+#' @param knots
 #' @param start
 #' @param variance
 #' @param fixed
@@ -847,9 +868,9 @@ splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=
 #' @export
 #'
 #' @examples
-splines_daily<-function(name, startYear, nodes, start=1, variance=1, fixed=FALSE){
+splines_daily<-function(name, startYear, knots, start=1, variance=1, fixed=FALSE){
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "dailySplines",
-                  name, as.integer(startYear), as.integer(nodes-1), as.integer(start-1), variance, fixed)
+                  name, as.integer(startYear), as.integer(knots-1), as.integer(start-1), variance, fixed)
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 

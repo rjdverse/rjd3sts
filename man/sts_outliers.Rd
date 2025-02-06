@@ -36,20 +36,10 @@ For instance, usual trading days are defined by \code{c(1,2,3,4,5,6,0)}, week da
 
 \item{level}{-1 = no level, 0 = fixed level, 1 = sotchastic level}
 
-\item{slope}{}
-
-\item{noise}{}
-
 \item{seasonal}{Seasonal model}
 
 \item{ao, ls, so}{boolean indicating if additive outliers (\code{ao}), level shift (\code{ls}) and seasonal
 outliers (\code{so}) should be detected.}
-
-\item{cv}{}
-
-\item{tcv}{}
-
-\item{estimation.forward}{}
 
 \item{estimation.backward}{}
 }

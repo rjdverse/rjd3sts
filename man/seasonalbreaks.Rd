@@ -22,10 +22,6 @@ seasonalbreaks(
 
 \item{level}{-1 = no level, 0 = fixed level, 1 = sotchastic level}
 
-\item{slope}{}
-
-\item{noise}{}
-
 \item{seasonal}{Seasonal model}
 
 \item{X}{Regression variables (same length as y) or NULL}

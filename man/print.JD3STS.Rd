@@ -7,8 +7,6 @@
 \method{print}{JD3STS}(x, ...)
 }
 \arguments{
-\item{x}{}
-
 \item{...}{}
 }
 \description{
