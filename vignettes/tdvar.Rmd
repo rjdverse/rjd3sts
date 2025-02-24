@@ -16,9 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Time-varying trading days
-
 ### Introduction 
+
 The state space framework allows an easy estimation of time-varying trading days effects.
 
 
