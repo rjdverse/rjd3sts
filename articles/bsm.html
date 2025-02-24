@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rjd3sts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,8 +40,10 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/bsm.html">BSM</a></li>
+    <li><a class="dropdown-item" href="../articles/regcmp_6.html">Time series with a sampling error component</a></li>
     <li><a class="dropdown-item" href="../articles/regsplines.html">Regular periodic cubic splines</a></li>
     <li><a class="dropdown-item" href="../articles/sts.html">Sructural Time Series using JDemetra+</a></li>
+    <li><a class="dropdown-item" href="../articles/sutse.html">SUTSE models</a></li>
     <li><a class="dropdown-item" href="../articles/tdvar.html">Time varying trading days</a></li>
   </ul>
 </li>
@@ -68,7 +70,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2024-12-12</h4>
+            <h4 data-toc-skip class="date">2025-02-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/bsm.Rmd" class="external-link"><code>vignettes/bsm.Rmd</code></a></small>
       <div class="d-none name"><code>bsm.Rmd</code></div>
@@ -96,10 +98,10 @@ likelihood.</p>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="../reference/locallineartrend.html">locallineartrend</a></span><span class="op">(</span><span class="st">"ll"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="../reference/seasonal.html">seasonal</a></span><span class="op">(</span><span class="st">"s"</span>, <span class="fl">12</span>, type<span class="op">=</span><span class="st">"HarrisonStevens"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="../reference/noise.html">noise</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">s</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Likelihood = 747.8184945</li>
-<li>Parameters = 0.160016, 0.000396, 0.243922, 1.000000</li>
+<li>Likelihood = 327.0607937</li>
+<li>Parameters = 0.168604, 0.000382, 0.271294, 1.000000</li>
 </ul>
 </div>
 <div class="section level3">
@@ -116,10 +118,10 @@ likelihood.</p>
 <span><span class="fu"><a href="../reference/add_equation.html">add_equation</a></span><span class="op">(</span><span class="va">eq</span>, <span class="st">"ll"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/add_equation.html">add_equation</a></span><span class="op">(</span><span class="va">eq</span>, <span class="st">"s"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">eq</span><span class="op">)</span></span>
-<span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">s</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Likelihood = 747.8184945</li>
-<li>Parameters = 0.160016, 0.000396, 0.243922, 1.000000</li>
+<li>Likelihood = 327.0607937</li>
+<li>Parameters = 0.168604, 0.000382, 0.271294, 1.000000</li>
 </ul>
 </div>
 <div class="section level3">
@@ -141,23 +143,23 @@ likelihood.</p>
 <span><span class="fu"><a href="../reference/add_equation.html">add_equation</a></span><span class="op">(</span><span class="va">eq</span>, <span class="st">"s"</span>, <span class="fl">.01</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/add_equation.html">add_equation</a></span><span class="op">(</span><span class="va">eq</span>, <span class="st">"n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">eq</span><span class="op">)</span></span>
-<span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">s</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">p</span><span class="op">&lt;-</span><span class="fu">result</span><span class="op">(</span><span class="va">rslt</span>, <span class="st">"parameters"</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Likelihood = 747.8184944</li>
-<li>Parameters = 1.0000, 0.0025, 1.0000, 1.0000, 0.4001, 0.4939</li>
+<li>Likelihood = 327.0607937</li>
+<li>Parameters = 1.0000, 0.0023, 1.0000, 1.0000, 0.4106, 0.5209</li>
 </ul>
 <p>To be noted:</p>
 <ul>
 <li>Level variance =
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>5</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>5</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">p[5]\times p[5]</annotation></semantics></math>
-= 0.160057</li>
+= 0.168617</li>
 <li>Slope variance =
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>5</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>5</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>2</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">p[5]\times p[5] \times p[2]</annotation></semantics></math>
-= 0.000396</li>
+= 0.000382</li>
 <li>Seas variance =
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>6</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>6</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">p[6]\times p[6]</annotation></semantics></math>
-= 0.243976</li>
+= 0.271315</li>
 </ul>
 </div>
 <div class="section level3">
@@ -173,10 +175,10 @@ likelihood.</p>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="../reference/seasonal.html">seasonal</a></span><span class="op">(</span><span class="st">"s"</span>, <span class="fl">12</span>, type<span class="op">=</span><span class="st">"HarrisonStevens"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="../reference/noise.html">noise</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="fl">1</span>, fixed<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="co"># create the equation (fix the variance to 1)</span></span>
-<span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">s</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Likelihood = 747.8184945</li>
-<li>Parameters = 0.160016, 0.000000, 0.000396, 0.243922, 1.000000</li>
+<li>Likelihood = 327.0607937</li>
+<li>Parameters = 0.168604, 0.000000, 0.000382, 0.271294, 1.000000</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ss</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/smoothed_states.html">smoothed_states</a></span><span class="op">(</span><span class="va">rslt</span><span class="op">)</span></span>

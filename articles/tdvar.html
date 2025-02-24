@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rjd3sts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,8 +40,10 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/bsm.html">BSM</a></li>
+    <li><a class="dropdown-item" href="../articles/regcmp_6.html">Time series with a sampling error component</a></li>
     <li><a class="dropdown-item" href="../articles/regsplines.html">Regular periodic cubic splines</a></li>
     <li><a class="dropdown-item" href="../articles/sts.html">Sructural Time Series using JDemetra+</a></li>
+    <li><a class="dropdown-item" href="../articles/sutse.html">SUTSE models</a></li>
     <li><a class="dropdown-item" href="../articles/tdvar.html">Time varying trading days</a></li>
   </ul>
 </li>
@@ -68,7 +70,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2024-12-12</h4>
+            <h4 data-toc-skip class="date">2025-02-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/tdvar.Rmd" class="external-link"><code>vignettes/tdvar.Rmd</code></a></small>
       <div class="d-none name"><code>tdvar.Rmd</code></div>
@@ -76,9 +78,6 @@ Palate</h4>
 
     
     
-<div class="section level2">
-<h2 id="time-varying-trading-days">Time-varying trading days<a class="anchor" aria-label="anchor" href="#time-varying-trading-days"></a>
-</h2>
 <div class="section level3">
 <h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
@@ -212,7 +211,6 @@ method</p>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">ss</span><span class="op">[</span>,<span class="va">pos</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">+</span><span class="fl">6</span><span class="op">]</span>, col<span class="op">=</span><span class="va">colors</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">ss</span><span class="op">[</span>,<span class="va">pos</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">+</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, col<span class="op">=</span><span class="va">colors</span><span class="op">[</span><span class="fl">7</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tdvar_files/figure-html/tdvar2_chart-1.png" width="576"></p>
-</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
