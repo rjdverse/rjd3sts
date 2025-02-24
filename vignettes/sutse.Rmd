@@ -1,5 +1,5 @@
 ---
-title: "SUTSE model"
+title: "SUTSE models"
 author: "Jean Palate"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -15,8 +15,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-
-## SUTSE models
 
 ### Introduction 
 

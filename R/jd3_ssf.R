@@ -249,6 +249,28 @@ ar2<-function(name, ar, fixedar=FALSE, variance=.01, fixedvariance=FALSE, nlags=
 #' Title
 #'
 #' @param name
+#' @param ar
+#' @param fixedar
+#' @param stderr
+#' @param scale
+#' @param fixed
+#' @param zeroinit
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+var_ar<-function(name, ar, fixedar=FALSE, stderr, scale=1, fixed=FALSE, zeroinit=FALSE){
+
+    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "arVar", name
+                  , .jarray(ar), fixedar, .jarray(stderr), as.numeric(scale), fixed, zeroinit)
+    return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
+}
+
+
+#' Title
+#'
+#' @param name
 #' @param factor
 #' @param period
 #' @param fixed
@@ -873,6 +895,31 @@ splines_daily<-function(name, startYear, knots, start=1, variance=1, fixed=FALSE
                   name, as.integer(startYear), as.integer(knots-1), as.integer(start-1), variance, fixed)
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
+
+#' Title
+#'
+#' @param name
+#' @param length
+#' @param period
+#' @param th0
+#' @param th1
+#' @param bth0
+#' @param bth1
+#' @param fixedth
+#' @param variance
+#' @param fixedvariance
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+ltd_airline<-function(name, length, period, th0=-.6, th1=-.6, bth0=-.6, bth1=-.6, fixedth=FALSE, variance=.01, fixedvariance=FALSE){
+    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "ltdAirline", name,
+                  as.integer(length), as.integer(period), th0, th1, bth0, bth1, fixedth, variance, fixedvariance)
+    return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
+}
+
+
 
 #' Title
 #'

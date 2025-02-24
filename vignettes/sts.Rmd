@@ -249,5 +249,6 @@ knit_print(block_p0(b_arma))
 
 ## [Regular period cubic splines](regsplines.html)
 
+## [Time series with a sampling error](regcmp_6.html)
 
 
