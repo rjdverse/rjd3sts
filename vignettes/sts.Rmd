@@ -249,6 +249,8 @@ knit_print(block_p0(b_arma))
 
 ## [Regular period cubic splines](regsplines.html)
 
+## [Modeling Nile riverflow](regcmp_4.html)
+
 ## [Time series with a sampling error](regcmp_6.html)
 
 

@@ -135,7 +135,7 @@ matplot(data, type='l')
 
 ```
 
-#### CV improvvement due to signal extraction
+#### CV improvement due to signal extraction
  
 ```{r improvement,fig.width=7, fig.height=4}
 improvement<-(h-qe[,2])/h*100
