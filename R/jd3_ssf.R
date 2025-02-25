@@ -28,9 +28,12 @@ STATEBLOCK<-'JD3_SsfStateBlock'
 add_equation<-function(equation, item, coeff=1, fixed=TRUE, loading=NULL){
   if (! is(equation, EQUATION))
     stop("Not an equation")
-  if (is.null(loading))
-    .jcall(equation$internal, "V", "add", item, coeff, as.logical(fixed), .jnull("jdplus/toolkit/base/core/ssf/ISsfLoading"))
-  else if (is(loading, LOADING))
+  if (is.null(loading)){
+      if (is(item, STATEBLOCK))
+        .jcall(equation$internal, "V", "add", item$internal, coeff, as.logical(fixed))
+      else
+        .jcall(equation$internal, "V", "add", item, coeff, as.logical(fixed), .jnull("jdplus/toolkit/base/core/ssf/ISsfLoading"))
+  }else if (is(loading, LOADING))
     .jcall(equation$internal, "V", "add", item, coeff, as.logical(fixed), loading$internal)
   else
     stop("Not a loading")
@@ -242,6 +245,28 @@ ar2<-function(name, ar, fixedar=FALSE, variance=.01, fixedvariance=FALSE, nlags=
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "ar", name, .jarray(ar), fixedar, variance, fixedvariance, as.integer(nlags), as.integer(nfcasts))
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
+
+#' Title
+#'
+#' @param name
+#' @param ar
+#' @param fixedar
+#' @param stderr
+#' @param scale
+#' @param fixed
+#' @param zeroinit
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+var_ar<-function(name, ar, fixedar=FALSE, stderr, scale=1, fixed=FALSE, zeroinit=FALSE){
+
+    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "arVar", name
+                  , .jarray(ar), fixedar, .jarray(stderr), as.numeric(scale), fixed, zeroinit)
+    return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
+}
+
 
 #' Title
 #'
@@ -807,8 +832,8 @@ reg_td<-function(name, period, start, length, groups=c(1,2,3,4,5,6,0), contrast=
 #'
 #' @param name
 #' @param period
-#' @param nnodes
-#' @param nodes
+#' @param nknots
+#' @param knots
 #' @param start
 #' @param variance
 #' @param fixed
@@ -817,17 +842,38 @@ reg_td<-function(name, period, start, length, groups=c(1,2,3,4,5,6,0), contrast=
 #' @export
 #'
 #' @examples
-splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=1, fixed=FALSE){
-  if (is.null(nodes)){
-    if (nnodes == 0)
-      stop('Invalid parameters. nnodes should be greater than 0 or nodes should be defined')
+splines_regular<-function(name, period, nknots=0, knots=NULL, start=1, variance=1, fixed=FALSE){
+  if (is.null(knots)){
+    if (nknots == 0)
+      stop('Invalid parameters. nknots should be greater than 0 or knots should be defined')
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines",
-                  name, period, as.integer(nnodes), as.integer(start-1), variance, fixed)
+                  name, period, as.integer(nknots), as.integer(start-1), variance, fixed)
   } else {
     jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "regularSplines",
-                  name, period, as.numeric(nodes), as.integer(start-1), variance, fixed)
+                  name, period, as.numeric(knots), as.integer(start-1), variance, fixed)
   }
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
+}
+
+#' Title
+#'
+#' @param name
+#' @param period
+#' @param knots
+#' @param order
+#' @param start
+#' @param variance
+#' @param fixed
+#'
+#' @return
+#' @export
+#'
+#' @examples
+splines_generic<-function(name, period, knots, order=4, start=1, variance=1, fixed=FALSE){
+
+        jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "genericSplines",
+                      name, period, as.numeric(knots), as.integer(order), as.integer(start-1), variance, fixed)
+        return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
 
@@ -835,7 +881,7 @@ splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=
 #'
 #' @param name
 #' @param startYear
-#' @param nodes
+#' @param knots
 #' @param start
 #' @param variance
 #' @param fixed
@@ -844,11 +890,36 @@ splines_regular<-function(name, period, nnodes=0, nodes=NULL, start=1, variance=
 #' @export
 #'
 #' @examples
-splines_daily<-function(name, startYear, nodes, start=1, variance=1, fixed=FALSE){
+splines_daily<-function(name, startYear, knots, start=1, variance=1, fixed=FALSE){
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "dailySplines",
-                  name, as.integer(startYear), as.integer(nodes-1), as.integer(start-1), variance, fixed)
+                  name, as.integer(startYear), as.integer(knots-1), as.integer(start-1), variance, fixed)
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
+
+#' Title
+#'
+#' @param name
+#' @param length
+#' @param period
+#' @param th0
+#' @param th1
+#' @param bth0
+#' @param bth1
+#' @param fixedth
+#' @param variance
+#' @param fixedvariance
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+ltd_airline<-function(name, length, period, th0=-.6, th1=-.6, bth0=-.6, bth1=-.6, fixedth=FALSE, variance=.01, fixedvariance=FALSE){
+    jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "ltdAirline", name,
+                  as.integer(length), as.integer(period), th0, th1, bth0, bth1, fixedth, variance, fixedvariance)
+    return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
+}
+
+
 
 #' Title
 #'
@@ -1014,3 +1085,89 @@ parameters<-function(model){
   names(res) <- rjd3toolkit::result(model, "parametersnames")
   return()
 }
+
+
+#' Title
+#'
+#' @param block
+#' @param pos
+#'
+#' @return
+#' @export
+#'
+#' @examples
+block_t<-function(block, pos = 0){
+    if (! is(block, STATEBLOCK))
+        stop("Not a state block")
+    if ( is.jnull(block$internal) ){
+        return(NULL)
+    }
+
+    jt<-.jcall("jdplus/sts/base/r/SsfTools", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "transitionMatrix",
+               block$internal, as.integer(pos))
+    return (rjd3toolkit::.jd2r_matrix(jt))
+}
+
+
+#' Title
+#'
+#' @param block
+#'
+#' @return
+#' @export
+#'
+#' @examples
+block_v<-function(block, pos = 0){
+    if (! is(block, STATEBLOCK))
+        stop("Not a state block")
+    if ( is.jnull(block$internal) ){
+        return(NULL)
+    }
+
+    jt<-.jcall("jdplus/sts/base/r/SsfTools", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "innovationMatrix",
+               block$internal, as.integer(pos))
+    return (rjd3toolkit::.jd2r_matrix(jt))
+}
+
+#' Title
+#'
+#' @param block
+#'
+#' @return
+#' @export
+#'
+#' @examples
+block_p0<-function(block, pos = 0){
+    if (! is(block, STATEBLOCK))
+        stop("Not a state block")
+    if ( is.jnull(block$internal) ){
+        return(NULL)
+    }
+
+    jt<-.jcall("jdplus/sts/base/r/SsfTools", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "stationaryInitialVariance",
+               block$internal)
+    return (rjd3toolkit::.jd2r_matrix(jt))
+}
+
+#' Title
+#'
+#' @param block
+#' @param pos
+#'
+#' @return
+#' @export
+#'
+#' @examples
+block_d0<-function(block, pos = 0){
+    if (! is(block, STATEBLOCK))
+        stop("Not a state block")
+    if ( is.jnull(block$internal) ){
+        return(NULL)
+    }
+
+    jt<-.jcall("jdplus/sts/base/r/SsfTools", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "diffuseInitialConstraint",
+               block$internal)
+    return (rjd3toolkit::.jd2r_matrix(jt))
+}
+
+
