@@ -209,7 +209,8 @@ compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
 #' Functions to create an autoregressive model (`ar`) or a
 #' modified autoregressive model (`ar2`)
 #'
-#' @param ar vector of the AR coefficients (\eqn{\varphi_1, \dots, \varphi_p}).
+#' @param ar vector of the AR coefficients (See @details
+#' Additional details...).
 #' @param fixedar boolean that triggers the estimation of the AR coefficients (`FALSE`)
 #' or fixed it (`TRUE`) to a pre-specified value set by the parameter `ar`.
 #' @param variance the variance (\eqn{\sigma^2_{ar}}).
@@ -223,15 +224,15 @@ compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
 #'
 #' @details
 #' The AR process is defined by
-#' \deqn{\Phi\left(B\right)y_t=\epsilon_t}
-#' where
-#' \deqn{\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p}
-#' is an auto-regressive polynomial.
+#' \deqn{y_t = \phi_1 y_{t-1} +  \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t}
+#' The stability of the auto-regressive polynomial is not checked.
 #' @return
-#'
+#' An element of type "JD3_SsfStateBlock" (wrapper around the corresponding Java object))
 #' @export
 #'
 #' @examples
+#' b_ar<-ar("my_ar", c(.8,-.3,.2), variance=1)
+#' block_p0(b_ar)
 ar<-function(name, ar, fixedar=FALSE, variance=.01, fixedvariance=FALSE, nlags=0, zeroinit=FALSE){
 
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "ar", name, .jarray(ar), fixedar, variance, fixedvariance, as.integer(nlags), zeroinit)
@@ -1137,7 +1138,7 @@ block_v<-function(block, pos = 0){
 #' @export
 #'
 #' @examples
-block_p0<-function(block, pos = 0){
+block_p0<-function(block){
     if (! is(block, STATEBLOCK))
         stop("Not a state block")
     if ( is.jnull(block$internal) ){

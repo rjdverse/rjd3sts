@@ -4,7 +4,7 @@ author: "Jean Palate"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SUTSE model}
+  %\VignetteIndexEntry{SUTSE models}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction
+## Introduction
 
 ```{r echo=FALSE}
 suppressPackageStartupMessages(library(rjd3toolkit))
@@ -24,7 +24,7 @@ suppressPackageStartupMessages(library(rjd3sts))
 library(knitr)
 ```
 
-# Data
+## Data
 
 We illustrate the various methods using two sets of time series:
 
@@ -32,13 +32,45 @@ We illustrate the various methods using two sets of time series:
 * The **ABS** data set contains long monthly series over Australian retail trade.
 
 
-# Overview of the supported state space forms
+## Overview of the supported state space forms
 
-# Description of the state blocks
+The `general linear gaussian` state-space model can be written in many different ways. The form considered in JD+ 3.0 is presented below.
 
-## ar
+$$ y_t = Z_t \alpha_t + \epsilon_t,\quad \epsilon_t \sim N\left(0, \sigma^2 H_t\right),\quad t \gt 0 $$
 
-### Introduction
+$$ \alpha_{t+1} = T_t \alpha_t + \mu_t, \quad \mu_t \sim N \left(0, \sigma^2 V_t \right),\quad t \ge 0 $$
+
+$y_t$  is the observation at period t, $\alpha_t$  is the state vector.
+$\epsilon_t, \mu_t$ are assumed to be serially independent at all leads and lags and independent from each other.  
+In the case of multi-variate models, $y_t$ is a vector of observations. However, in most cases, we will use the univariate approach by considering the observations one by one (univariate handling of multi-variate models). 
+
+The innovations of the state equation will be modelled as 
+
+$$ \mu_t = S_t \xi_t, \quad \xi_t \sim N\left( 0, \sigma^2 I\right) $$
+
+In other words, $V_t=S_t S_t'$
+
+The initial ($\equiv t=0$) conditions of the filter are defined as follows:
+
+$$ \alpha_{0} = a_{0} + B\delta + \mu_{0}, \quad \delta \sim N\left(0, \kappa I \right),\: \mu_{0} \sim N\left(0, P_*\right)$$
+
+where  $\kappa$ is arbitrary large. $P_*$ is the variance of the stationary part of the initial state vector and $B$ models the diffuse part. We write $BB'=P_\infty$. 
+
+The definition used in JD+ is quasi-identical to that of Durbin and Koopman[1].
+
+In summary, the model is completely defined by the following quantities (possible default values are indicated in brackets):
+
+$$ \mathbf{Z_t}, \mathbf{H_t} [=0] $$
+
+$$ \mathbf{T_t}, \mathbf{V_t} [=S_t S_t'], \mathbf{S_t} [=Cholesky(V)] $$ 
+
+$$ \mathbf{a_{0}}[=0], \mathbf{P_*} [=0], \mathbf{B} [=0], \mathbf{P_\infty} [=BB'] $$
+
+## Description of the state blocks
+
+### ar
+
+#### Introduction
 
 The auto-regressive block is defined by
 
@@ -79,15 +111,29 @@ $$ Z_t = \begin{pmatrix} 1 & 0 & \cdots & 0\end{pmatrix}$$
 $$ \alpha_{-1} = \begin{pmatrix}0 \\ 0 \\ \vdots\\ 0 \end{pmatrix} $$  
 
 $$ P_{*} = \Omega $$
-$\Omega$ is the unconditional covariance of the state array; it can be easily derived using the MA representation. We have:
+$\Omega$ is the unconditional covariance of the state array; it is computed by means of the auto-covariance function of the model
 
-$$ \Omega\left(i,0\right) = \gamma_i $$  
+$$ \Omega_t = \begin{pmatrix}\gamma_0 & \gamma_1 & \cdots  & \gamma_p  \\
+                        \gamma_1 & \gamma_0 & \gamma_1 &  \cdots &     \\ 
+						\vdots     &  \ddots & \ddots & \vdots\\ 
+						\gamma_p & \cdots & \gamma_1  & \gamma_0  \end{pmatrix}$$
 
-$$ \Omega\left(i,j\right) = \Omega\left(i-1,j-1\right)-\psi_i \psi_j $$  
+### R code
+
+The "ar" block is defined by specifying the coefficients $\phi_i$ of the ar polynomial and the innovation variance.
+More exactly, they correspond to the equation
+
+$$ y_t = \phi_1 y_{t-1} +  \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t$$
+
+The coefficients and/or the variance can be fixed
 
 ```{r }
-b_ar<-ar("ar", c(-.2, .4, -.1), nlags=5)
+b_ar<-ar("ar", c(.7,-.4, .2), nlags=5, variance=1)
+
+cat("T\n")
 knit_print(block_t(b_ar))
+cat("\nP0\n")
+knit_print(block_p0(b_ar))
 
 ```
 ## ar2
