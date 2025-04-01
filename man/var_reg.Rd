@@ -19,7 +19,7 @@ var_reg(name, x, stderr, scale = 1, fixed = FALSE)
 Time Varying Regressor
 }
 \examples{
- x<-rjd3toolkit::retail$BookStores
+ x<-rjd3toolkit::Retail$BookStores
  std<-rep(1, length(x))
  std[c(20, 50, 150)]<-5
  v<-var_reg("vx", x, std, 0.1)

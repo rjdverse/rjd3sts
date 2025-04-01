@@ -5,19 +5,13 @@
 \title{Title}
 \usage{
 loading(pos = NULL, weights = NULL)
-
-loading(pos = NULL, weights = NULL)
 }
 \arguments{
 \item{pos}{defines the position of each one of the elements of the block of states defined.
 \code{NULL} indicates by default the first state included in the block (pos=0)}
 
 \item{weights}{defines the weights associated to each one of the state variables included in the block.}
-
-\item{obs}{}
 }
 \description{
-Title
-
 Title
 }

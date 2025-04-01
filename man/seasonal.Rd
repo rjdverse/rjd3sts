@@ -2,7 +2,7 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{seasonal}
 \alias{seasonal}
-\title{Title}
+\title{Seasonal state block}
 \usage{
 seasonal(
   name,
@@ -13,8 +13,22 @@ seasonal(
 )
 }
 \arguments{
-\item{fixed}{}
+\item{name}{Name of the block}
+
+\item{period}{Period of the seasonality}
+
+\item{type}{Type of the seasonal component}
+
+\item{variance}{Innovation variance}
+
+\item{fixed}{Indicates if the variance is fixed}
 }
 \description{
-Title
+Seasonal state block
+}
+\examples{
+seas1<-seasonal("seas1", 12, "HarrisonStevens", variance=1)
+print(block_v(seas1))
+seas2<-seasonal("seas2", 12, "Trigonometric", variance=1)
+print(block_v(seas2))
 }
