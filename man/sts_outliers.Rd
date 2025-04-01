@@ -47,6 +47,6 @@ outliers (\code{so}) should be detected.}
 Title
 }
 \examples{
- x<-rjd3toolkit::retail$BookStores
+ x<-rjd3toolkit::Retail$BookStores
  sts_outliers(x)
 }

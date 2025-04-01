@@ -205,7 +205,7 @@ print.JD3_SUTSE<-function(q){
 
 ```{r sutse_example, fig.width=7, fig.height=5}
 
-q<-sutse(ts.union(log(retail$RetailSalesTotal), log(retail$BookStores)))
+q<-sutse(ts.union(log(Retail$RetailSalesTotal), log(Retail$BookStores)))
 print(q)
 plot(q)
 ```

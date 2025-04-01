@@ -7,6 +7,8 @@
 sae(name, ar, fixedar = FALSE, lag = 1, zeroinit = FALSE)
 }
 \arguments{
+\item{name}{Name of the block}
+
 \item{zeroinit}{}
 }
 \description{

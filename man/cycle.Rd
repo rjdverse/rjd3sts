@@ -14,7 +14,11 @@ cycle(
 )
 }
 \arguments{
-\item{fixedvariance}{}
+\item{name}{Name of the block}
+
+\item{variance}{Variance of the innovations}
+
+\item{fixedvariance}{Indicates if the variance if fixed}
 }
 \description{
 Title

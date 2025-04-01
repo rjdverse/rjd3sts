@@ -22,3 +22,19 @@ A matrix with the components
 Retrieves the components of the model (univariate case) or the
 components corresponding to a given equation (multivariate case)
 }
+\examples{
+model<-model()
+llt<-locallineartrend("llt")
+seas<-seasonal("seas", 12, "Crude")
+n<-noise("n")
+add(model,llt)
+add(model,seas)
+add(model,n)
+y<-rjd3toolkit::Retail$BookStores
+emodel<-estimate(model, y)
+scmp<-smoothed_components(emodel)
+high<-cbind(scmp[,1], y-scmp[,2])
+low<-scmp[,c(2,3)]
+matplot(high, type='l')
+matplot(low, type='l')
+}
