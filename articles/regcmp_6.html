@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rjd3sts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/bsm.html">BSM</a></li>
+    <li><a class="dropdown-item" href="../articles/regcmp_4.html">Modeling Nile riverflow</a></li>
     <li><a class="dropdown-item" href="../articles/regcmp_6.html">Time series with a sampling error component</a></li>
     <li><a class="dropdown-item" href="../articles/regsplines.html">Regular periodic cubic splines</a></li>
     <li><a class="dropdown-item" href="../articles/sts.html">Sructural Time Series using JDemetra+</a></li>
@@ -70,7 +71,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2025-02-24</h4>
+            <h4 data-toc-skip class="date">2025-04-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/regcmp_6.Rmd" class="external-link"><code>vignettes/regcmp_6.Rmd</code></a></small>
       <div class="d-none name"><code>regcmp_6.Rmd</code></div>
@@ -161,7 +162,7 @@ for non-weighted state components).</p>
 <p><img src="regcmp_6_files/figure-html/stderr-1.png" width="672"></p>
 </div>
 <div class="section level4">
-<h4 id="cv-improvvement-due-to-signal-extraction">CV improvvement due to signal extraction<a class="anchor" aria-label="anchor" href="#cv-improvvement-due-to-signal-extraction"></a>
+<h4 id="cv-improvement-due-to-signal-extraction">CV improvement due to signal extraction<a class="anchor" aria-label="anchor" href="#cv-improvement-due-to-signal-extraction"></a>
 </h4>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">improvement</span><span class="op">&lt;-</span><span class="op">(</span><span class="va">h</span><span class="op">-</span><span class="va">qe</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">h</span><span class="op">*</span><span class="fl">100</span></span>

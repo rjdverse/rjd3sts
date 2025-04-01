@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rjd3sts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/bsm.html">BSM</a></li>
+    <li><a class="dropdown-item" href="../articles/regcmp_4.html">Modeling Nile riverflow</a></li>
     <li><a class="dropdown-item" href="../articles/regcmp_6.html">Time series with a sampling error component</a></li>
     <li><a class="dropdown-item" href="../articles/regsplines.html">Regular periodic cubic splines</a></li>
     <li><a class="dropdown-item" href="../articles/sts.html">Sructural Time Series using JDemetra+</a></li>
@@ -70,7 +71,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2025-02-24</h4>
+            <h4 data-toc-skip class="date">2025-04-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/bsm.Rmd" class="external-link"><code>vignettes/bsm.Rmd</code></a></small>
       <div class="d-none name"><code>bsm.Rmd</code></div>
@@ -87,7 +88,7 @@ structural model. We present below some of them.</p>
 different approaches, it is important to compute the marginal
 likelihood.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">s</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">retail</span><span class="op">$</span><span class="va">BookStores</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">Retail</span><span class="op">$</span><span class="va">BookStores</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="standard-definition-noise-in-the-state">Standard definition, noise in the state<a class="anchor" aria-label="anchor" href="#standard-definition-noise-in-the-state"></a>
 </h3>

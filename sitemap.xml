@@ -3,6 +3,7 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/LICENSE-text.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/articles/bsm.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/articles/index.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/articles/regcmp_4.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/articles/regcmp_6.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/articles/regsplines.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/articles/sts.html</loc></url>
@@ -21,6 +22,7 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/block_p0.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/block_t.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/block_v.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/components_pos.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/cumul.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/cycle.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/equation.html</loc></url>
@@ -34,6 +36,7 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/loading_cyclical.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/loading_periodic.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/loading_sum.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/loadings.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/locallevel.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/locallineartrend.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/ltd_airline.html</loc></url>
@@ -63,6 +66,8 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/sts_forecast.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/sts_outliers.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/sts_raw.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/tdairline_decomposition.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/tdairline_estimation.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/var_ar.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/var_loading.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/var_locallevel.html</loc></url>

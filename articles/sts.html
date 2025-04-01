@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rjd3sts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/bsm.html">BSM</a></li>
+    <li><a class="dropdown-item" href="../articles/regcmp_4.html">Modeling Nile riverflow</a></li>
     <li><a class="dropdown-item" href="../articles/regcmp_6.html">Time series with a sampling error component</a></li>
     <li><a class="dropdown-item" href="../articles/regsplines.html">Regular periodic cubic splines</a></li>
     <li><a class="dropdown-item" href="../articles/sts.html">Sructural Time Series using JDemetra+</a></li>
@@ -70,7 +71,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2025-02-24</h4>
+            <h4 data-toc-skip class="date">2025-04-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/sts.Rmd" class="external-link"><code>vignettes/sts.Rmd</code></a></small>
       <div class="d-none name"><code>sts.Rmd</code></div>
@@ -78,13 +79,13 @@ Palate</h4>
 
     
     
-<div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
+<div class="section level3">
+<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h3>
 </div>
-<div class="section level2">
-<h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
-</h2>
+<div class="section level3">
+<h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h3>
 <p>We illustrate the various methods using two sets of time series:</p>
 <ul>
 <li>The <strong>retail</strong> data set contains monthly figures over
@@ -94,19 +95,59 @@ to 2010.</li>
 Australian retail trade.</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="overview-of-the-supported-state-space-forms">Overview of the supported state space forms<a class="anchor" aria-label="anchor" href="#overview-of-the-supported-state-space-forms"></a>
-</h2>
-</div>
-<div class="section level2">
-<h2 id="description-of-the-state-blocks">Description of the state blocks<a class="anchor" aria-label="anchor" href="#description-of-the-state-blocks"></a>
-</h2>
 <div class="section level3">
-<h3 id="ar">ar<a class="anchor" aria-label="anchor" href="#ar"></a>
+<h3 id="overview-of-the-supported-state-space-forms">Overview of the supported state space forms<a class="anchor" aria-label="anchor" href="#overview-of-the-supported-state-space-forms"></a>
+</h3>
+<p>The <code>general linear gaussian</code> state-space model can be
+written in many different ways. The form considered in JD+ 3.0 is
+presented below.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>t</mi></msub><mo>=</mo><msub><mi>Z</mi><mi>t</mi></msub><msub><mi>α</mi><mi>t</mi></msub><mo>+</mo><msub><mi>ϵ</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>ϵ</mi><mi>t</mi></msub><mo>∼</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><msub><mi>H</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi>t</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex"> y_t = Z_t \alpha_t + \epsilon_t,\quad \epsilon_t \sim N\left(0, \sigma^2 H_t\right),\quad t \gt 0 </annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>T</mi><mi>t</mi></msub><msub><mi>α</mi><mi>t</mi></msub><mo>+</mo><msub><mi>μ</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>μ</mi><mi>t</mi></msub><mo>∼</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><msub><mi>V</mi><mi>t</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi>t</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex"> \alpha_{t+1} = T_t \alpha_t + \mu_t, \quad \mu_t \sim N \left(0, \sigma^2 V_t \right),\quad t \ge 0 </annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>y</mi><mi>t</mi></msub><annotation encoding="application/x-tex">y_t</annotation></semantics></math>
+is the observation at period t,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>t</mi></msub><annotation encoding="application/x-tex">\alpha_t</annotation></semantics></math>
+is the state vector.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ϵ</mi><mi>t</mi></msub><mo>,</mo><msub><mi>μ</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\epsilon_t, \mu_t</annotation></semantics></math>
+are assumed to be serially independent at all leads and lags and
+independent from each other.<br>
+In the case of multi-variate models,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>y</mi><mi>t</mi></msub><annotation encoding="application/x-tex">y_t</annotation></semantics></math>
+is a vector of observations. However, in most cases, we will use the
+univariate approach by considering the observations one by one
+(univariate handling of multi-variate models).</p>
+<p>The innovations of the state equation will be modelled as</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>t</mi></msub><mo>=</mo><msub><mi>S</mi><mi>t</mi></msub><msub><mi>ξ</mi><mi>t</mi></msub><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>ξ</mi><mi>t</mi></msub><mo>∼</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mi>I</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex"> \mu_t = S_t \xi_t, \quad \xi_t \sim N\left( 0, \sigma^2 I\right) </annotation></semantics></math></p>
+<p>In other words,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mi>t</mi></msub><mo>=</mo><msub><mi>S</mi><mi>t</mi></msub><msub><mi>S</mi><mi>t</mi></msub><mi>′</mi></mrow><annotation encoding="application/x-tex">V_t=S_t S_t'</annotation></semantics></math></p>
+<p>The initial
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≡</mo><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\equiv t=0</annotation></semantics></math>)
+conditions of the filter are defined as follows:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mn>0</mn></msub><mo>=</mo><msub><mi>a</mi><mn>0</mn></msub><mo>+</mo><mi>B</mi><mi>δ</mi><mo>+</mo><msub><mi>μ</mi><mn>0</mn></msub><mo>,</mo><mspace width="1.0em"></mspace><mi>δ</mi><mo>∼</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>κ</mi><mi>I</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="0.222em"></mspace><msub><mi>μ</mi><mn>0</mn></msub><mo>∼</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><msub><mi>P</mi><mo>*</mo></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex"> \alpha_{0} = a_{0} + B\delta + \mu_{0}, \quad \delta \sim N\left(0, \kappa I \right),\: \mu_{0} \sim N\left(0, P_*\right)</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>
+is arbitrary large.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mo>*</mo></msub><annotation encoding="application/x-tex">P_*</annotation></semantics></math>
+is the variance of the stationary part of the initial state vector and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+models the diffuse part. We write
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mi>B</mi><mi>′</mi><mo>=</mo><msub><mi>P</mi><mi>∞</mi></msub></mrow><annotation encoding="application/x-tex">BB'=P_\infty</annotation></semantics></math>.</p>
+<p>The definition used in JD+ is quasi-identical to that of Durbin and
+Koopman[1].</p>
+<p>In summary, the model is completely defined by the following
+quantities (possible default values are indicated in brackets):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐙</mi><mi>𝐭</mi></msub><mo>,</mo><msub><mi>𝐇</mi><mi>𝐭</mi></msub><mrow><mo stretchy="true" form="prefix">[</mo><mo>=</mo><mn>0</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex"> \mathbf{Z_t}, \mathbf{H_t} [=0] </annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐓</mi><mi>𝐭</mi></msub><mo>,</mo><msub><mi>𝐕</mi><mi>𝐭</mi></msub><mrow><mo stretchy="true" form="prefix">[</mo><mo>=</mo><msub><mi>S</mi><mi>t</mi></msub><msub><mi>S</mi><mi>t</mi></msub><mi>′</mi><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><msub><mi>𝐒</mi><mi>𝐭</mi></msub><mrow><mo stretchy="true" form="prefix">[</mo><mo>=</mo><mi>C</mi><mi>h</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>s</mi><mi>k</mi><mi>y</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>V</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex"> \mathbf{T_t}, \mathbf{V_t} [=S_t S_t'], \mathbf{S_t} [=Cholesky(V)] </annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐚</mi><mn>𝟎</mn></msub><mrow><mo stretchy="true" form="prefix">[</mo><mo>=</mo><mn>0</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><msub><mi>𝐏</mi><mo mathvariant="bold">*</mo></msub><mrow><mo stretchy="true" form="prefix">[</mo><mo>=</mo><mn>0</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mi>𝐁</mi><mrow><mo stretchy="true" form="prefix">[</mo><mo>=</mo><mn>0</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><msub><mi>𝐏</mi><mi mathvariant="bold">∞</mi></msub><mrow><mo stretchy="true" form="prefix">[</mo><mo>=</mo><mi>B</mi><mi>B</mi><mi>′</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex"> \mathbf{a_{0}}[=0], \mathbf{P_*} [=0], \mathbf{B} [=0], \mathbf{P_\infty} [=BB'] </annotation></semantics></math></p>
+</div>
+<div class="section level3">
+<h3 id="description-of-the-state-blocks">Description of the state blocks<a class="anchor" aria-label="anchor" href="#description-of-the-state-blocks"></a>
 </h3>
 <div class="section level4">
-<h4 id="introduction-1">Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"></a>
+<h4 id="ar">ar<a class="anchor" aria-label="anchor" href="#ar"></a>
 </h4>
+<div class="section level5">
+<h5 id="introduction-1">Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"></a>
+</h5>
 <p>The auto-regressive block is defined by</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Φ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>y</mi><mi>t</mi></msub><mo>=</mo><msub><mi>ϵ</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">\Phi\left(B\right)y_t=\epsilon_t </annotation></semantics></math></p>
 <p>where:</p>
@@ -117,6 +158,7 @@ Australian retail trade.</li>
 be the autocovariances of the process</p>
 <p>Using those notations, the state-space block can be written as
 follows :</p>
+</div>
 </div>
 <div class="section level4">
 <h4 id="state-block">State block:<a class="anchor" aria-label="anchor" href="#state-block"></a>
@@ -145,19 +187,44 @@ in complex (multi-variate) models</p>
 </h4>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mrow><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>⋮</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex"> \alpha_{-1} = \begin{pmatrix}0 \\ 0 \\ \vdots\\ 0 \end{pmatrix} </annotation></semantics></math></p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mo>*</mo></msub><mo>=</mo><mi>Ω</mi></mrow><annotation encoding="application/x-tex"> P_{*} = \Omega </annotation></semantics></math><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>
-is the unconditional covariance of the state array; it can be easily
-derived using the MA representation. We have:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>γ</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex"> \Omega\left(i,0\right) = \gamma_i </annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo>,</mo><mi>j</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><msub><mi>ψ</mi><mi>i</mi></msub><msub><mi>ψ</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex"> \Omega\left(i,j\right) = \Omega\left(i-1,j-1\right)-\psi_i \psi_j </annotation></semantics></math></p>
+is the unconditional covariance of the state array; it is computed by
+means of the auto-covariance function of the model</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Ω</mi><mi>t</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mn>0</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mn>1</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><mi>⋯</mi></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mi>p</mi></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mn>1</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mn>0</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mn>1</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><mi>⋯</mi></mtd><mtd columnalign="center" style="text-align: center"></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>⋮</mi></mtd><mtd columnalign="center" style="text-align: center"><mo>⋱</mo></mtd><mtd columnalign="center" style="text-align: center"><mo>⋱</mo></mtd><mtd columnalign="center" style="text-align: center"><mi>⋮</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mi>p</mi></msub></mtd><mtd columnalign="center" style="text-align: center"><mi>⋯</mi></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mn>1</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>γ</mi><mn>0</mn></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex"> \Omega_t = \begin{pmatrix}\gamma_0 &amp; \gamma_1 &amp; \cdots  &amp; \gamma_p  \\
+                        \gamma_1 &amp; \gamma_0 &amp; \gamma_1 &amp;  \cdots &amp;     \\ 
+                        \vdots     &amp;  \ddots &amp; \ddots &amp; \vdots\\ 
+                        \gamma_p &amp; \cdots &amp; \gamma_1  &amp; \gamma_0  \end{pmatrix}</annotation></semantics></math></p>
+</div>
+<div class="section level4">
+<h4 id="r-code">R code<a class="anchor" aria-label="anchor" href="#r-code"></a>
+</h4>
+<p>The “ar” block is defined by specifying the coefficients
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ϕ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\phi_i</annotation></semantics></math>
+of the ar polynomial and the innovation variance. More exactly, they
+correspond to the equation</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>t</mi></msub><mo>=</mo><msub><mi>ϕ</mi><mn>1</mn></msub><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>ϕ</mi><mn>2</mn></msub><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>+</mo><mi>…</mi><mo>+</mo><msub><mi>ϕ</mi><mi>p</mi></msub><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mi>p</mi></mrow></msub><mo>+</mo><msub><mi>ϵ</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex"> y_t = \phi_1 y_{t-1} +  \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t</annotation></semantics></math></p>
+<p>The coefficients and/or the variance can be fixed</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">b_ar</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/ar.html">ar</a></span><span class="op">(</span><span class="st">"ar"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.2</span>, <span class="fl">.4</span>, <span class="op">-</span><span class="fl">.1</span><span class="op">)</span>, nlags<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">b_ar</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/ar.html">ar</a></span><span class="op">(</span><span class="st">"ar"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.7</span>,<span class="op">-</span><span class="fl">.4</span>, <span class="fl">.2</span><span class="op">)</span>, nlags<span class="op">=</span><span class="fl">5</span>, variance<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"T\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; T</span></span>
 <span><span class="fu">knit_print</span><span class="op">(</span><span class="fu"><a href="../reference/block_t.html">block_t</a></span><span class="op">(</span><span class="va">b_ar</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      [,1] [,2] [,3] [,4] [,5]</span></span>
-<span><span class="co">#&gt; [1,] -0.2  0.4 -0.1    0    0</span></span>
+<span><span class="co">#&gt; [1,]  0.7 -0.4  0.2    0    0</span></span>
 <span><span class="co">#&gt; [2,]  1.0  0.0  0.0    0    0</span></span>
 <span><span class="co">#&gt; [3,]  0.0  1.0  0.0    0    0</span></span>
 <span><span class="co">#&gt; [4,]  0.0  0.0  1.0    0    0</span></span>
-<span><span class="co">#&gt; [5,]  0.0  0.0  0.0    1    0</span></span></code></pre></div>
+<span><span class="co">#&gt; [5,]  0.0  0.0  0.0    1    0</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nP0\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; P0</span></span>
+<span><span class="fu">knit_print</span><span class="op">(</span><span class="fu"><a href="../reference/block_p0.html">block_p0</a></span><span class="op">(</span><span class="va">b_ar</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            [,1]       [,2]       [,3]       [,4]       [,5]</span></span>
+<span><span class="co">#&gt; [1,] 1.51552795 0.77018634 0.08695652 0.05590062 0.15838509</span></span>
+<span><span class="co">#&gt; [2,] 0.77018634 1.51552795 0.77018634 0.08695652 0.05590062</span></span>
+<span><span class="co">#&gt; [3,] 0.08695652 0.77018634 1.51552795 0.77018634 0.08695652</span></span>
+<span><span class="co">#&gt; [4,] 0.05590062 0.08695652 0.77018634 1.51552795 0.77018634</span></span>
+<span><span class="co">#&gt; [5,] 0.15838509 0.05590062 0.08695652 0.77018634 1.51552795</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -343,7 +410,6 @@ derived using the MA representation. We have:</p>
 <h3 id="arima">arima<a class="anchor" aria-label="anchor" href="#arima"></a>
 </h3>
 </div>
-</div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
@@ -360,6 +426,11 @@ derived using the MA representation. We have:</p>
 <div class="section level3">
 <h3 id="regular-period-cubic-splines">
 <a href="regsplines.html">Regular period cubic splines</a><a class="anchor" aria-label="anchor" href="#regular-period-cubic-splines"></a>
+</h3>
+</div>
+<div class="section level3">
+<h3 id="modeling-nile-riverflow">
+<a href="regcmp_4.html">Modeling Nile riverflow</a><a class="anchor" aria-label="anchor" href="#modeling-nile-riverflow"></a>
 </h3>
 </div>
 <div class="section level3">

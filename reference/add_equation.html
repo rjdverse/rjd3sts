@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rjd3sts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +19,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/bsm.html">BSM</a></li>
+    <li><a class="dropdown-item" href="../articles/regcmp_4.html">Modeling Nile riverflow</a></li>
     <li><a class="dropdown-item" href="../articles/regcmp_6.html">Time series with a sampling error component</a></li>
     <li><a class="dropdown-item" href="../articles/regsplines.html">Regular periodic cubic splines</a></li>
     <li><a class="dropdown-item" href="../articles/sts.html">Sructural Time Series using JDemetra+</a></li>
@@ -71,10 +72,19 @@
 
 
 <dt id="arg-loading">loading<a class="anchor" aria-label="anchor" href="#arg-loading"></a></dt>
-<dd><p>the loading that links the block to the observation</p></dd>
+<dd><p>the loading that links the block to the observations</p></dd>
 
 </dl></div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">eq</span><span class="op">&lt;-</span> <span class="fu"><a href="equation.html">equation</a></span><span class="op">(</span><span class="st">'eq1'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ll</span><span class="op">&lt;-</span><span class="fu"><a href="locallevel.html">locallevel</a></span><span class="op">(</span><span class="st">'ll'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="noise.html">noise</a></span><span class="op">(</span><span class="st">"n"</span>, variance <span class="op">=</span> <span class="fl">1</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">add_equation</span><span class="op">(</span><span class="va">eq</span>, <span class="va">ll</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">add_equation</span><span class="op">(</span><span class="va">eq</span>, <span class="va">n</span>, coeff<span class="op">=</span><span class="fl">0.1</span>, fixed<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
