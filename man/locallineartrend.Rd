@@ -2,18 +2,18 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{locallineartrend}
 \alias{locallineartrend}
-\title{Local Linear Trend}
+\title{Local linear trend state block}
 \usage{
 locallineartrend(
   name,
   levelVariance = 0.01,
-  slopevariance = 0.01,
+  slopeVariance = 0.01,
   fixedLevelVariance = FALSE,
   fixedSlopeVariance = FALSE
 )
 }
 \arguments{
-\item{name}{name of the component.}
+\item{name}{Name of the block}
 
 \item{levelVariance}{variance of the level (\eqn{\sigma^2_l})}
 
@@ -22,12 +22,16 @@ the estimation of the variances \eqn{\sigma^2_l} and \eqn{\sigma^2_n} (\code{FAL
 fixes it (\code{TRUE}) to a pre-specified value set by the parameters \code{levelVariance} and \code{slopevariance}.}
 }
 \description{
-Local Linear Trend
+Local linear trend state block
 }
 \details{
 \deqn{\begin{cases}l_{t+1} = l_t + n_t +  \xi_t \\
  n_{t+1} = n_t + \mu_t \\
- \xi_t \sim N(0, \sigma^2\sigma^2_l)\\
- \mu_t \sim N(0, \sigma^2\sigma^2_n)
+ \xi_t \sim N(0, \sigma^2_l)\\
+ \mu_t \sim N(0, \sigma^2_n)
  \end{cases}}
+}
+\examples{
+llt<-locallineartrend('llt', levelVariance=1, slopeVariance=.25)
+print(block_t(llt))
 }

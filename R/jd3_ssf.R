@@ -14,17 +14,17 @@ STATEBLOCK<-'JD3_SsfStateBlock'
 #' @param item the block of the state array that will be linked to the observation corresponding to this equation through the specified loading and coefficient
 #' @param coeff the value of the coefficient associated to the block of latent variables defined by `item`.
 #' @param fixed logical that triggers estimation of coeff (FALSE) or fixes it (TRUE) to a pre-specified value
-#' @param loading the loading that links the block to the observation
+#' @param loading the loading that links the block to the observations
 #'
 #' @return
 #' @export
 #'
 #' @examples
-#' model<- equation('eq1)
+#' eq<- equation('eq1')
 #' ll<-locallevel('ll')
-#' n<-noise('n')
-#' add_equation(model, ll)
-#' add_equation(model, n)
+#' n<-noise("n", variance = 1, fixed = TRUE)
+#' add_equation(eq, ll)
+#' add_equation(eq, n, coeff=0.1, fixed=FALSE)
 add_equation<-function(equation, item, coeff=1, fixed=TRUE, loading=NULL){
   if (! is(equation, EQUATION))
     stop("Not an equation")
@@ -78,7 +78,7 @@ signal<-function(object, obs=1, pos=NULL, loading=NULL, stdev=FALSE){
 
 #' Title
 #'
-#' @param object
+#' @param object Estimated model
 #' @param m
 #' @param pos
 #' @param stdev
@@ -112,30 +112,40 @@ msignal<-function(object, m, pos=NULL, stdev=FALSE){
   }
 }
 
-#' Title
+#' Give all the loadings for a given variable
 #'
-#' @param object
-#' @param obs
+#' @param object Estimated model
+#' @param var loadings for the given variable (or equation). Useless in the case of univariate models
 #'
-#' @return
+#' @return A matrix with the requested loadings. The number of rows corresponds to the number of observations.
 #' @export
 #'
 #' @examples
-loading<-function(object, obs=1){
+#' model<-model()
+#' llt<-locallineartrend("llt")
+#' seas<-seasonal("seas", 12, "Crude")
+#' n<-noise("n")
+#' add(model,llt)
+#' add(model,seas)
+#' add(model,n)
+#' y<-rjd3toolkit::Retail$BookStores
+#' emodel<-estimate(model, y)
+#' print(loadings(emodel))
+loadings<-function(object, var=1){
   if (! is(object, MODELESTIMATION))
     stop("Not a model estimation")
   if (is.jnull(object$internal)){
-    return
+    return (NULL)
   } else {
-      jm<-.jcall(object$internal, "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "loading", as.integer(obs-1))
+      jm<-.jcall(object$internal, "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "loading", as.integer(var-1))
       return(rjd3toolkit::.jd2r_matrix(jm))
   }
 }
 
 #' Title
 #'
-#' @param model
-#' @param item
+#' @param model A state space model
+#' @param item An equation or a state block
 #'
 #' @return
 #' @export
@@ -209,7 +219,8 @@ compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
 #' Functions to create an autoregressive model (`ar`) or a
 #' modified autoregressive model (`ar2`)
 #'
-#' @param ar vector of the AR coefficients (\eqn{\varphi_1, \dots, \varphi_p}).
+#' @param ar vector of the AR coefficients (See @details
+#' Additional details...).
 #' @param fixedar boolean that triggers the estimation of the AR coefficients (`FALSE`)
 #' or fixed it (`TRUE`) to a pre-specified value set by the parameter `ar`.
 #' @param variance the variance (\eqn{\sigma^2_{ar}}).
@@ -223,15 +234,15 @@ compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
 #'
 #' @details
 #' The AR process is defined by
-#' \deqn{\Phi\left(B\right)y_t=\epsilon_t}
-#' where
-#' \deqn{\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p}
-#' is an auto-regressive polynomial.
+#' \deqn{y_t = \phi_1 y_{t-1} +  \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t}
+#' The stability of the auto-regressive polynomial is not checked.
 #' @return
-#'
+#' An element of type "JD3_SsfStateBlock" (wrapper around the corresponding Java object))
 #' @export
 #'
 #' @examples
+#' b_ar<-ar("my_ar", c(.8,-.3,.2), variance=1)
+#' block_p0(b_ar)
 ar<-function(name, ar, fixedar=FALSE, variance=.01, fixedvariance=FALSE, nlags=0, zeroinit=FALSE){
 
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "ar", name, .jarray(ar), fixedar, variance, fixedvariance, as.integer(nlags), zeroinit)
@@ -248,7 +259,7 @@ ar2<-function(name, ar, fixedar=FALSE, variance=.01, fixedvariance=FALSE, nlags=
 
 #' Title
 #'
-#' @param name
+#' @param name Name of the block
 #' @param ar
 #' @param fixedar
 #' @param stderr
@@ -270,12 +281,12 @@ var_ar<-function(name, ar, fixedar=FALSE, stderr, scale=1, fixed=FALSE, zeroinit
 
 #' Title
 #'
-#' @param name
+#' @param name Name of the block
 #' @param factor
 #' @param period
 #' @param fixed
-#' @param variance
-#' @param fixedvariance
+#' @param variance Variance of the innovations
+#' @param fixedvariance Indicates if the variance if fixed
 #'
 #' @return
 #' @export
@@ -288,7 +299,7 @@ cycle<-function(name, factor=.9, period=60, fixed=FALSE, variance=.01, fixedvari
 
 #' Title
 #'
-#' @param name
+#' @param name Name of the block
 #' @param period
 #' @param harmonics
 #' @param variance
@@ -306,7 +317,7 @@ periodic<-function(name, period, harmonics, variance=.01, fixedvariance=FALSE){
 
 #' Title
 #'
-#' @param name
+#' @param name Name of the block
 #' @param ar
 #' @param fixedar
 #' @param lag
@@ -359,7 +370,7 @@ msae3<-function(name, vars, fixedvars=FALSE, ar, fixedar=TRUE, k, lag=1){
 
 #' Local Level
 #'
-#' @param name name of the component.
+#' @param name Name of the block
 #' @param variance the value of the variance (\eqn{\sigma^2_l}).
 #' @param fixed boolean that triggers estimation of \eqn{\sigma^2_l} (`FALSE`) or
 #' fixes it (`TRUE`) to a pre-specified  value set by the parameter `variance`.
@@ -375,13 +386,15 @@ msae3<-function(name, vars, fixedvars=FALSE, ar, fixedar=TRUE, k, lag=1){
 #' @export
 #'
 #' @examples
+#' ll<-locallevel('ll', variance=1)
+#' print(block_t(ll))
 locallevel<-function(name, variance=.01, fixed=FALSE, initial=NaN){
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "localLevel", name, variance, fixed, initial)
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
 
-#' Local Linear Trend
+#' Local linear trend state block
 #'
 #' @inheritParams locallevel
 #' @param levelVariance variance of the level (\eqn{\sigma^2_l})
@@ -393,46 +406,55 @@ locallevel<-function(name, variance=.01, fixed=FALSE, initial=NaN){
 #'
 #' \deqn{\begin{cases}l_{t+1} = l_t + n_t +  \xi_t \\
 #'  n_{t+1} = n_t + \mu_t \\
-#'  \xi_t \sim N(0, \sigma^2\sigma^2_l)\\
-#'  \mu_t \sim N(0, \sigma^2\sigma^2_n)
+#'  \xi_t \sim N(0, \sigma^2_l)\\
+#'  \mu_t \sim N(0, \sigma^2_n)
 #'  \end{cases}}
 #' @return
 #' @export
 #'
 #' @examples
-locallineartrend<-function(name, levelVariance=.01, slopevariance=.01, fixedLevelVariance=FALSE, fixedSlopeVariance=FALSE){
-  jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "localLinearTrend", name, levelVariance, slopevariance, fixedLevelVariance, fixedSlopeVariance)
+#' llt<-locallineartrend('llt', levelVariance=1, slopeVariance=.25)
+#' print(block_t(llt))
+
+locallineartrend<-function(name, levelVariance=.01, slopeVariance=.01, fixedLevelVariance=FALSE, fixedSlopeVariance=FALSE){
+  jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "localLinearTrend", name, levelVariance, slopeVariance, fixedLevelVariance, fixedSlopeVariance)
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
-#' Title
+#' Seasonal state block
 #'
-#' @param name
-#' @param period
-#' @param type
-#' @param variance
-#' @param fixed
+#' @param name Name of the block
+#' @param period Period of the seasonality
+#' @param type Type of the seasonal component
+#' @param variance Innovation variance
+#' @param fixed Indicates if the variance is fixed
 #'
 #' @return
 #' @export
 #'
 #' @examples
+#' seas1<-seasonal("seas1", 12, "HarrisonStevens", variance=1)
+#' print(block_v(seas1))
+#' seas2<-seasonal("seas2", 12, "Trigonometric", variance=1)
+#' print(block_v(seas2))
 seasonal<-function(name, period, type=c("Trigonometric", "Crude", "HarrisonStevens", "Dummy"), variance=.01, fixed=FALSE){
   type <- match.arg(type)
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "seasonalComponent", name, type, as.integer(period), variance, fixed)
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
 }
 
-#' Noise component
+#' Noise state block
 #'
-#' @param name
-#' @param variance
-#' @param fixed
+#' @param name Name of the block
+#' @param variance Variance of the noise
+#' @param fixed Indicates if the variance is fixed
 #'
 #' @return
 #' @export
 #'
 #' @examples
+#' n<-noise("n", 1)
+#' block_t(n)
 noise<-function(name, variance=.01, fixed=FALSE){
   jrslt<-.jcall("jdplus/sts/base/core/msts/AtomicModels", "Ljdplus/sts/base/core/msts/StateItem;", "noise", name, variance, fixed)
   return(rjd3toolkit::.jd3_object(jrslt, STATEBLOCK))
@@ -949,6 +971,20 @@ smoothed_states<-function(model){
 #' @export
 #'
 #' @examples
+#' model<-model()
+#' llt<-locallineartrend("llt")
+#' seas<-seasonal("seas", 12, "Crude")
+#' n<-noise("n")
+#' add(model,llt)
+#' add(model,seas)
+#' add(model,n)
+#' y<-rjd3toolkit::Retail$BookStores
+#' emodel<-estimate(model, y)
+#' scmp<-smoothed_components(emodel)
+#' high<-cbind(scmp[,1], y-scmp[,2])
+#' low<-scmp[,c(2,3)]
+#' matplot(high, type='l')
+#' matplot(low, type='l')
 smoothed_components<-function(model, equation=1, fast=TRUE){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
@@ -961,7 +997,7 @@ smoothed_components<-function(model, equation=1, fast=TRUE){
     return(rjd3toolkit::result(model,paste0("ssf.smoothing.components(",equation-1,')')))
 }
 
-#' Retrieves the stdev of the components of the model (univariate case) or of the
+#' Retrieves the standard deviations of the components of the model (univariate case) or of the
 #' components corresponding to a given equation (multivariate case)
 #'
 #' @param model Estimated state space model
@@ -981,15 +1017,52 @@ smoothed_components_stdev<-function(model, equation=1){
 }
 
 
-
-#' Title
+#' Position of the components
 #'
-#' @param model
+#' @param model Estimated model
 #'
-#' @return
+#' @returns The first position of the different blocks in the state array
 #' @export
 #'
 #' @examples
+#' model<-model()
+#' ll<-locallevel("ll")
+#' seas<-seasonal("seas", 12, "Crude")
+#' n<-noise("n")
+#' add(model,ll)
+#' add(model,seas)
+#' add(model,n)
+#' emodel<-estimate(model, rjd3toolkit::Retail$BookStores)
+#' print(components_pos(emodel))
+components_pos<-function(model){
+    if (! is(model, MODELESTIMATION))
+        stop("Not a model")
+    if (is.jnull(model$internal)){
+        return(NULL)
+    }
+    return (1+rjd3toolkit::result(model, "ssf.cmppos"))
+}
+
+
+#' Standard deviations of the smoothed states
+#'
+#' @param model Estimated model
+#'
+#' @return A matrix with the standard deviations of the states (a row corresponding to one time point)
+#' @export
+#'
+#' @examples
+#' model<-model()
+#' ll<-locallevel("ll")
+#' seas<-seasonal("seas", 12, "Crude")
+#' n<-noise("n")
+#' add(model,ll)
+#' add(model,seas)
+#' add(model,n)
+#' emodel<-estimate(model, rjd3toolkit::Retail$BookStores)
+#' ess<-smoothed_states_stdev(emodel)
+#' cmps<-ess[,c(1,2,13)]
+#' matplot(cmps, type='l')
 smoothed_states_stdev<-function(model){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
@@ -1137,7 +1210,7 @@ block_v<-function(block, pos = 0){
 #' @export
 #'
 #' @examples
-block_p0<-function(block, pos = 0){
+block_p0<-function(block){
     if (! is(block, STATEBLOCK))
         stop("Not a state block")
     if ( is.jnull(block$internal) ){

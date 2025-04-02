@@ -1,0 +1,108 @@
+---
+title: "Modeling Nile riverflow"
+author: "Jean Palate"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Modeling Nile riverflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(scipen=999)
+```
+
+## Introduction
+
+This document reproduces with rjd3sts the example N°4 of the paper:
+
+*Bell W.R. (2011). REGCMPNT - A Fortran Program for Regression Models with ARIMA Component Errors.
+Journal of Statistical Software. Volume 41, Issue 7.*
+
+Details on the considered model can be retrieved from the original paper (pages 8-11).
+
+
+```{r echo=FALSE}
+suppressPackageStartupMessages(library(rjd3toolkit))
+suppressPackageStartupMessages(library(rjd3sts))
+library(knitr)
+
+# Data
+
+nile<-c(1120,1160, 963,1210,1160,1160, 813,1230,1370,1140,
+    995, 935,1110, 994,1020, 960,1180, 799, 958,1140,
+    1100,1210,1150,1250,1260,1220,1030,1100, 774, 840,
+    874, 694, 940, 833, 701, 916, 692,1020,1050, 969,
+    831, 726, 456, 824, 702,1120,1100, 832, 764, 821,
+    768, 845, 864, 862, 698, 845, 744, 796,1040, 759,
+    781, 865, 845, 944, 984, 897, 822,1010, 771, 676,
+    649, 846, 812, 742, 801,1040, 860, 874, 848, 890,
+    744, 749, 838,1050, 918, 986, 797, 923, 975, 815,
+    1020, 906, 901,1170, 912, 746, 919, 718, 714, 740
+)
+
+```
+
+### Definition of the model in rjd3sts
+
+We consider two models strictly equivalent, the first one based on ARIMA models and the second one based on common BSM blocks. To be noted that the state space representations of those approaches are not always the same.
+
+```{r models}
+# create the UCARIMA model
+model1<-rjd3sts::model()
+# create the components and add them to the model
+rjd3sts::add(model1, rjd3sts::sarima("d1", period=1, orders=c(0,1,0), seasonal = c(0,0,0)))
+rjd3sts::add(model1, rjd3sts::sarima("n", period=1, orders=c(0,0,0), seasonal = c(0,0,0)))
+
+rslt1<-rjd3sts::estimate(model1, nile)
+
+# create the BSM model
+model2<-rjd3sts::model()
+# create the components and add them to the model
+rjd3sts::add(model2, rjd3sts::locallevel("l"))
+rjd3sts::add(model2, rjd3sts::noise("n"))
+
+rslt2<-rjd3sts::estimate(model2, nile)
+
+```
+
+### Main results
+
+```{r main, echo=FALSE}
+p1<-rjd3toolkit::result(rslt1, "parameters")
+factor1<-rjd3toolkit::result(rslt1, "scalingfactor")
+p2<-rjd3toolkit::result(rslt2, "parameters")
+factor2<-rjd3toolkit::result(rslt2, "scalingfactor")
+
+```
+
+#### UCARIMA model
+
+$\sigma_1^2=$  `r p1[1]*factor1`
+
+$\sigma_2^2=$  `r p1[2]*factor1`
+
+
+#### BSM model
+
+$\sigma_1^2=$  `r p2[1]*factor2`
+
+$\sigma_2^2=$  `r p2[2]*factor2`
+
+### Trend estimates
+
+```{r chart,fig.width=7, fig.height=5}
+q1<-rjd3sts::smoothed_components(rslt1)
+qe1<-rjd3sts::smoothed_components_stdev(rslt1)
+
+plot(nile, type='l', col="darkgray")
+lines(q1[,1], col="blue")
+
+lines(q1[,1]+qe1[,1]*2, col="magenta")
+lines(q1[,1]-qe1[,1]*2, col="magenta")
+```

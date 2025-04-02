@@ -15,8 +15,15 @@ add_equation(equation, item, coeff = 1, fixed = TRUE, loading = NULL)
 
 \item{fixed}{logical that triggers estimation of coeff (FALSE) or fixes it (TRUE) to a pre-specified value}
 
-\item{loading}{the loading that links the block to the observation}
+\item{loading}{the loading that links the block to the observations}
 }
 \description{
 Add a building block to the considered equation
+}
+\examples{
+eq<- equation('eq1')
+ll<-locallevel('ll')
+n<-noise("n", variance = 1, fixed = TRUE)
+add_equation(eq, ll)
+add_equation(eq, n, coeff=0.1, fixed=FALSE)
 }

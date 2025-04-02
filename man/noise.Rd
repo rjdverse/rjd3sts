@@ -2,13 +2,21 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{noise}
 \alias{noise}
-\title{Noise component}
+\title{Noise state block}
 \usage{
 noise(name, variance = 0.01, fixed = FALSE)
 }
 \arguments{
-\item{fixed}{}
+\item{name}{Name of the block}
+
+\item{variance}{Variance of the noise}
+
+\item{fixed}{Indicates if the variance is fixed}
 }
 \description{
-Noise component
+Noise state block
+}
+\examples{
+n<-noise("n", 1)
+block_t(n)
 }
