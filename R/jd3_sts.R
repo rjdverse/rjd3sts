@@ -12,7 +12,7 @@ NULL
 #' @export
 #'
 #' @examples
-#'  x<-rjd3toolkit::retail$BookStores
+#'  x<-rjd3toolkit::Retail$BookStores
 #'  sts(x)
 sts<-function(y, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, noise=1
               , seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"), diffuse.regs=TRUE, tol=1e-9){

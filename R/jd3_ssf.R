@@ -796,7 +796,7 @@ reg<-function(name, x, var=NULL, fixed=FALSE){
 #' @export
 #'
 #' @examples
-#'  x<-rjd3toolkit::retail$BookStores
+#'  x<-rjd3toolkit::Retail$BookStores
 #'  std<-rep(1, length(x))
 #'  std[c(20, 50, 150)]<-5
 #'  v<-var_reg("vx", x, std, 0.1)
