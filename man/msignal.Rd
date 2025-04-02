@@ -7,6 +7,8 @@
 msignal(object, m, pos = NULL, stdev = FALSE)
 }
 \arguments{
+\item{object}{Estimated model}
+
 \item{stdev}{}
 }
 \description{

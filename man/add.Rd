@@ -7,7 +7,9 @@
 add(model, item)
 }
 \arguments{
-\item{item}{}
+\item{model}{A state space model}
+
+\item{item}{An equation or a state block}
 }
 \description{
 Title

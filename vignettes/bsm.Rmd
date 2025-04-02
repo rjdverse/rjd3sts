@@ -27,7 +27,7 @@ library(knitr)
 ```
 
 ```{r data}
-s<-log(retail$BookStores)
+s<-log(Retail$BookStores)
 ```
 
 ### Standard definition, noise in the state

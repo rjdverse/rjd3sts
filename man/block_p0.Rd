@@ -4,7 +4,7 @@
 \alias{block_p0}
 \title{Title}
 \usage{
-block_p0(block, pos = 0)
+block_p0(block)
 }
 \arguments{
 \item{block}{}

@@ -35,6 +35,6 @@ For instance, usual trading days are defined by \code{c(1,2,3,4,5,6,0)}, week da
 Title
 }
 \examples{
- x<-rjd3toolkit::retail$BookStores
+ x<-rjd3toolkit::Retail$BookStores
  seasonalbreaks(x)
 }
