@@ -7,7 +7,7 @@
 locallevel(name, variance = 0.01, fixed = FALSE, initial = NaN)
 }
 \arguments{
-\item{name}{name of the component.}
+\item{name}{Name of the block}
 
 \item{variance}{the value of the variance (\eqn{\sigma^2_l}).}
 
@@ -24,4 +24,8 @@ Local Level
  \mu_t \sim N(0, \sigma^2 \sigma^2_l)
  \end{cases}
 }
+}
+\examples{
+ll<-locallevel('ll', variance=1)
+print(block_t(ll))
 }

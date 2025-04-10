@@ -22,10 +22,6 @@ seasonalbreaks(
 
 \item{level}{-1 = no level, 0 = fixed level, 1 = sotchastic level}
 
-\item{slope}{}
-
-\item{noise}{}
-
 \item{seasonal}{Seasonal model}
 
 \item{X}{Regression variables (same length as y) or NULL}
@@ -39,6 +35,6 @@ For instance, usual trading days are defined by \code{c(1,2,3,4,5,6,0)}, week da
 Title
 }
 \examples{
- x<-rjd3toolkit::retail$BookStores
+ x<-rjd3toolkit::Retail$BookStores
  seasonalbreaks(x)
 }

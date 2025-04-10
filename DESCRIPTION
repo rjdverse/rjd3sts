@@ -1,7 +1,7 @@
 Package: rjd3sts
 Type: Package
 Title: State Space Framework and Structural Time Series with 'JDemetra+ 3.x'
-Version: 2.1.1
+Version: 2.3.0
 Authors@R: c(
   person("Jean", "Palate", role = c("aut", "cre"),
                 email = "palatejean@gmail.com"),
@@ -13,17 +13,17 @@ Depends:
   R (>= 4.1.0)
 Imports:
   rJava (>= 1.0-6),
-  RProtoBuf (>= 0.4.17),
-  rjd3toolkit (>= 3.2.2),
+  RProtoBuf (>= 0.4.20),
+  rjd3toolkit (>= 3.5.0),
   methods
 Remotes: 
-    github::rjdverse/rjd3toolkit@*release
+    github::rjdverse/rjd3toolkit
 SystemRequirements: Java (>= 17)
-License: EUPL
+License: file LICENSE
 URL: https://github.com/rjdverse/rjd3sts, https://rjdverse.github.io/rjd3sts
 LazyData: TRUE
 Suggests: knitr, rmarkdown
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 BugReports: https://github.com/rjdverse/rjd3sts
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
@@ -34,5 +34,6 @@ Collate:
     'jd3_sts.R'
     'jd3_stsoutliers.R'
     'protobuf.R'
+    'tdarima.R'
     'zzz.R'
 VignetteBuilder: knitr

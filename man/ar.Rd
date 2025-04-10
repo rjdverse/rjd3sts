@@ -26,7 +26,8 @@ ar2(
 )
 }
 \arguments{
-\item{ar}{vector of the AR coefficients (\eqn{\varphi_1, \dots, \varphi_p}).}
+\item{ar}{vector of the AR coefficients (See @details
+Additional details...).}
 
 \item{fixedar}{boolean that triggers the estimation of the AR coefficients (\code{FALSE})
 or fixed it (\code{TRUE}) to a pre-specified value set by the parameter \code{ar}.}
@@ -45,14 +46,19 @@ unconditional mean and variance of the AR(p) process.}
 
 \item{nfcasts}{integer specifying how many forecasts of the state variable are needed}
 }
+\value{
+An element of type "JD3_SsfStateBlock" (wrapper around the corresponding Java object))
+}
 \description{
 Functions to create an autoregressive model (\code{ar}) or a
 modified autoregressive model (\code{ar2})
 }
 \details{
 The AR process is defined by
-\deqn{\Phi\left(B\right)y_t=\epsilon_t}
-where
-\deqn{\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p}
-is an auto-regressive polynomial.
+\deqn{y_t = \phi_1 y_{t-1} +  \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t}
+The stability of the auto-regressive polynomial is not checked.
+}
+\examples{
+b_ar<-ar("my_ar", c(.8,-.3,.2), variance=1)
+block_p0(b_ar)
 }

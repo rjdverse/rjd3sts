@@ -52,7 +52,7 @@ The results of the first two models should be identical (up to numerical precisi
 
 ```{r bsm_splines1}
 model<-model()
-seas<-splines_regular("s", 12, nodes=c(0:11))
+seas<-splines_regular("s", 12, knots=c(0:11))
 add(model, llt)
 add(model, seas)
 add(model, n)
@@ -69,7 +69,7 @@ summary(sa1[,2]-sa2[,2])
 The splines are computed on 8 points (instead of 12)
 ```{r bsm_splines2, fig.width=6, fig.height=5}
 model<-model()
-seas<-splines_regular("s", 12, nodes=c(1,2,6,7,8,9,10,11))
+seas<-splines_regular("s", 12, knots=c(1,2,6,7,8,9,10,11))
 add(model, llt)
 add(model, seas)
 add(model, n)

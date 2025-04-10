@@ -7,6 +7,8 @@
 periodic(name, period, harmonics, variance = 0.01, fixedvariance = FALSE)
 }
 \arguments{
+\item{name}{Name of the block}
+
 \item{fixedvariance}{}
 }
 \description{

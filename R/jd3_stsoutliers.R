@@ -16,7 +16,7 @@ NULL
 #' @export
 #'
 #' @examples
-#'  x<-rjd3toolkit::retail$BookStores
+#'  x<-rjd3toolkit::Retail$BookStores
 #'  sts_outliers(x)
 sts_outliers<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, noise=1, seasonal=c("Trigonometric", "Dummy", "Crude", "HarrisonStevens", "Fixed", "Unused"),
               ao=TRUE, ls=TRUE, so=FALSE,

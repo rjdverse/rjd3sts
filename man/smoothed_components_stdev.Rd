@@ -2,7 +2,7 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{smoothed_components_stdev}
 \alias{smoothed_components_stdev}
-\title{Retrieves the stdev of the components of the model (univariate case) or of the
+\title{Retrieves the standard deviations of the components of the model (univariate case) or of the
 components corresponding to a given equation (multivariate case)}
 \usage{
 smoothed_components_stdev(model, equation = 1)
@@ -16,6 +16,6 @@ smoothed_components_stdev(model, equation = 1)
 A matrix with the stdev of the components
 }
 \description{
-Retrieves the stdev of the components of the model (univariate case) or of the
+Retrieves the standard deviations of the components of the model (univariate case) or of the
 components corresponding to a given equation (multivariate case)
 }

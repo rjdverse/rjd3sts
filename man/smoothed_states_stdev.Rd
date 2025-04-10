@@ -2,13 +2,29 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{smoothed_states_stdev}
 \alias{smoothed_states_stdev}
-\title{Title}
+\title{Standard deviations of the smoothed states}
 \usage{
 smoothed_states_stdev(model)
 }
 \arguments{
-\item{model}{}
+\item{model}{Estimated model}
+}
+\value{
+A matrix with the standard deviations of the states (a row corresponding to one time point)
 }
 \description{
-Title
+Standard deviations of the smoothed states
+}
+\examples{
+model<-model()
+ll<-locallevel("ll")
+seas<-seasonal("seas", 12, "Crude")
+n<-noise("n")
+add(model,ll)
+add(model,seas)
+add(model,n)
+emodel<-estimate(model, rjd3toolkit::Retail$BookStores)
+ess<-smoothed_states_stdev(emodel)
+cmps<-ess[,c(1,2,13)]
+matplot(cmps, type='l')
 }

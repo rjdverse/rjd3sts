@@ -27,7 +27,7 @@ library(knitr)
 ```
 
 ```{r data}
-s<-log(retail$BookStores)
+s<-log(Retail$BookStores)
 ```
 
 ### Standard definition, noise in the state
@@ -40,7 +40,7 @@ bsm<-model()
 add(bsm, locallineartrend("ll"))
 add(bsm, seasonal("s", 12, type="HarrisonStevens"))
 add(bsm, noise("n"))
-rslt<-estimate(bsm, log(s), marginal=TRUE)
+rslt<-estimate(bsm, s, marginal=TRUE)
 
 
 ```
@@ -62,7 +62,7 @@ eq<-equation("eq", 1,TRUE)
 add_equation(eq, "ll")
 add_equation(eq, "s")
 add(bsm, eq)
-rslt<-estimate(bsm, log(s), marginal=TRUE)
+rslt<-estimate(bsm, s, marginal=TRUE)
 ```
 * Likelihood = `r result(rslt, "likelihood.ll")`
 * Parameters = `r sapply(result(rslt, "parameters"), function(num) sprintf(num, fmt = '%#.6f'))`
@@ -75,9 +75,9 @@ rslt<-estimate(bsm, log(s), marginal=TRUE)
 # create the model
 bsm<-model()
   # create the components, with fixed variances, and add them to the model
-add(bsm, locallineartrend("ll", 
-                             levelVariance = 1, fixedLevelVariance = TRUE) )
-add(bsm, seasonal("s", 12, type="HarrisonStevens", 
+add(bsm, locallineartrend("ll",
+                             levelVariance = 1, fixedLevelVariance = TRUE))
+add(bsm, seasonal("s", 12, type="HarrisonStevens",
                      variance = 1, fixed = TRUE))
 add(bsm, noise("n", 1, fixed=TRUE))
   # create the equation (fix the variance to 1)
@@ -86,7 +86,7 @@ add_equation(eq, "ll", .01, FALSE)
 add_equation(eq, "s", .01, FALSE)
 add_equation(eq, "n")
 add(bsm, eq)
-rslt<-estimate(bsm, log(s), marginal=TRUE)
+rslt<-estimate(bsm, s, marginal=TRUE)
 p<-result(rslt, "parameters")
 ```
 
@@ -108,13 +108,13 @@ To be noted:
 # create the model
 bsm<-model()
   # create the components and add them to the model
-add(bsm, locallevel("l", initial = 0) )
-add(bsm, locallineartrend("lt", levelVariance = 0, 
-                             fixedLevelVariance = TRUE) )
+add(bsm, locallevel("l", initial = 0))
+add(bsm, locallineartrend("lt", levelVariance = 0,
+                             fixedLevelVariance = TRUE))
 add(bsm, seasonal("s", 12, type="HarrisonStevens"))
 add(bsm, noise("n", 1, fixed=TRUE))
   # create the equation (fix the variance to 1)
-rslt<-estimate(bsm, log(s), marginal=TRUE)
+rslt<-estimate(bsm, s, marginal=TRUE)
 
 ```
 * Likelihood = `r result(rslt, "likelihood.ll")`

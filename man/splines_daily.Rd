@@ -4,7 +4,7 @@
 \alias{splines_daily}
 \title{Title}
 \usage{
-splines_daily(name, startYear, nodes, start = 1, variance = 1, fixed = FALSE)
+splines_daily(name, startYear, knots, start = 1, variance = 1, fixed = FALSE)
 }
 \arguments{
 \item{fixed}{}

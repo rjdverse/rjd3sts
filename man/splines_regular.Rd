@@ -7,8 +7,8 @@
 splines_regular(
   name,
   period,
-  nnodes = 0,
-  nodes = NULL,
+  nknots = 0,
+  knots = NULL,
   start = 1,
   variance = 1,
   fixed = FALSE

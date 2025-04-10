@@ -11,7 +11,7 @@
 	<description>Usage: mvn -Pcopy-jars</description>
 
 	<properties>
-		<jdplus-incubator.version>2.2.0</jdplus-incubator.version>
+		<jdplus-incubator.version>2.3.0</jdplus-incubator.version>
 	</properties>
 
 	<dependencies>
@@ -22,11 +22,11 @@
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId>
-					<artifactId>jdplus-advancedsa-base-api</artifactId>
+					<artifactId>jdplus-sa-base-api</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>*</groupId>
-					<artifactId>jdplus-advancedsa-base-core</artifactId>
+					<artifactId>jdplus-sa-base-core</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>*</groupId>
@@ -37,6 +37,17 @@
 		<dependency>
 			<groupId>eu.europa.ec.joinup.sat</groupId>
 			<artifactId>jdplus-sts-base-io</artifactId>
+			<version>${jdplus-incubator.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>eu.europa.ec.joinup.sat</groupId>
+			<artifactId>jdplus-advancedsa-base-r</artifactId>
 			<version>${jdplus-incubator.version}</version>
 			<exclusions>
 				<exclusion>
