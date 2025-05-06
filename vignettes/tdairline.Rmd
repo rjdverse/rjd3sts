@@ -1,0 +1,73 @@
+---
+title: "Time dependent airline model"
+author: "Jean Palate"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Time dependent airline model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+### Introduction
+
+This document presents some results on time dependent arima models developed by G. Melard, as they are implemented in JDemetra+
+The current implementation focuses on airline models.
+
+#### Estimation of time-dependent airline models
+
+The likelihood ratios between time-dependent and normal airline models computed on 63 series of the US-retail trade statistics are presented below. Likelihood ratios above 4 indicate a significant preference for the time-dependent models.
+
+```{r echo=FALSE}
+library(knitr)
+```
+
+
+```{r estimation}
+test<-function(z){
+  q<-rjd3sts::tdairline_estimation(z)
+  return (q$ltd_sarima$likelihood- q$sarima$likelihood)
+}
+
+all<-sapply(rjd3toolkit::Retail, function(z) test(z))
+
+hist(all, breaks=10)
+print(all)
+
+```
+
+#### Canonical decomposition and estimation of the components by means of the Kalman smoother
+
+We present below the seasonal adjustment of a series (total retail trade) and the differences between the sa series based on the airline model and the time-dependent airline model, using the Kalman smoother
+
+
+```{r sa, fig.width=6, fig.height=4}
+s<-log(rjd3toolkit::Retail$RetailAndFoodServicesSalesTotal)
+
+q<-rjd3sts::tdairline_estimation(s)
+
+print('airline')
+print(q$sarima$likelihood)
+print('tdairline')
+print(q$ltd_sarima$likelihood)
+
+tdss<-rjd3sts::tdairline_decomposition(s, q$ltd_sarima$th, q$ltd_sarima$bth)
+
+air<-rjd3toolkit::sarima_model(period=12, d=1, theta=q$sarima$parameters[2],bd=1, btheta=q$sarima$parameters[3] )
+ucm<-rjd3toolkit::sarima_decompose(air)
+
+ss<-rjd3toolkit::ucarima_estimate(s, ucm)
+plot(s-tdss[,2], type='l', col='red')
+lines(s-ss[,2], col='gray')
+
+plot(tdss[,2]-ss[,2], type='l')
+
+
+```
