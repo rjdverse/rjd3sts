@@ -30,7 +30,7 @@ library(knitr)
 ```
 
 
-```{r estimation}
+```{r estimation, fig.width=6, fig.height=4}
 test<-function(z){
   q<-rjd3sts::tdairline_estimation(z)
   return (q$ltd_sarima$likelihood- q$sarima$likelihood)
@@ -49,7 +49,7 @@ We present below the seasonal adjustment of a series (total retail trade) and th
 
 
 ```{r sa, fig.width=6, fig.height=4}
-s<-log(rjd3toolkit::Retail$RetailAndFoodServicesSalesTotal)
+s<-log(rjd3toolkit::Retail$GasolineStations)
 
 q<-rjd3sts::tdairline_estimation(s)
 
@@ -58,16 +58,51 @@ print(q$sarima$likelihood)
 print('tdairline')
 print(q$ltd_sarima$likelihood)
 
-tdss<-rjd3sts::tdairline_decomposition(s, q$ltd_sarima$th, q$ltd_sarima$bth)
+tdss<-rjd3sts::tdairline_decomposition(s, q$ltd_sarima$parameters)
 
-air<-rjd3toolkit::sarima_model(period=12, d=1, theta=q$sarima$parameters[2],bd=1, btheta=q$sarima$parameters[3] )
+th<-q$sarima$parameters[2]
+if (th< -.98){th<- -.98}
+bth<-q$sarima$parameters[3]
+if (bth< -.98){bth<- -.98}
+
+air<-rjd3toolkit::sarima_model(period=12, d=1, theta=th,bd=1, btheta=bth )
 ucm<-rjd3toolkit::sarima_decompose(air)
 
 ss<-rjd3toolkit::ucarima_estimate(s, ucm)
-plot(s-tdss[,2], type='l', col='red')
-lines(s-ss[,2], col='gray')
 
-plot(tdss[,2]-ss[,2], type='l')
+sa_td<-ts(s-tdss[,2], frequency = frequency(s), start=start(s))
+sa<-ts(s-ss[,2], frequency = frequency(s), start=start(s))
+
+ts.plot(ts.union(sa_td, sa), type='l', col=c('red', 'gray'))
+
+ts.plot(window(ts.union(sa_td, sa), end=1996), type='l', col=c('red', 'gray'))
+ts.plot(window(ts.union(sa_td, sa), start=2005), type='l', col=c('red', 'gray'))
+
+
+s_td<-ts(tdss[,2], frequency = frequency(s), start=start(s))
+s<-ts(ss[,2], frequency = frequency(s), start=start(s))
+
+ts.plot(ts.union(s_td, s), type='l', col=c('red', 'gray'))
+
+
+plot(s_td-s, type='l')
 
 
 ```
+
+#### Main results
+
+##### Models
+
+Airline:
+
+$\theta =$ `r q$sarima$parameters[2]`
+$\Theta =$ `r q$sarima$parameters[3]`
+
+
+Time-dependent airline
+
+$\bar{\theta} =$ **`r 0.5*(q$ltd_sarima$parameters[1]+q$ltd_sarima$parameters[2])`** [ `r q$ltd_sarima$parameters[1]`, `r q$ltd_sarima$parameters[2]`]
+
+$\bar{\Theta} =$ **`r 0.5*(q$ltd_sarima$parameters[3]+q$ltd_sarima$parameters[4])`** [ `r q$ltd_sarima$parameters[3]`, `r q$ltd_sarima$parameters[4]`]
+

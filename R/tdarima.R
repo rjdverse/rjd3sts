@@ -14,7 +14,17 @@ NULL
 #' @export
 #'
 #' @examples
-tdairline_decomposition<-function(data, th, bth, se=FALSE){
+tdairline_decomposition<-function(data, parameters, se=FALSE){
+    th0<-parameters[1]
+    th1<-parameters[2]
+    bth0<-parameters[3]
+    bth1<-parameters[4]
+    if (th0< -.98) th0=-.98
+    if (th1< -.98) th1=-.98
+    if (bth0< -.98) bth0=-.98
+    if (bth1< -.98) bth1=-.98
+    th=linear(length(data),th0, th1)
+    bth=linear(length(data), bth0, bth1)
   if (! is.ts(data)) stop("data should be a time series (ts)")
   jmatrix<-.jcall('jdplus/advancedsa/base/r/TimeVaryingArimaModels', 'Ljdplus/toolkit/base/api/math/matrices/Matrix;', 'airlineDecomposition',
             as.numeric(data), as.integer(frequency(data)), as.numeric(th), as.numeric(bth), as.logical(se))
@@ -86,10 +96,7 @@ tdairline_estimation<-function(s, td=NULL, vartd=FALSE, precision=1e-9){
     ctd<-NULL
   ltd_arima_model<-list(
     parameters=parameters,
-    likelihood=likelihood, td=ctd,
-    th=linear(length(s), parameters[1], parameters[2]),
-    bth=linear(length(s), parameters[3], parameters[4])
-
+    likelihood=likelihood, td=ctd
   )
   return (list(sarima=arima_model, ltd_sarima=ltd_arima_model))
 }
