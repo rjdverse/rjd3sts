@@ -1,5 +1,5 @@
 #' @include utils.R
-#' @import rjd3toolkit
+#' @import rjd3toolkit rjd3tramoseats
 NULL
 
 .onLoad <- function(libname, pkgname) {
