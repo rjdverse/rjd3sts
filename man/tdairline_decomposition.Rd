@@ -4,7 +4,7 @@
 \alias{tdairline_decomposition}
 \title{Title}
 \usage{
-tdairline_decomposition(data, th, bth, se = FALSE)
+tdairline_decomposition(data, parameters, se = FALSE)
 }
 \arguments{
 \item{se}{}

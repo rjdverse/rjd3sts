@@ -72,9 +72,10 @@ tdairline_estimation<-function(s, td=NULL, vartd=FALSE, precision=1e-9){
     likelihood=likelihood,
     td=ctd
   )
+
   ltdarima<-ltd_airline("ltd", length(s), frequency(s),
-                                      th0 = parameters[2],th1=parameters[2],
-                                      bth0 = parameters[3],bth1=parameters[3],
+                                      th0=parameters[2], th1=parameters[2],
+                                      bth0 = parameters[3], bth1=parameters[3],
                                       variance = 1, fixedvariance = TRUE)
   model1<-model()
   rjd3sts::add(model1, ltdarima)
@@ -86,6 +87,16 @@ tdairline_estimation<-function(s, td=NULL, vartd=FALSE, precision=1e-9){
 
   parameters<-rjd3toolkit::result(rslt1, "parameters")
   likelihood<-rjd3toolkit::result(rslt1, "likelihood.ll")
+  th0<-parameters[1]
+  th1<-parameters[2]
+  bth0<-parameters[3]
+  bth1<-parameters[4]
+  if (th0< -.98) th0=-.98
+  if (th1< -.98) th1=-.98
+  if (bth0< -.98) bth0=-.98
+  if (bth1< -.98) bth1=-.98
+  th=linear(length(s),th0, th1)
+  bth=linear(length(s), bth0, bth1)
   if (! is.null(td)){
     ss<-rjd3sts::smoothed_states(rslt1)
     spos<-rjd3toolkit::result(rslt1, "ssf.cmppos")
@@ -96,7 +107,7 @@ tdairline_estimation<-function(s, td=NULL, vartd=FALSE, precision=1e-9){
     ctd<-NULL
   ltd_arima_model<-list(
     parameters=parameters,
-    likelihood=likelihood, td=ctd
+    likelihood=likelihood, td=ctd, th=th, bth=bth
   )
   return (list(sarima=arima_model, ltd_sarima=ltd_arima_model))
 }
