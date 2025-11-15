@@ -71,7 +71,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2025-05-13</h4>
+            <h4 data-toc-skip class="date">2025-11-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/regcmp_6.Rmd" class="external-link"><code>vignettes/regcmp_6.Rmd</code></a></small>
       <div class="d-none name"><code>regcmp_6.Rmd</code></div>
@@ -143,7 +143,7 @@ for non-weighted state components).</p>
 <code class="sourceCode R"><span></span>
 <span><span class="va">data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">nr055</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="va">q</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/matplot.html" class="external-link">matplot</a></span><span class="op">(</span><span class="va">data</span>, type<span class="op">=</span><span class="st">'l'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="regcmp_6_files/figure-html/signal-1.png" width="672"></p>
+<p><img src="regcmp_6_files/figure-html/signal-1.png" class="r-plt" width="672"></p>
 </div>
 <div class="section level4">
 <h4 id="signal-extraction-estimates-of-the-sampling-error">Signal extraction estimates of the sampling error<a class="anchor" aria-label="anchor" href="#signal-extraction-estimates-of-the-sampling-error"></a>
@@ -151,7 +151,7 @@ for non-weighted state components).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">noise</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">exp</a></span><span class="op">(</span><span class="va">q</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">noise</span>, type<span class="op">=</span><span class="st">'l'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="regcmp_6_files/figure-html/samplingerror-1.png" width="672"></p>
+<p><img src="regcmp_6_files/figure-html/samplingerror-1.png" class="r-plt" width="672"></p>
 </div>
 <div class="section level4">
 <h4 id="sampling-error-and-signal-extraction-error">Sampling error and signal extraction error<a class="anchor" aria-label="anchor" href="#sampling-error-and-signal-extraction-error"></a>
@@ -159,7 +159,7 @@ for non-weighted state components).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">h</span>, <span class="va">qe</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/matplot.html" class="external-link">matplot</a></span><span class="op">(</span><span class="va">data</span>, type<span class="op">=</span><span class="st">'l'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="regcmp_6_files/figure-html/stderr-1.png" width="672"></p>
+<p><img src="regcmp_6_files/figure-html/stderr-1.png" class="r-plt" width="672"></p>
 </div>
 <div class="section level4">
 <h4 id="cv-improvement-due-to-signal-extraction">CV improvement due to signal extraction<a class="anchor" aria-label="anchor" href="#cv-improvement-due-to-signal-extraction"></a>
@@ -167,7 +167,7 @@ for non-weighted state components).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">improvement</span><span class="op">&lt;-</span><span class="op">(</span><span class="va">h</span><span class="op">-</span><span class="va">qe</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="va">h</span><span class="op">*</span><span class="fl">100</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">improvement</span>, type<span class="op">=</span><span class="st">'l'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="regcmp_6_files/figure-html/improvement-1.png" width="672"></p>
+<p><img src="regcmp_6_files/figure-html/improvement-1.png" class="r-plt" width="672"></p>
 </div>
 </div>
 </div>
@@ -182,7 +182,7 @@ for non-weighted state components).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
