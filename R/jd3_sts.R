@@ -30,7 +30,7 @@ bsm_model<-function(period, noise.var=1, level.var=1, slope.var=NULL, seasonal.v
     if (is.null(cycle.var))
         cycle=NULL
     else
-        cycle=list(var=cycle.var, dumping_factor=dumpingfactor, length=cyccle.length)
+        cycle=list(var=cycle.var, dumping_factor=cycle.dumpingfactor, length=cycle.length)
     return (structure(
         list(
             period=period,
@@ -217,11 +217,11 @@ sts_raw<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, n
 #' @param y Series
 #' @param model Model for calendar effects
 #' \itemize{
-#'   \item{td2: }{leap year + week days (week-end derived)}
-#'   \item{td3: }{leap year + week days + saturdays (sundays derived)}
-#'   \item{td7: }{leap year + all days (sundays derived)}
-#'   \item{full: }{td3 + easter effect}
-#'   \item{none: }{no calendar effect}
+#'   \item{td2: leap year + week days (week-end derived)}
+#'   \item{td3: leap year + week days + saturdays (sundays derived)}
+#'   \item{td7: leap year + all days (sundays derived)}
+#'   \item{full: td3 + easter effect}
+#'   \item{none: no calendar effect}
 #'   }
 #' @param nf number of forecasts
 #'
