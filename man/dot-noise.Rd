@@ -4,7 +4,7 @@
 \alias{.noise}
 \title{Title}
 \usage{
-.noise(var)
+.noise(var = 1)
 }
 \arguments{
 \item{var}{}

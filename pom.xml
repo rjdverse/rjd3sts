@@ -22,15 +22,7 @@
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId>
-					<artifactId>jdplus-advancedsa-base-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>jdplus-advancedsa-base-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>*</groupId>
-					<artifactId>jdplus-toolkit-base-r</artifactId>
+					<artifactId>*</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

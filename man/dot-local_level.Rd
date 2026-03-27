@@ -4,7 +4,7 @@
 \alias{.local_level}
 \title{Title}
 \usage{
-.local_level(var, start = NaN)
+.local_level(var = 1, start = NaN)
 }
 \arguments{
 \item{start}{}

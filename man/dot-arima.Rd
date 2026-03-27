@@ -12,3 +12,7 @@
 \description{
 Title
 }
+\examples{
+sb<-.arima(c(1, -.5), NULL, c(1,-.8))
+.ssf_P0(sb)
+}

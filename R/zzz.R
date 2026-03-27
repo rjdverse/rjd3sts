@@ -1,9 +1,9 @@
 #' @include utils.R
-#' @import rjd3sax
+#' @import rjd3xjars
 NULL
 
 .onLoad <- function(libname, pkgname) {
-  if (!requireNamespace('rjd3sax', quietly = TRUE)) stop("Loading rjd3 libraries failed")
+  if (!requireNamespace('rjd3xjars', quietly = TRUE)) stop("Loading rjd3 libraries failed")
 
   result <- rJava::.jpackage(pkgname, lib.loc=libname)
   if (!result) stop("Loading java packages failed")

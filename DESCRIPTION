@@ -15,7 +15,7 @@ Imports:
   rJava (>= 1.0-6),
   RProtoBuf (>= 0.4.20),
   rjd3toolkit (>= 3.7.1),
-  rjd3sax (>= 0.1.0),
+  rjd3xjars (>= 0.1.0),
   methods
 Remotes: 
     github::rjdverse/rjd3toolkit,
