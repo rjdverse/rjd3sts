@@ -185,32 +185,32 @@ q<-sutse(ts.union(log(Retail$RetailSalesTotal), log(Retail$BookStores)))
 print(q)
 #> SUTSE model
 #> 
-#> Max likelihood =  334.5012 
+#> Max likelihood =  378.665 
 #> 
 #> Variances of series 1
 #> 
 #>              variance
-#> level    9.697070e-05
-#> slope    3.047011e-08
-#> seasonal 2.005309e-06
-#> noise    1.860063e-04
+#> level    9.697043e-05
+#> slope    3.047241e-08
+#> seasonal 2.005323e-06
+#> noise    1.860062e-04
 #> 
 #> 
 #> Variances of series 2
 #> 
 #>              variance
-#> level    5.169902e-05
-#> slope    1.539889e-07
-#> seasonal 1.130950e-04
-#> noise    5.416549e-04
+#> level    5.169842e-05
+#> slope    1.539884e-07
+#> seasonal 1.130941e-04
+#> noise    5.416631e-04
 #> 
 #> 
 #> Correlations between innovations of the two series
 #>           variance
-#> level    0.5106506
+#> level    0.5106498
 #> slope    1.0000000
-#> seasonal 0.5894694
-#> noise    0.2847937
+#> seasonal 0.5894592
+#> noise    0.2847975
 plot(q)
 ```
 

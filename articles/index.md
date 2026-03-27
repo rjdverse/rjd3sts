@@ -12,7 +12,5 @@
 - [Sructural Time Series using
   JDemetra+](https://rjdverse.github.io/rjd3sts/articles/sts.md):
 - [SUTSE models](https://rjdverse.github.io/rjd3sts/articles/sutse.md):
-- [Time dependent airline
-  model](https://rjdverse.github.io/rjd3sts/articles/tdairline.md):
 - [Time varying trading
   days](https://rjdverse.github.io/rjd3sts/articles/tdvar.md):

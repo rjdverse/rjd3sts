@@ -24,7 +24,7 @@ add(bsm, noise("n"))
 rslt<-estimate(bsm, s, marginal=TRUE)
 ```
 
-- Likelihood = 327.0607937
+- Likelihood = 349.1426991
 - Parameters = 0.168604, 0.000382, 0.271294, 1.000000
 
 ### Standard definition, noise in the measurement
@@ -43,7 +43,7 @@ add(bsm, eq)
 rslt<-estimate(bsm, s, marginal=TRUE)
 ```
 
-- Likelihood = 327.0607937
+- Likelihood = 349.1426991
 - Parameters = 0.168604, 0.000382, 0.271294, 1.000000
 
 ### components with fixed variances, aggregated with diffuse weights (noise in the state)
@@ -67,18 +67,18 @@ rslt<-estimate(bsm, s, marginal=TRUE)
 p<-result(rslt, "parameters")
 ```
 
-- Likelihood = 327.0607937
+- Likelihood = 349.1426991
 - Parameters = 1.0000, 0.0023, 1.0000, 1.0000, 0.4106, 0.5209
 
 To be noted:
 
 - Level variance = $p\lbrack 5\rbrack \times p\lbrack 5\rbrack$ =
-  0.168617
+  0.168622
 - Slope variance =
   $p\lbrack 5\rbrack \times p\lbrack 5\rbrack \times p\lbrack 2\rbrack$
   = 0.000382
 - Seas variance = $p\lbrack 6\rbrack \times p\lbrack 6\rbrack$ =
-  0.271315
+  0.271323
 
 ### bsm with long term trend and cycle
 
@@ -95,7 +95,7 @@ add(bsm, noise("n", 1, fixed=TRUE))
 rslt<-estimate(bsm, s, marginal=TRUE)
 ```
 
-- Likelihood = 327.0607937
+- Likelihood = 349.1426991
 - Parameters = 0.168604, 0.000000, 0.000382, 0.271294, 1.000000
 
 ``` r

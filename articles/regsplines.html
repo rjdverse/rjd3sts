@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rjd3sts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.4.0.9500</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,6 @@
     <li><a class="dropdown-item" href="../articles/regsplines.html">Regular periodic cubic splines</a></li>
     <li><a class="dropdown-item" href="../articles/sts.html">Sructural Time Series using JDemetra+</a></li>
     <li><a class="dropdown-item" href="../articles/sutse.html">SUTSE models</a></li>
-    <li><a class="dropdown-item" href="../articles/tdairline.html">Time dependent airline model</a></li>
     <li><a class="dropdown-item" href="../articles/tdvar.html">Time varying trading days</a></li>
   </ul>
 </li>
@@ -71,7 +70,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2025-11-15</h4>
+            <h4 data-toc-skip class="date">2026-03-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/regsplines.Rmd" class="external-link"><code>vignettes/regsplines.Rmd</code></a></small>
       <div class="d-none name"><code>regsplines.Rmd</code></div>
@@ -119,7 +118,7 @@ numerical precision)</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">sa1</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">-</span><span class="va">sa2</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. </span></span>
-<span><span class="co">#&gt; -3.099e-07 -4.402e-08 -4.641e-10  2.138e-10  4.262e-08  2.310e-07</span></span></code></pre></div>
+<span><span class="co">#&gt; -1.181e-07 -1.665e-08 -3.910e-11  8.890e-11  1.603e-08  8.794e-08</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="bsm-with-partial-periodic-splines-seasonal-component">BSM with partial periodic splines seasonal component<a class="anchor" aria-label="anchor" href="#bsm-with-partial-periodic-splines-seasonal-component"></a>
@@ -138,7 +137,7 @@ numerical precision)</p>
 <span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/matplot.html" class="external-link">matplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">sa1</span><span class="op">[</span><span class="fl">301</span><span class="op">:</span><span class="fl">336</span>,<span class="fl">2</span><span class="op">]</span>,<span class="va">sa2</span><span class="op">[</span><span class="fl">301</span><span class="op">:</span><span class="fl">336</span>,<span class="fl">2</span><span class="op">]</span>,<span class="va">sa3</span><span class="op">[</span><span class="fl">301</span><span class="op">:</span><span class="fl">336</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>, type<span class="op">=</span><span class="st">'l'</span>, ylab<span class="op">=</span><span class="st">"Seasonal"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="regsplines_files/figure-html/bsm_splines2-1.png" class="r-plt" width="576"></p>
+<p><img src="regsplines_files/figure-html/bsm_splines2-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

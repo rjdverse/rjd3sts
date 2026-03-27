@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rjd3sts</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.4.0.9500</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,6 @@
     <li><a class="dropdown-item" href="../articles/regsplines.html">Regular periodic cubic splines</a></li>
     <li><a class="dropdown-item" href="../articles/sts.html">Sructural Time Series using JDemetra+</a></li>
     <li><a class="dropdown-item" href="../articles/sutse.html">SUTSE models</a></li>
-    <li><a class="dropdown-item" href="../articles/tdairline.html">Time dependent airline model</a></li>
     <li><a class="dropdown-item" href="../articles/tdvar.html">Time varying trading days</a></li>
   </ul>
 </li>
@@ -71,7 +70,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2025-11-15</h4>
+            <h4 data-toc-skip class="date">2026-03-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/bsm.Rmd" class="external-link"><code>vignettes/bsm.Rmd</code></a></small>
       <div class="d-none name"><code>bsm.Rmd</code></div>
@@ -101,7 +100,7 @@ likelihood.</p>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="fu"><a href="../reference/noise.html">noise</a></span><span class="op">(</span><span class="st">"n"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">s</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Likelihood = 327.0607937</li>
+<li>Likelihood = 349.1426991</li>
 <li>Parameters = 0.168604, 0.000382, 0.271294, 1.000000</li>
 </ul>
 </div>
@@ -121,7 +120,7 @@ likelihood.</p>
 <span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">eq</span><span class="op">)</span></span>
 <span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">s</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Likelihood = 327.0607937</li>
+<li>Likelihood = 349.1426991</li>
 <li>Parameters = 0.168604, 0.000382, 0.271294, 1.000000</li>
 </ul>
 </div>
@@ -147,20 +146,20 @@ likelihood.</p>
 <span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">s</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">p</span><span class="op">&lt;-</span><span class="fu">result</span><span class="op">(</span><span class="va">rslt</span>, <span class="st">"parameters"</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Likelihood = 327.0607937</li>
+<li>Likelihood = 349.1426991</li>
 <li>Parameters = 1.0000, 0.0023, 1.0000, 1.0000, 0.4106, 0.5209</li>
 </ul>
 <p>To be noted:</p>
 <ul>
 <li>Level variance =
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>5</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>5</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">p[5]\times p[5]</annotation></semantics></math>
-= 0.168617</li>
+= 0.168622</li>
 <li>Slope variance =
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>5</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>5</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>2</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">p[5]\times p[5] \times p[2]</annotation></semantics></math>
 = 0.000382</li>
 <li>Seas variance =
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>6</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">[</mo><mn>6</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">p[6]\times p[6]</annotation></semantics></math>
-= 0.271315</li>
+= 0.271323</li>
 </ul>
 </div>
 <div class="section level3">
@@ -178,14 +177,14 @@ likelihood.</p>
 <span>  <span class="co"># create the equation (fix the variance to 1)</span></span>
 <span><span class="va">rslt</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/estimate.html">estimate</a></span><span class="op">(</span><span class="va">bsm</span>, <span class="va">s</span>, marginal<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>Likelihood = 327.0607937</li>
+<li>Likelihood = 349.1426991</li>
 <li>Parameters = 0.168604, 0.000000, 0.000382, 0.271294, 1.000000</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ss</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/smoothed_states.html">smoothed_states</a></span><span class="op">(</span><span class="va">rslt</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ss</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="va">ss</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, type<span class="op">=</span><span class="st">'l'</span>, col<span class="op">=</span><span class="st">'blue'</span>, ylab<span class="op">=</span><span class="st">'trends'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">ss</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, col<span class="op">=</span><span class="st">'red'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="bsm_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" width="576"></p>
+<p><img src="bsm_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

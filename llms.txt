@@ -8,7 +8,7 @@ built](https://github.com/rjdverse/rjd3sts/actions/workflows/pkgdown.yaml/badge.
 
 ## Installation
 
-Running rjd3 packages requires **Java 17 or higher**. How to set up such
+Running rjd3 packages requires **Java 21 or higher**. How to set up such
 a configuration in R is explained
 [here](https://jdemetra-new-documentation.netlify.app/#Rconfig)
 
@@ -107,12 +107,69 @@ Licence
   : Title
 - [`block_v()`](https://rjdverse.github.io/rjd3sts/reference/block_v.md)
   : Title
+- [`bsm_model()`](https://rjdverse.github.io/rjd3sts/reference/bsm_model.md)
+  : Title
+- [`bsm_to_ucm()`](https://rjdverse.github.io/rjd3sts/reference/bsm_to_ucm.md)
+  : Title
 - [`components_pos()`](https://rjdverse.github.io/rjd3sts/reference/components_pos.md)
   : Position of the components
 - [`cumul()`](https://rjdverse.github.io/rjd3sts/reference/cumul.md) :
   Title
 - [`cycle()`](https://rjdverse.github.io/rjd3sts/reference/cycle.md) :
   Title
+- [`.arima()`](https://rjdverse.github.io/rjd3sts/reference/dot-arima.md)
+  : Title
+- [`.arima2()`](https://rjdverse.github.io/rjd3sts/reference/dot-arima2.md)
+  : Title
+- [`.bsm2spec()`](https://rjdverse.github.io/rjd3sts/reference/dot-bsm2spec.md)
+  : Title
+- [`.bsm2ucm()`](https://rjdverse.github.io/rjd3sts/reference/dot-bsm2ucm.md)
+  : Title
+- [`.circular_loading()`](https://rjdverse.github.io/rjd3sts/reference/dot-circular_loading.md)
+  : Title
+- [`.composite()`](https://rjdverse.github.io/rjd3sts/reference/dot-composite.md)
+  : Title
+- [`.cyclical_loading()`](https://rjdverse.github.io/rjd3sts/reference/dot-cyclical_loading.md)
+  : Title
+- [`.loading()`](https://rjdverse.github.io/rjd3sts/reference/dot-loading.md)
+  : Title
+- [`.loading_composite()`](https://rjdverse.github.io/rjd3sts/reference/dot-loading_composite.md)
+  : Creates a composite loading
+- [`.local_level()`](https://rjdverse.github.io/rjd3sts/reference/dot-local_level.md)
+  : Title
+- [`.local_linear_trend()`](https://rjdverse.github.io/rjd3sts/reference/dot-local_linear_trend.md)
+  : Title
+- [`.noise()`](https://rjdverse.github.io/rjd3sts/reference/dot-noise.md)
+  : Title
+- [`.proc_diffuselikelihood()`](https://rjdverse.github.io/rjd3sts/reference/dot-proc_diffuselikelihood.md)
+  : Title
+- [`.r2jd_bsm()`](https://rjdverse.github.io/rjd3sts/reference/dot-r2jd_bsm.md)
+  : Title
+- [`.seasonal()`](https://rjdverse.github.io/rjd3sts/reference/dot-seasonal.md)
+  : Title
+- [`.ssf()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf.md) :
+  Title
+- [`.ssf_B()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_B.md)
+  : Title
+- [`.ssf_P0()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_P0.md)
+  : Title
+- [`.ssf_S()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_S.md)
+  : Title
+- [`.ssf_T()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_T.md)
+  : Title
+- [`.ssf_V()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_V.md)
+  : Title
+- [`.ssf_Z()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_Z.md)
+  : Gets the loading vector. It should have the same length as the
+  corresponding state block.
+- [`.ssf_component()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_component.md)
+  : Title
+- [`.ssf_dim()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_dim.md)
+  : Retrieves the dimension of a state block
+- [`.ssf_loading()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_loading.md)
+  : Title
+- [`.ssf_smooth()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_smooth.md)
+  : Title
 - [`equation()`](https://rjdverse.github.io/rjd3sts/reference/equation.md)
   : Create equation
 - [`estimate()`](https://rjdverse.github.io/rjd3sts/reference/estimate.md)
@@ -195,8 +252,6 @@ Licence
   : Title
 - [`sts_raw()`](https://rjdverse.github.io/rjd3sts/reference/sts_raw.md)
   : Title
-- [`tdairline_decomposition()`](https://rjdverse.github.io/rjd3sts/reference/tdairline_decomposition.md)
-  : Title
 - [`tdairline_estimation()`](https://rjdverse.github.io/rjd3sts/reference/tdairline_estimation.md)
   : Title
 - [`var_ar()`](https://rjdverse.github.io/rjd3sts/reference/var_ar.md) :
@@ -228,7 +283,5 @@ Licence
 - [Sructural Time Series using
   JDemetra+](https://rjdverse.github.io/rjd3sts/articles/sts.md):
 - [SUTSE models](https://rjdverse.github.io/rjd3sts/articles/sutse.md):
-- [Time dependent airline
-  model](https://rjdverse.github.io/rjd3sts/articles/tdairline.md):
 - [Time varying trading
   days](https://rjdverse.github.io/rjd3sts/articles/tdvar.md):

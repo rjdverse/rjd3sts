@@ -52,9 +52,9 @@ rslt<-rjd3sts::estimate(model, y, concentrated=FALSE)
 #### Estimated parameters
 
     #> Airline:
-    #> Innovation variance:  0.005302598
-    #> theta:  -0.4695642
-    #> btheta:  -0.4222849
+    #> Innovation variance:  0.005302615
+    #> theta:  -0.4695604
+    #> btheta:  -0.4222892
 
 #### Original series (solid) and signal extraction estimates (dashed)
 
