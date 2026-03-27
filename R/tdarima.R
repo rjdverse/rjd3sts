@@ -1,37 +1,6 @@
 #' @include utils.R
 NULL
 
-
-#' Title
-#'
-#' @param data
-#' @param period
-#' @param th
-#' @param bth
-#' @param se
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-tdairline_decomposition<-function(data, parameters, se=FALSE){
-    th0<-parameters[1]
-    th1<-parameters[2]
-    bth0<-parameters[3]
-    bth1<-parameters[4]
-    if (th0< -.98) th0=-.98
-    if (th1< -.98) th1=-.98
-    if (bth0< -.98) bth0=-.98
-    if (bth1< -.98) bth1=-.98
-    th=linear(length(data),th0, th1)
-    bth=linear(length(data), bth0, bth1)
-  if (! is.ts(data)) stop("data should be a time series (ts)")
-  jmatrix<-.jcall('jdplus/advancedsa/base/r/TimeVaryingArimaModels', 'Ljdplus/toolkit/base/api/math/matrices/Matrix;', 'airlineDecomposition',
-            as.numeric(data), as.integer(frequency(data)), as.numeric(th), as.numeric(bth), as.logical(se))
-  return (rjd3toolkit::.jd2r_matrix(jmatrix))
-}
-
-
 #' Title
 #'
 #' @param s

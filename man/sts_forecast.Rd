@@ -11,11 +11,11 @@ sts_forecast(y, model = c("none", "td2", "td3", "td7", "full"), nf = 12)
 
 \item{model}{Model for calendar effects
 \itemize{
-\item{td2: }{leap year + week days (week-end derived)}
-\item{td3: }{leap year + week days + saturdays (sundays derived)}
-\item{td7: }{leap year + all days (sundays derived)}
-\item{full: }{td3 + easter effect}
-\item{none: }{no calendar effect}
+\item{td2: leap year + week days (week-end derived)}
+\item{td3: leap year + week days + saturdays (sundays derived)}
+\item{td7: leap year + all days (sundays derived)}
+\item{full: td3 + easter effect}
+\item{none: no calendar effect}
 }}
 
 \item{nf}{number of forecasts}
