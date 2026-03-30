@@ -20,7 +20,7 @@ Imports:
 Remotes: 
     github::rjdverse/rjd3toolkit,
     github::rjdverse/rjd3xjars,
-SystemRequirements: Java (>= 17)
+SystemRequirements: Java (>= 21)
 License: file LICENSE
 URL: https://github.com/rjdverse/rjd3sts, https://rjdverse.github.io/rjd3sts
 LazyData: TRUE
