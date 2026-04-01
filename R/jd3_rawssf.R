@@ -3,7 +3,10 @@ NULL
 
 RAWSTATEBLOCK<-'JD3_RawStateBlock'
 RAWLOADING<-'JD3_RawLoading'
+RAWMEASUREMENT<-'JD3_RawMeasurement'
+RAWMEASUREMENTS<-'JD3_RawMeasurements'
 RAWSSF<-'JD3_RawSSF'
+RAWMSSF<-'JD3_RawMSSF'
 
 #' Title
 #'
@@ -35,6 +38,124 @@ RAWSSF<-'JD3_RawSSF'
     jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "arima", jar, jdelta, jma, as.numeric(var))
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
+
+#' Title
+#'
+#' @param period
+#' @param phi
+#' @param d
+#' @param theta
+#' @param bphi
+#' @param bd
+#' @param btheta
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.sarima<-function(period, phi, d=1, theta, bphi, bd=1, btheta){
+    if (is.null(phi))
+        jphi<-.jnull("[D")
+    else
+        jphi<-.jarray(phi)
+    if (is.null(theta))
+        jtheta<-.jnull("[D")
+    else
+        jtheta<-.jarray(theta)
+    if (is.null(bphi))
+        jbphi<-.jnull("[D")
+    else
+        jbphi<-.jarray(bphi)
+    if (is.null(btheta))
+        jbtheta<-.jnull("[D")
+    else
+        jbtheta<-.jarray(btheta)
+
+    jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "sarima", as.integer(period),
+                  jphi, as.integer(d), jtheta,
+                  jbphi, as.integer(bd), jbtheta
+                  )
+    return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
+}
+
+#' Title
+#'
+#' @param period
+#' @param phi
+#' @param d
+#' @param theta
+#' @param bphi
+#' @param bd
+#' @param btheta
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.sarma<-function(period, phi, theta, bphi, btheta){
+    if (is.null(phi))
+        jphi<-.jnull("[D")
+    else
+        jphi<-.jarray(phi)
+    if (is.null(theta))
+        jtheta<-.jnull("[D")
+    else
+        jtheta<-.jarray(theta)
+    if (is.null(bphi))
+        jbphi<-.jnull("[D")
+    else
+        jbphi<-.jarray(bphi)
+    if (is.null(btheta))
+        jbtheta<-.jnull("[D")
+    else
+        jbtheta<-.jarray(btheta)
+
+    jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "sarma", as.integer(period),
+                  jphi, jtheta,
+                  jbphi, jbtheta
+    )
+    return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
+}
+
+#' Title
+#'
+#' @param period
+#' @param phi
+#' @param d
+#' @param theta
+#' @param bphi
+#' @param bd
+#' @param btheta
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.sarma2<-function(period, phi, theta, bphi, btheta){
+    if (is.null(phi))
+        jphi<-.jnull("[D")
+    else
+        jphi<-.jarray(phi)
+    if (is.null(theta))
+        jtheta<-.jnull("[D")
+    else
+        jtheta<-.jarray(theta)
+    if (is.null(bphi))
+        jbphi<-.jnull("[D")
+    else
+        jbphi<-.jarray(bphi)
+    if (is.null(btheta))
+        jbtheta<-.jnull("[D")
+    else
+        jbtheta<-.jarray(btheta)
+
+    jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "sarma2", as.integer(period),
+                  jphi, jtheta,
+                  jbphi, jbtheta
+    )
+    return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
+}
+
 
 #' Title
 #'
@@ -305,8 +426,9 @@ RAWSSF<-'JD3_RawSSF'
                   as.integer(period), as.integer(start))
 
     return(rjd3toolkit::.jd3_object(jrslt, RAWLOADING))
-
 }
+
+
 
 #' Gets the loading vector. It should have the same length as the corresponding state block.
 #'
@@ -322,6 +444,10 @@ RAWSSF<-'JD3_RawSSF'
     if (! is(x, RAWLOADING))
         stop("Not a loading")
     return (.jcall("jdplus/sts/base/r/Measurements", "[D", "Z", x$internal, as.integer(n), as.integer(pos)))
+}
+
+.ssf_invariant<-function(a0=NULL, P0=NULL, B0=NULL, T, V=NULL, S=NULL, Z, h=0){
+
 }
 
 #' Creates a composite loading
@@ -369,6 +495,46 @@ RAWSSF<-'JD3_RawSSF'
 
 #' Title
 #'
+#' @param Z
+#' @param H
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.mssf_measurements<-function(Z, H){
+    jz<-rjd3toolkit::.r2jd_matrix(Z)
+    jh<-rjd3toolkit::.r2jd_matrix(H)
+    jrslt<-.jcall("jdplus/sts/base.r/Measurements", "Ljdplus/toolkit/base/core/ssf/multivariate/ISsfMeasurements;", "of",
+                  jz, jh)
+
+    return(rjd3toolkit::.jd3_object(jrslt, RAWMEASUREMENTS))
+}
+
+#' Title
+#'
+#' @param component
+#' @param measurements
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.mssf<-function(component, measurements){
+    if (! is(measurements, RAWMEASUREMENTS))
+        stop("Not measurements")
+    if (! is(component, RAWSTATEBLOCK))
+        stop("Not a state block")
+    jrslt<-.jcall("jdplus/sts/base.r/StateSpaceModels", "Ljdplus/toolkit/base/core/ssf/multivariate/IMultivariateSsf;", "ssf",
+                  component$internal, loading$measurements)
+
+    return(rjd3toolkit::.jd3_object(jrslt, RAWMSSF))
+
+}
+
+
+#' Title
+#'
 #' @param ssf
 #'
 #' @returns
@@ -412,4 +578,72 @@ RAWSSF<-'JD3_RawSSF'
     qtype<-match.arg(qtype)
     jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "smooth", ssf$internal, as.numeric(data), as.logical(all), qtype)
     return (rjd3toolkit::.jd2r_matrix(jrslt))
+}
+
+#' Title
+#'
+#' @param ssf
+#' @param data
+#' @param rescalingFactor
+#' @param qtype
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.akf_likelihood<-function(ssf, data, qtype=c("NORMAL", "PARTIAL_TRIANGULARIZATION", "FULL_TRIANGULARIZATION", "QR"), collapsing = TRUE, rescalingFactor=TRUE){
+    qtype<-match.arg(qtype)
+    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/ssf/likelihood/DiffuseLikelihood;", "akfLikelihood", ssf$internal, as.numeric(data),
+                  qtype, as.logical(collapsing), as.logical(rescalingFactor))
+    return (.jd2r_diffuse_likelihood(jrslt))
+}
+
+#' Title
+#'
+#' @param ssf
+#' @param data
+#' @param sqr
+#' @param rescalingFactor
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.dk_likelihood<-function(ssf, data, sqr = TRUE, rescalingFactor=TRUE){
+    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/ssf/likelihood/DiffuseLikelihood;", "dkLikelihood", ssf$internal, as.numeric(data),
+                  as.logical(sqr), as.logical(rescalingFactor))
+    return (.jd2r_diffuse_likelihood(jrslt))
+}
+
+#' Title
+#'
+#' @param ssf
+#' @param data
+#' @param rescalingFactor
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.ckms_likelihood<-function(ssf, data, rescalingFactor=TRUE){
+    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/stats/likelihood/Likelihood;", "ckmsLikelihood", ssf$internal,
+                  as.numeric(data), as.logical(rescalingFactor))
+    return (jrslt)
+}
+
+
+#' Title
+#'
+#' @param jssf
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.ssf_as_time_invariant<-function(jssf){
+    if (! is(jssf, RAWSSF))
+        stop("Not a ssf")
+    jrslt<-.jcall("jdplus/sts/base.r/StateSpaceModels", "Ljdplus/toolkit/base/core/ssf/univariate/ISsf;", "asTimeInvariant",
+                  jssf$internal)
+     return(rjd3toolkit::.jd3_object(jrslt, RAWSSF))
 }
