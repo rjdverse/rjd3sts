@@ -78,6 +78,84 @@ RAWMSSF<-'JD3_RawMSSF'
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
 
+#' Title
+#'
+#' @param period
+#' @param phi
+#' @param d
+#' @param theta
+#' @param bphi
+#' @param bd
+#' @param btheta
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.sarma<-function(period, phi, theta, bphi, btheta){
+    if (is.null(phi))
+        jphi<-.jnull("[D")
+    else
+        jphi<-.jarray(phi)
+    if (is.null(theta))
+        jtheta<-.jnull("[D")
+    else
+        jtheta<-.jarray(theta)
+    if (is.null(bphi))
+        jbphi<-.jnull("[D")
+    else
+        jbphi<-.jarray(bphi)
+    if (is.null(btheta))
+        jbtheta<-.jnull("[D")
+    else
+        jbtheta<-.jarray(btheta)
+
+    jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "sarma", as.integer(period),
+                  jphi, jtheta,
+                  jbphi, jbtheta
+    )
+    return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
+}
+
+#' Title
+#'
+#' @param period
+#' @param phi
+#' @param d
+#' @param theta
+#' @param bphi
+#' @param bd
+#' @param btheta
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.sarma2<-function(period, phi, theta, bphi, btheta){
+    if (is.null(phi))
+        jphi<-.jnull("[D")
+    else
+        jphi<-.jarray(phi)
+    if (is.null(theta))
+        jtheta<-.jnull("[D")
+    else
+        jtheta<-.jarray(theta)
+    if (is.null(bphi))
+        jbphi<-.jnull("[D")
+    else
+        jbphi<-.jarray(bphi)
+    if (is.null(btheta))
+        jbtheta<-.jnull("[D")
+    else
+        jbtheta<-.jarray(btheta)
+
+    jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "sarma2", as.integer(period),
+                  jphi, jtheta,
+                  jbphi, jbtheta
+    )
+    return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
+}
+
 
 #' Title
 #'
@@ -513,12 +591,46 @@ RAWMSSF<-'JD3_RawMSSF'
 #' @export
 #'
 #' @examples
-.akf_likelihood<-function(ssf, data, qtype=c("NORMAL", "PARTIAL_TRIANGULARIZATION", "FULL_TRIANGULARIZATION", "QR"), rescalingFactor=TRUE){
+.akf_likelihood<-function(ssf, data, qtype=c("NORMAL", "PARTIAL_TRIANGULARIZATION", "FULL_TRIANGULARIZATION", "QR"), collapsing = TRUE, rescalingFactor=TRUE){
     qtype<-match.arg(qtype)
     jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/ssf/likelihood/DiffuseLikelihood;", "akfLikelihood", ssf$internal, as.numeric(data),
-                  qtype, as.logical(rescalingFactor))
+                  qtype, as.logical(collapsing), as.logical(rescalingFactor))
     return (.jd2r_diffuse_likelihood(jrslt))
 }
+
+#' Title
+#'
+#' @param ssf
+#' @param data
+#' @param sqr
+#' @param rescalingFactor
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.dk_likelihood<-function(ssf, data, sqr = TRUE, rescalingFactor=TRUE){
+    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/ssf/likelihood/DiffuseLikelihood;", "dkLikelihood", ssf$internal, as.numeric(data),
+                  as.logical(sqr), as.logical(rescalingFactor))
+    return (.jd2r_diffuse_likelihood(jrslt))
+}
+
+#' Title
+#'
+#' @param ssf
+#' @param data
+#' @param rescalingFactor
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.ckms_likelihood<-function(ssf, data, rescalingFactor=TRUE){
+    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/stats/likelihood/Likelihood;", "ckmsLikelihood", ssf$internal,
+                  as.numeric(data), as.logical(rescalingFactor))
+    return (jrslt)
+}
+
 
 #' Title
 #'
