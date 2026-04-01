@@ -2,13 +2,26 @@
 % Please edit documentation in R/jd3_rawssf.R
 \name{.ssf_as_time_invariant}
 \alias{.ssf_as_time_invariant}
-\title{Title}
+\title{Transforms a time invariant state space form based on functions into a state space models represented by matrices.}
 \usage{
 .ssf_as_time_invariant(jssf)
 }
 \arguments{
-\item{jssf}{}
+\item{jssf}{The object oriented (java) state space form, which should be time invariant}
+}
+\value{
+A new Java object based on matrices
 }
 \description{
-Title
+Transforms a time invariant state space form based on functions into a state space models represented by matrices.
+}
+\examples{
+ll<-.local_linear_trend(0.1, 0.1)
+s<-.seasonal(12, var=.5)
+m<-.composite(list(ll, s))
+ssf1<-.ssf(m, .loading(c(0,2)), 1)
+ssf2<-.ssf_as_time_invariant(ssf1)
+ll1<-.akf_likelihood(ssf1, rjd3toolkit::ABS$X0.2.09.10.M)
+ll2<-.akf_likelihood(ssf2, rjd3toolkit::ABS$X0.2.09.10.M)
+print(ll1$ll-ll2$ll)
 }

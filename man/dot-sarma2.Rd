@@ -2,13 +2,28 @@
 % Please edit documentation in R/jd3_rawssf.R
 \name{.sarma2}
 \alias{.sarma2}
-\title{Title}
+\title{Creates an ARMA state block (representation II)}
 \usage{
 .sarma2(period, phi, theta, bphi, btheta)
 }
 \arguments{
-\item{btheta}{}
+\item{period}{Period of the seasonality}
+
+\item{phi}{Regular stationary auto-regressive polynomial. True signs, without the constant}
+
+\item{theta}{Regular moving average polynomial. True signs, without the constant}
+
+\item{bphi}{Seasonal stationary auto-regressive polynomial. True signs, without the constant}
+
+\item{btheta}{Seasonal moving average polynomial. True signs, without the constant}
+}
+\value{
+A raw java state block
 }
 \description{
-Title
+Creates an ARMA state block (representation II)
+}
+\examples{
+sb<-.sarma2(12, c(0.5, -.2, .1), -.8, NULL, -.6)
+.ssf_P0(sb)
 }

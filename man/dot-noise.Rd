@@ -2,13 +2,20 @@
 % Please edit documentation in R/jd3_rawssf.R
 \name{.noise}
 \alias{.noise}
-\title{Title}
+\title{Creates a white noise}
 \usage{
 .noise(var = 1)
 }
 \arguments{
-\item{var}{}
+\item{var}{Variance of the noise}
+}
+\value{
+A raw java state block
 }
 \description{
-Title
+Creates a white noise
+}
+\examples{
+sb<-.noise(.01)
+.ssf_T(sb, 0)
 }

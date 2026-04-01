@@ -8,14 +8,14 @@ RAWMEASUREMENTS<-'JD3_RawMeasurements'
 RAWSSF<-'JD3_RawSSF'
 RAWMSSF<-'JD3_RawMSSF'
 
-#' Title
+#' Creates an ARIMA state block (representation I)
 #'
-#' @param ar
-#' @param delta
-#' @param ma
-#' @param var
+#' @param ar Stationary auto-regressive polynomial, including the constant (=1). True signs.
+#' @param delta Non-stationary auto-regressive polynomial, including the constant (=1). True signs.
+#' @param ma Moving average polynomial, including the constant (=1). True signs.
+#' @param var Variance of the innovations
 #'
-#' @returns
+#' @returns A raw java state block.
 #' @export
 #'
 #' @examples
@@ -39,20 +39,22 @@ RAWMSSF<-'JD3_RawMSSF'
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
 
-#' Title
+#' Creates an ARMA state block
 #'
-#' @param period
-#' @param phi
-#' @param d
-#' @param theta
-#' @param bphi
-#' @param bd
-#' @param btheta
+#' @param period Period of the seasonality
+#' @param phi Regular stationary auto-regressive polynomial. True signs, without the constant
+#' @param d Regular differencing order
+#' @param theta Regular moving average polynomial. True signs, without the constant
+#' @param bphi Seasonal stationary auto-regressive polynomial. True signs, without the constant
+#' @param bd Seasonal differencing order
+#' @param btheta Seasonal moving average polynomial. True signs, without the constant
 #'
-#' @returns
+#' @returns A raw java state block
 #' @export
 #'
 #' @examples
+#' sb<-.sarima(12, c(0.5, -.2, .1), 1, -.8, NULL, 1, -.6)
+#' .ssf_P0(sb)
 .sarima<-function(period, phi, d=1, theta, bphi, bd=1, btheta){
     if (is.null(phi))
         jphi<-.jnull("[D")
@@ -78,20 +80,20 @@ RAWMSSF<-'JD3_RawMSSF'
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
 
-#' Title
+#' Creates an ARMA state block (representation I)
 #'
-#' @param period
-#' @param phi
-#' @param d
-#' @param theta
-#' @param bphi
-#' @param bd
-#' @param btheta
+#' @param period Period of the seasonality
+#' @param phi Regular stationary auto-regressive polynomial. True signs, without the constant
+#' @param theta Regular moving average polynomial. True signs, without the constant
+#' @param bphi Seasonal stationary auto-regressive polynomial. True signs, without the constant
+#' @param btheta Seasonal moving average polynomial. True signs, without the constant
 #'
-#' @returns
+#' @returns A raw java state block
 #' @export
 #'
 #' @examples
+#' sb<-.sarma(12, c(0.5, -.2, .1), -.8, NULL, -.6)
+#' .ssf_P0(sb)
 .sarma<-function(period, phi, theta, bphi, btheta){
     if (is.null(phi))
         jphi<-.jnull("[D")
@@ -117,20 +119,20 @@ RAWMSSF<-'JD3_RawMSSF'
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
 
-#' Title
+#' Creates an ARMA state block (representation II)
 #'
-#' @param period
-#' @param phi
-#' @param d
-#' @param theta
-#' @param bphi
-#' @param bd
-#' @param btheta
+#' @param period Period of the seasonality
+#' @param phi Regular stationary auto-regressive polynomial. True signs, without the constant
+#' @param theta Regular moving average polynomial. True signs, without the constant
+#' @param bphi Seasonal stationary auto-regressive polynomial. True signs, without the constant
+#' @param btheta Seasonal moving average polynomial. True signs, without the constant
 #'
-#' @returns
+#' @returns A raw java state block
 #' @export
 #'
 #' @examples
+#' sb<-.sarma2(12, c(0.5, -.2, .1), -.8, NULL, -.6)
+#' .ssf_P0(sb)
 .sarma2<-function(period, phi, theta, bphi, btheta){
     if (is.null(phi))
         jphi<-.jnull("[D")
@@ -157,14 +159,14 @@ RAWMSSF<-'JD3_RawMSSF'
 }
 
 
-#' Title
+#' Creates an ARIMA state block (representation II)
 #'
-#' @param ar
-#' @param delta
-#' @param ma
-#' @param var
+#' @param ar Stationary auto-regressive polynomial, including the constant (=1). True signs.
+#' @param delta Non-stationary auto-regressive polynomial, including the constant (=1). True signs.
+#' @param ma Moving average polynomial, including the constant (=1). True signs.
+#' @param var Variance of the innovations
 #'
-#' @returns
+#' @returns A raw java state block
 #' @export
 #'
 #' @examples
@@ -189,16 +191,19 @@ RAWMSSF<-'JD3_RawMSSF'
 }
 
 
-#' Title
+#' Creates a seasonal component, corresponding to a multivariate random walk,
+#' with an aggregation constraint to 0 and various covariances for the innovations of the transition equation.
 #'
-#' @param period
-#' @param type
-#' @param var
+#' @param period Period of the seasonality
+#' @param type Type of the innovations of the transition equation
+#' @param var Variance of the innovations
 #'
 #' @returns
 #' @export
 #'
 #' @examples
+#' sb<-.seasonal(4, "HarrisonStevens", .01)
+#' .ssf_V(sb, 0)
 .seasonal<-function(period, type=c("Trigonometric", "Crude", "HarrisonStevens", "Dummy"), var=1){
     type <- match.arg(type)
 
@@ -206,14 +211,16 @@ RAWMSSF<-'JD3_RawMSSF'
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
 
-#' Title
+#' Creates a white noise
 #'
-#' @param var
+#' @param var Variance of the noise
 #'
-#' @returns
+#' @returns A raw java state block
 #' @export
 #'
 #' @examples
+#' sb<-.noise(.01)
+#' .ssf_T(sb, 0)
 .noise<-function(var=1){
     jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "noise", as.numeric(var))
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
@@ -632,14 +639,22 @@ RAWMSSF<-'JD3_RawMSSF'
 }
 
 
-#' Title
+#' Transforms a time invariant state space form based on functions into a state space models represented by matrices.
 #'
-#' @param jssf
+#' @param jssf The object oriented (java) state space form, which should be time invariant
 #'
-#' @returns
+#' @returns A new Java object based on matrices
 #' @export
 #'
 #' @examples
+#' ll<-.local_linear_trend(0.1, 0.1)
+#' s<-.seasonal(12, var=.5)
+#' m<-.composite(list(ll, s))
+#' ssf1<-.ssf(m, .loading(c(0,2)), 1)
+#' ssf2<-.ssf_as_time_invariant(ssf1)
+#' ll1<-.akf_likelihood(ssf1, rjd3toolkit::ABS$X0.2.09.10.M)
+#' ll2<-.akf_likelihood(ssf2, rjd3toolkit::ABS$X0.2.09.10.M)
+#' print(ll1$ll-ll2$ll)
 .ssf_as_time_invariant<-function(jssf){
     if (! is(jssf, RAWSSF))
         stop("Not a ssf")

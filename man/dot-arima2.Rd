@@ -2,15 +2,24 @@
 % Please edit documentation in R/jd3_rawssf.R
 \name{.arima2}
 \alias{.arima2}
-\title{Title}
+\title{Creates an ARIMA state block (representation II)}
 \usage{
 .arima2(ar, delta, ma, var = 1)
 }
 \arguments{
-\item{var}{}
+\item{ar}{Stationary auto-regressive polynomial, including the constant (=1). True signs.}
+
+\item{delta}{Non-stationary auto-regressive polynomial, including the constant (=1). True signs.}
+
+\item{ma}{Moving average polynomial, including the constant (=1). True signs.}
+
+\item{var}{Variance of the innovations}
+}
+\value{
+A raw java state block
 }
 \description{
-Title
+Creates an ARIMA state block (representation II)
 }
 \examples{
 sb<-.arima2(c(1, -.5), NULL, c(1,-.8))

@@ -2,7 +2,8 @@
 % Please edit documentation in R/jd3_rawssf.R
 \name{.seasonal}
 \alias{.seasonal}
-\title{Title}
+\title{Creates a seasonal component, corresponding to a multivariate random walk,
+with an aggregation constraint to 0 and various covariances for the innovations of the transition equation.}
 \usage{
 .seasonal(
   period,
@@ -11,8 +12,17 @@
 )
 }
 \arguments{
-\item{var}{}
+\item{period}{Period of the seasonality}
+
+\item{type}{Type of the innovations of the transition equation}
+
+\item{var}{Variance of the innovations}
 }
 \description{
-Title
+Creates a seasonal component, corresponding to a multivariate random walk,
+with an aggregation constraint to 0 and various covariances for the innovations of the transition equation.
+}
+\examples{
+sb<-.seasonal(4, "HarrisonStevens", .01)
+.ssf_V(sb, 0)
 }
