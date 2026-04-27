@@ -2,13 +2,22 @@
 % Please edit documentation in R/jd3_rawssf.R
 \name{.local_linear_trend}
 \alias{.local_linear_trend}
-\title{Title}
+\title{Creates a local linear trend state block.}
 \usage{
 .local_linear_trend(lvar, svar = 0)
 }
 \arguments{
-\item{svar}{}
+\item{lvar}{Innovation variance of the level equation.}
+
+\item{svar}{Innovation variance of the slope equation.}
+}
+\value{
+A wrapper around the java object (class JD3_RawStateBlock).
 }
 \description{
-Title
+Creates a local linear trend state block.
+}
+\examples{
+sb<-.local_linear_trend(1.5, 0.5)
+.ssf_T(sb, 0)
 }

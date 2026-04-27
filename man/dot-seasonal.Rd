@@ -18,6 +18,9 @@ with an aggregation constraint to 0 and various covariances for the innovations 
 
 \item{var}{Variance of the innovations}
 }
+\value{
+A wrapper around the java object (class JD3_RawStateBlock)
+}
 \description{
 Creates a seasonal component, corresponding to a multivariate random walk,
 with an aggregation constraint to 0 and various covariances for the innovations of the transition equation.

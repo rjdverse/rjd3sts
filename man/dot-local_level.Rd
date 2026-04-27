@@ -2,13 +2,22 @@
 % Please edit documentation in R/jd3_rawssf.R
 \name{.local_level}
 \alias{.local_level}
-\title{Title}
+\title{Creates a local level state block}
 \usage{
 .local_level(var = 1, start = NaN)
 }
 \arguments{
-\item{start}{}
+\item{var}{Innovation variance of local level}
+
+\item{start}{Initial value of the state block. Should be NaN for a diffuse initialization}
+}
+\value{
+A wrapper around the java object (class JD3_RawStateBlock).
 }
 \description{
-Title
+Creates a local level state block
+}
+\examples{
+sb<-.local_level(1.5, 0)
+.ssf_T(sb, 0)
 }

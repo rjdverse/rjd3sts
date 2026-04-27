@@ -198,7 +198,7 @@ RAWMSSF<-'JD3_RawMSSF'
 #' @param type Type of the innovations of the transition equation
 #' @param var Variance of the innovations
 #'
-#' @returns
+#' @returns A wrapper around the java object (class JD3_RawStateBlock)
 #' @export
 #'
 #' @examples
@@ -211,11 +211,11 @@ RAWMSSF<-'JD3_RawMSSF'
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
 
-#' Creates a white noise
+#' Creates a white noise.
 #'
-#' @param var Variance of the noise
+#' @param var Variance of the noise.
 #'
-#' @returns A raw java state block
+#' @returns A wrapper around the java object (class JD3_RawStateBlock).
 #' @export
 #'
 #' @examples
@@ -226,29 +226,33 @@ RAWMSSF<-'JD3_RawMSSF'
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
 
-#' Title
+#' Creates a local level state block
 #'
-#' @param var
-#' @param start
+#' @param var Innovation variance of local level
+#' @param start Initial value of the state block. Should be NaN for a diffuse initialization
 #'
-#' @returns
+#' @returns A wrapper around the java object (class JD3_RawStateBlock).
 #' @export
 #'
 #' @examples
+#' sb<-.local_level(1.5, 0)
+#' .ssf_T(sb, 0)
 .local_level<-function(var=1, start=NaN){
     jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "localLevel", as.numeric(var), as.numeric(start))
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
 }
 
-#' Title
+#' Creates a local linear trend state block.
 #'
-#' @param lvar
-#' @param svar
+#' @param lvar Innovation variance of the level equation.
+#' @param svar Innovation variance of the slope equation.
 #'
-#' @returns
+#' @returns A wrapper around the java object (class JD3_RawStateBlock).
 #' @export
 #'
 #' @examples
+#' sb<-.local_linear_trend(1.5, 0.5)
+#' .ssf_T(sb, 0)
 .local_linear_trend<-function(lvar, svar=0){
     jrslt<-.jcall("jdplus/sts/base/r/StateBlocks", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "localLinearTrend", as.numeric(lvar), as.numeric(svar))
     return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
@@ -329,13 +333,27 @@ RAWMSSF<-'JD3_RawMSSF'
 #'
 #' @examples
 #' s<-.seasonal(12)
-#' .ssf_dim(s)
-.ssf_dim<-function(x){
+#' .state_dim(s)
+.state_dim<-function(x){
     if (! is(x, RAWSTATEBLOCK))
         stop("Not a state block")
-    return (jrslt<-.jcall(x$internal, "I", "dim"))
+    return (.jcall(x$internal, "I", "dim"))
 }
 
+#' Title
+#'
+#' @param x
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.state_diffuse_dim<-function(x){
+    if (! is(x, RAWSTATEBLOCK))
+        stop("Not a state block")
+    jrslt<-.jcall(x$internal, "Ljdplus/toolkit/base/core/ssf/ISsfInitialization;", "initialization")
+    return (.jcall(jrslt, "I", "getDiffuseDim"))
+}
 
 
 #' Title
@@ -540,125 +558,6 @@ RAWMSSF<-'JD3_RawMSSF'
 }
 
 
-#' Title
-#'
-#' @param ssf
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-.ssf_component<-function(ssf){
-    if (! is(ssf, RAWSSF))
-        stop("Not a State space form")
-    jrslt<-.jcall("jdplus/sts/base.r/StateSpaceModels", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "componentOf", ssf$internal)
-    return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
-}
-
-#' Title
-#'
-#' @param ssf
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-.ssf_loading<-function(ssf){
-    if (! is(ssf, RAWSSF))
-        stop("Not a State space form")
-    jrslt<-.jcall(ssf$internal, "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "loading")
-    return(rjd3toolkit::.jd3_object(jrslt, RAWLOADING))
-}
-
-#' Title
-#'
-#' @param ssf
-#' @param data
-#' @param all
-#' @param qtype
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-.ssf_smooth<-function(ssf, data, all=TRUE, qtype=c("NORMAL", "PARTIAL_TRIANGULARIZATION", "FULL_TRIANGULARIZATION", "QR")){
-    qtype<-match.arg(qtype)
-    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "smooth", ssf$internal, as.numeric(data), as.logical(all), qtype)
-    return (rjd3toolkit::.jd2r_matrix(jrslt))
-}
-
-#' Title
-#'
-#' @param ssf
-#' @param data
-#' @param rescalingFactor
-#' @param qtype
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-.akf_likelihood<-function(ssf, data, qtype=c("NORMAL", "PARTIAL_TRIANGULARIZATION", "FULL_TRIANGULARIZATION", "QR"), collapsing = TRUE, rescalingFactor=TRUE){
-    qtype<-match.arg(qtype)
-    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/ssf/likelihood/DiffuseLikelihood;", "akfLikelihood", ssf$internal, as.numeric(data),
-                  qtype, as.logical(collapsing), as.logical(rescalingFactor))
-    return (.jd2r_diffuse_likelihood(jrslt))
-}
-
-#' Title
-#'
-#' @param ssf
-#' @param data
-#' @param sqr
-#' @param rescalingFactor
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-.dk_likelihood<-function(ssf, data, sqr = TRUE, rescalingFactor=TRUE){
-    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/ssf/likelihood/DiffuseLikelihood;", "dkLikelihood", ssf$internal, as.numeric(data),
-                  as.logical(sqr), as.logical(rescalingFactor))
-    return (.jd2r_diffuse_likelihood(jrslt))
-}
-
-#' Title
-#'
-#' @param ssf
-#' @param data
-#' @param rescalingFactor
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-.ckms_likelihood<-function(ssf, data, rescalingFactor=TRUE){
-    jrslt<-.jcall("jdplus/sts/base.r/Algorithms", "Ljdplus/toolkit/base/core/stats/likelihood/Likelihood;", "ckmsLikelihood", ssf$internal,
-                  as.numeric(data), as.logical(rescalingFactor))
-    return (jrslt)
-}
 
 
-#' Transforms a time invariant state space form based on functions into a state space models represented by matrices.
-#'
-#' @param jssf The object oriented (java) state space form, which should be time invariant
-#'
-#' @returns A new Java object based on matrices
-#' @export
-#'
-#' @examples
-#' ll<-.local_linear_trend(0.1, 0.1)
-#' s<-.seasonal(12, var=.5)
-#' m<-.composite(list(ll, s))
-#' ssf1<-.ssf(m, .loading(c(0,2)), 1)
-#' ssf2<-.ssf_as_time_invariant(ssf1)
-#' ll1<-.akf_likelihood(ssf1, rjd3toolkit::ABS$X0.2.09.10.M)
-#' ll2<-.akf_likelihood(ssf2, rjd3toolkit::ABS$X0.2.09.10.M)
-#' print(ll1$ll-ll2$ll)
-.ssf_as_time_invariant<-function(jssf){
-    if (! is(jssf, RAWSSF))
-        stop("Not a ssf")
-    jrslt<-.jcall("jdplus/sts/base.r/StateSpaceModels", "Ljdplus/toolkit/base/core/ssf/univariate/ISsf;", "asTimeInvariant",
-                  jssf$internal)
-     return(rjd3toolkit::.jd3_object(jrslt, RAWSSF))
-}
+

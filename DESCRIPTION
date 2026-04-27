@@ -1,7 +1,7 @@
 Package: rjd3sts
 Type: Package
 Title: State Space Framework and Structural Time Series with 'JDemetra+ 3.x'
-Version: 2.4.0.9500
+Version: 2.4.1
 Authors@R: c(
   person("Jean", "Palate", role = c("aut", "cre"),
                 email = "palatejean@gmail.com"),
@@ -32,6 +32,10 @@ Encoding: UTF-8
 Collate: 
     'utils.R'
     'jd3_rawssf.R'
+    'jd3_rawssf_algorithms.R'
+    'jd3_rawssf_loadings.R'
+    'jd3_rawssf_models.R'
+    'jd3_rawssf_states.R'
     'jd3_seasonalbreaks.R'
     'jd3_ssf.R'
     'jd3_sts.R'
