@@ -25,48 +25,48 @@ NULL
     return(rjd3toolkit::.jd3_object(jrslt, RAWSSF))
 }
 
-
 #' Title
 #'
-#' @param ssf
+#' @param component
+#' @param loading
+#' @param evar
 #'
 #' @returns
 #' @export
 #'
 #' @examples
-.ssf_component<-function(ssf){
-    if (! is(ssf, RAWSSF))
-        stop("Not a State space form")
-    jrslt<-.jcall("jdplus/sts/base.r/StateSpaceModels", "Ljdplus/toolkit/base/core/ssf/StateComponent;", "componentOf", ssf$internal)
-    return(rjd3toolkit::.jd3_object(jrslt, RAWSTATEBLOCK))
+.ssf<-function(component, loading, evar=0){
+    if (! is(loading, RAWLOADING))
+        stop("Not a loading")
+    if (! is(component, RAWSTATEBLOCK))
+        stop("Not a state block")
+    jrslt<-.jcall("jdplus/sts/base.r/StateSpaceModels", "Ljdplus/toolkit/base/core/ssf/univariate/ISsf;", "ssf",
+                  component$internal, loading$internal, evar)
+
+    return(rjd3toolkit::.jd3_object(jrslt, RAWSSF))
+
 }
 
 #' Title
 #'
-#' @param ssf
+#' @param component
+#' @param measurements
 #'
 #' @returns
 #' @export
 #'
 #' @examples
-.ssf_loading<-function(ssf){
-    if (! is(ssf, RAWSSF))
-        stop("Not a State space form")
-    jrslt<-.jcall(ssf$internal, "Ljdplus/toolkit/base/core/ssf/ISsfLoading;", "loading")
-    return(rjd3toolkit::.jd3_object(jrslt, RAWLOADING))
+.mssf<-function(component, measurements){
+    if (! is(measurements, RAWMEASUREMENTS))
+        stop("Not measurements")
+    if (! is(component, RAWSTATEBLOCK))
+        stop("Not a state block")
+    jrslt<-.jcall("jdplus/sts/base.r/StateSpaceModels", "Ljdplus/toolkit/base/core/ssf/multivariate/IMultivariateSsf;", "ssf",
+                  component$internal, loading$measurements)
+
+    return(rjd3toolkit::.jd3_object(jrslt, RAWMSSF))
+
 }
 
-#' Title
-#'
-#' @param state
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-.state_initialization<-function(state){
-    if (! is(state, RAWSTATEBLOCK))
-        stop("Not a State block")
-    jrslt<-.jcall(state$internal, "Ljdplus/toolkit/base/core/ssf/ISsfInitialization;", "initialization")
-    return(rjd3toolkit::.jd3_object(jrslt))
-}
+
+

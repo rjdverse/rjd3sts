@@ -2,13 +2,22 @@
 % Please edit documentation in R/jd3_rawssf.R
 \name{.ssf_T}
 \alias{.ssf_T}
-\title{Title}
+\title{Gets the transition matrix.}
 \usage{
 .ssf_T(x, pos = 0)
 }
 \arguments{
-\item{pos}{}
+\item{x}{A state block or a state space form.}
+
+\item{pos}{The 0-based position (use 0 for time invariant models)}
+}
+\value{
+The requested matrix.
 }
 \description{
-Title
+Gets the transition matrix.
+}
+\examples{
+sarima<-.sarma(12, .9, -.6, .9, -.5)
+.ssf_T(sarima)
 }
