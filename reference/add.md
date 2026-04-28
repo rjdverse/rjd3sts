@@ -1,6 +1,7 @@
-# Title
+# Adds a state block or a measurement equation to a given state space model
 
-Title
+Adds a state block or a measurement equation to a given state space
+model
 
 ## Usage
 
@@ -16,4 +17,12 @@ add(model, item)
 
 - item:
 
-  An equation or a state block
+  A state block or a measurement equation
+
+## Examples
+
+``` r
+model<-model()
+llt<-locallineartrend("llt")
+add(model,llt)
+```

@@ -87,7 +87,8 @@ Licence
 
 ## All functions
 
-- [`add()`](https://rjdverse.github.io/rjd3sts/reference/add.md) : Title
+- [`add()`](https://rjdverse.github.io/rjd3sts/reference/add.md) : Adds
+  a state block or a measurement equation to a given state space model
 - [`add_equation()`](https://rjdverse.github.io/rjd3sts/reference/add_equation.md)
   : Add a building block to the considered equation
 - [`aggregation()`](https://rjdverse.github.io/rjd3sts/reference/aggregation.md)
@@ -117,12 +118,15 @@ Licence
   Title
 - [`cycle()`](https://rjdverse.github.io/rjd3sts/reference/cycle.md) :
   Title
+- [`.airline()`](https://rjdverse.github.io/rjd3sts/reference/dot-airline.md)
+  : Creates the state space form of an airline model;
 - [`.akf_likelihood()`](https://rjdverse.github.io/rjd3sts/reference/dot-akf_likelihood.md)
-  : Title
+  : Computes the diffuse likelihood by means of the augmented Kalman
+  filter.
 - [`.arima()`](https://rjdverse.github.io/rjd3sts/reference/dot-arima.md)
-  : Title
+  : Creates an ARIMA state block (representation I)
 - [`.arima2()`](https://rjdverse.github.io/rjd3sts/reference/dot-arima2.md)
-  : Title
+  : Creates an ARIMA state block (representation II)
 - [`.bsm2spec()`](https://rjdverse.github.io/rjd3sts/reference/dot-bsm2spec.md)
   : Title
 - [`.bsm2ucm()`](https://rjdverse.github.io/rjd3sts/reference/dot-bsm2ucm.md)
@@ -136,33 +140,36 @@ Licence
 - [`.cyclical_loading()`](https://rjdverse.github.io/rjd3sts/reference/dot-cyclical_loading.md)
   : Title
 - [`.dk_likelihood()`](https://rjdverse.github.io/rjd3sts/reference/dot-dk_likelihood.md)
-  : Title
+  : Computes the diffuse likelihood by means of the diffuse Kalman
+  filter (Durbin-Koopman).
 - [`.loading()`](https://rjdverse.github.io/rjd3sts/reference/dot-loading.md)
   : Title
 - [`.loading_composite()`](https://rjdverse.github.io/rjd3sts/reference/dot-loading_composite.md)
   : Creates a composite loading
 - [`.local_level()`](https://rjdverse.github.io/rjd3sts/reference/dot-local_level.md)
-  : Title
+  : Creates a local level state block
 - [`.local_linear_trend()`](https://rjdverse.github.io/rjd3sts/reference/dot-local_linear_trend.md)
-  : Title
+  : Creates a local linear trend state block.
 - [`.mssf()`](https://rjdverse.github.io/rjd3sts/reference/dot-mssf.md)
   : Title
 - [`.mssf_measurements()`](https://rjdverse.github.io/rjd3sts/reference/dot-mssf_measurements.md)
   : Title
 - [`.noise()`](https://rjdverse.github.io/rjd3sts/reference/dot-noise.md)
-  : Title
+  : Creates a white noise.
 - [`.proc_diffuselikelihood()`](https://rjdverse.github.io/rjd3sts/reference/dot-proc_diffuselikelihood.md)
   : Title
 - [`.r2jd_bsm()`](https://rjdverse.github.io/rjd3sts/reference/dot-r2jd_bsm.md)
   : Title
 - [`.sarima()`](https://rjdverse.github.io/rjd3sts/reference/dot-sarima.md)
-  : Title
+  : Creates an ARMA state block
 - [`.sarma()`](https://rjdverse.github.io/rjd3sts/reference/dot-sarma.md)
-  : Title
+  : Creates an ARMA state block (representation I)
 - [`.sarma2()`](https://rjdverse.github.io/rjd3sts/reference/dot-sarma2.md)
-  : Title
+  : Creates an ARMA state block (representation II)
 - [`.seasonal()`](https://rjdverse.github.io/rjd3sts/reference/dot-seasonal.md)
-  : Title
+  : Creates a seasonal component, corresponding to a multivariate random
+  walk, with an aggregation constraint to 0 and various covariances for
+  the innovations of the transition equation.
 - [`.ssf()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf.md) :
   Title
 - [`.ssf_B()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_B.md)
@@ -172,22 +179,24 @@ Licence
 - [`.ssf_S()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_S.md)
   : Title
 - [`.ssf_T()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_T.md)
-  : Title
+  : Gets the transition matrix.
 - [`.ssf_V()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_V.md)
-  : Title
+  : Gets the covariance of the innovations in the transition equation.
 - [`.ssf_Z()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_Z.md)
   : Gets the loading vector. It should have the same length as the
   corresponding state block.
 - [`.ssf_as_time_invariant()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_as_time_invariant.md)
-  : Title
-- [`.ssf_component()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_component.md)
-  : Title
-- [`.ssf_dim()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_dim.md)
-  : Retrieves the dimension of a state block
-- [`.ssf_loading()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_loading.md)
-  : Title
+  : Transforms a time invariant state space form based on functions into
+  a state space models represented by matrices.
 - [`.ssf_smooth()`](https://rjdverse.github.io/rjd3sts/reference/dot-ssf_smooth.md)
+  : Computes smoothed states by means of the augmented Kalman filter in
+  the case of diffuse initialization
+- [`.state_diffuse_dim()`](https://rjdverse.github.io/rjd3sts/reference/dot-state_diffuse_dim.md)
   : Title
+- [`.state_dim()`](https://rjdverse.github.io/rjd3sts/reference/dot-state_dim.md)
+  : Retrieves the dimension of a state block
+- [`.state_of()`](https://rjdverse.github.io/rjd3sts/reference/dot-state_of.md)
+  : Gets the state of the state space form
 - [`equation()`](https://rjdverse.github.io/rjd3sts/reference/equation.md)
   : Create equation
 - [`estimate()`](https://rjdverse.github.io/rjd3sts/reference/estimate.md)

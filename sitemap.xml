@@ -27,6 +27,7 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/components_pos.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/cumul.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/cycle.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-airline.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-akf_likelihood.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-arima.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-arima2.html</loc></url>
@@ -58,10 +59,10 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-ssf_V.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-ssf_Z.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-ssf_as_time_invariant.html</loc></url>
-<url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-ssf_component.html</loc></url>
-<url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-ssf_dim.html</loc></url>
-<url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-ssf_loading.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-ssf_smooth.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-state_diffuse_dim.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-state_dim.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-state_of.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/equation.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/estimate.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/filtered_states.html</loc></url>

@@ -1,6 +1,6 @@
-# Title
+# Creates an ARIMA state block (representation II)
 
-Title
+Creates an ARIMA state block (representation II)
 
 ## Usage
 
@@ -10,7 +10,27 @@ Title
 
 ## Arguments
 
+- ar:
+
+  Stationary auto-regressive polynomial, including the constant (=1).
+  True signs.
+
+- delta:
+
+  Non-stationary auto-regressive polynomial, including the constant
+  (=1). True signs.
+
+- ma:
+
+  Moving average polynomial, including the constant (=1). True signs.
+
 - var:
+
+  Variance of the innovations
+
+## Value
+
+A raw java state block
 
 ## Examples
 
