@@ -19,6 +19,7 @@ for non-weighted state components).
 
 ``` r
 
+
 y<-log(nr055)
 
 # create the model
@@ -60,6 +61,7 @@ rslt<-rjd3sts::estimate(model, y, concentrated=FALSE)
 
 ``` r
 
+
 data<-cbind(nr055, exp(q[,1]))
 matplot(data, type='l')
 ```
@@ -69,6 +71,7 @@ matplot(data, type='l')
 #### Signal extraction estimates of the sampling error
 
 ``` r
+
 noise<-exp(q[,2])
 plot(noise, type='l')
 ```
@@ -78,6 +81,7 @@ plot(noise, type='l')
 #### Sampling error and signal extraction error
 
 ``` r
+
 data<-cbind(h, qe[,2])
 matplot(data, type='l')
 ```
@@ -87,6 +91,7 @@ matplot(data, type='l')
 #### CV improvement due to signal extraction
 
 ``` r
+
 improvement<-(h-qe[,2])/h*100
 plot(improvement, type='l')
 ```

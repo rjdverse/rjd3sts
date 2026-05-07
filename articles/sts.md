@@ -17,32 +17,40 @@ We illustrate the various methods using two sets of time series:
 The `general linear gaussian` state-space model can be written in many
 different ways. The form considered in JD+ 3.0 is presented below.
 
-$$y_{t} = Z_{t}\alpha_{t} + \epsilon_{t},\quad\epsilon_{t} \sim N\left( 0,\sigma^{2}H_{t} \right),\quad t > 0$$
+``` math
+ y_t = Z_t \alpha_t + \epsilon_t,\quad \epsilon_t \sim N\left(0, \sigma^2 H_t\right),\quad t \gt 0 
+```
 
-$$\alpha_{t + 1} = T_{t}\alpha_{t} + \mu_{t},\quad\mu_{t} \sim N\left( 0,\sigma^{2}V_{t} \right),\quad t \geq 0$$
+``` math
+ \alpha_{t+1} = T_t \alpha_t + \mu_t, \quad \mu_t \sim N \left(0, \sigma^2 V_t \right),\quad t \ge 0 
+```
 
-$y_{t}$ is the observation at period t, $\alpha_{t}$ is the state
-vector. $\epsilon_{t},\mu_{t}$ are assumed to be serially independent at
+$`y_t`$ is the observation at period t, $`\alpha_t`$ is the state
+vector. $`\epsilon_t, \mu_t`$ are assumed to be serially independent at
 all leads and lags and independent from each other.  
-In the case of multi-variate models, $y_{t}$ is a vector of
+In the case of multi-variate models, $`y_t`$ is a vector of
 observations. However, in most cases, we will use the univariate
 approach by considering the observations one by one (univariate handling
 of multi-variate models).
 
 The innovations of the state equation will be modelled as
 
-$$\mu_{t} = S_{t}\xi_{t},\quad\xi_{t} \sim N\left( 0,\sigma^{2}I \right)$$
+``` math
+ \mu_t = S_t \xi_t, \quad \xi_t \sim N\left( 0, \sigma^2 I\right) 
+```
 
-In other words, $V_{t} = S_{t}S_{t}\prime$
+In other words, $`V_t=S_t S_t'`$
 
-The initial ($\equiv t = 0$) conditions of the filter are defined as
+The initial ($`\equiv t=0`$) conditions of the filter are defined as
 follows:
 
-$$\alpha_{0} = a_{0} + B\delta + \mu_{0},\quad\delta \sim N(0,\kappa I),\ \mu_{0} \sim N\left( 0,P_{*} \right)$$
+``` math
+ \alpha_{0} = a_{0} + B\delta + \mu_{0}, \quad \delta \sim N\left(0, \kappa I \right),\: \mu_{0} \sim N\left(0, P_*\right)
+```
 
-where $\kappa$ is arbitrary large. $P_{*}$ is the variance of the
-stationary part of the initial state vector and $B$ models the diffuse
-part. We write $BB\prime = P_{\infty}$.
+where $`\kappa`$ is arbitrary large. $`P_*`$ is the variance of the
+stationary part of the initial state vector and $`B`$ models the diffuse
+part. We write $`BB'=P_\infty`$.
 
 The definition used in JD+ is quasi-identical to that of Durbin and
 Koopman\[1\].
@@ -50,11 +58,17 @@ Koopman\[1\].
 In summary, the model is completely defined by the following quantities
 (possible default values are indicated in brackets):
 
-$$\mathbf{Z}_{\mathbf{t}},\mathbf{H}_{\mathbf{t}}\lbrack = 0\rbrack$$
+``` math
+ \mathbf{Z_t}, \mathbf{H_t} [=0] 
+```
 
-$$\mathbf{T}_{\mathbf{t}},\mathbf{V}_{\mathbf{t}}\left\lbrack = S_{t}S_{t}\prime \right\rbrack,\mathbf{S}_{\mathbf{t}}\left\lbrack = Cholesky(V) \right\rbrack$$
+``` math
+ \mathbf{T_t}, \mathbf{V_t} [=S_t S_t'], \mathbf{S_t} [=Cholesky(V)] 
+```
 
-$$\mathbf{a}_{\mathbf{0}}\lbrack = 0\rbrack,\mathbf{P}_{*}\lbrack = 0\rbrack,\mathbf{B}\lbrack = 0\rbrack,\mathbf{P}_{\mathbf{\infty}}\lbrack = BB\prime\rbrack$$
+``` math
+ \mathbf{a_{0}}[=0], \mathbf{P_*} [=0], \mathbf{B} [=0], \mathbf{P_\infty} [=BB'] 
+```
 
 ### Description of the state blocks
 
@@ -64,84 +78,87 @@ $$\mathbf{a}_{\mathbf{0}}\lbrack = 0\rbrack,\mathbf{P}_{*}\lbrack = 0\rbrack,\ma
 
 The auto-regressive block is defined by
 
-$$\Phi(B)y_{t} = \epsilon_{t}$$
+``` math
+\Phi\left(B\right)y_t=\epsilon_t 
+```
 
 where:
 
-$$\Phi(B) = 1 + \varphi_{1}B + \cdots + \varphi_{p}B^{p}$$
+``` math
+\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p 
+```
 
 is an auto-regressive polynomial.
 
-Let $\gamma_{i}$ be the autocovariances of the process
+Let $`\gamma_i`$ be the autocovariances of the process
 
 Using those notations, the state-space block can be written as follows :
 
 #### State block:
 
-$$\alpha_{t} = \begin{pmatrix}
-y_{t} \\
-y_{t - 1} \\
-\vdots \\
-y_{t - p + 1}
-\end{pmatrix}$$  
+``` math
+ \alpha_t= \begin{pmatrix} y_t \\ y_{t-1} \\ \vdots \\ y_{t-p+1} \end{pmatrix}
+```
+  
 The state block can be extended with additional lags. That can be useful
 in complex (multi-variate) models
 
 #### Dynamics
 
-$$T_{t} = \begin{pmatrix}
-{- \varphi_{1}} & \cdots & \cdots & {- \varphi_{p}} \\
-1 & \cdots & \cdots & 0 \\
-\vdots & \ddots & \ddots & \vdots \\
-0 & 0 & 1 & 0
-\end{pmatrix}$$
+``` math
+ T_t = \begin{pmatrix}-\varphi_1 & \cdots & \cdots  & -\varphi_p  \\
+                        1          & \cdots &  \cdots &  0          \\ 
+                        \vdots     & \ddots &  \ddots & \vdots\\ 
+                        0          &   0    &  1      & 0  \end{pmatrix}
+```
 
-$$S_{t} = \sigma_{ar}\begin{pmatrix}
-1 \\
-0 \\
-\vdots \\
-0
-\end{pmatrix}$$
+``` math
+ S_t = \sigma_{ar} \begin{pmatrix} 1 \\ 0 \\ \vdots\\ 0 \end{pmatrix} 
+```
 
-$$V_{t} = SS\prime$$
+``` math
+ V_t = S S' 
+```
 
 #### Default loading
 
-$$Z_{t} = \begin{pmatrix}
-1 & 0 & \cdots & 0
-\end{pmatrix}$$
+``` math
+ Z_t = \begin{pmatrix} 1 & 0 & \cdots & 0\end{pmatrix}
+```
 
 #### Initialization
 
-$$\alpha_{- 1} = \begin{pmatrix}
-0 \\
-0 \\
-\vdots \\
-0
-\end{pmatrix}$$
+``` math
+ \alpha_{-1} = \begin{pmatrix}0 \\ 0 \\ \vdots\\ 0 \end{pmatrix} 
+```
 
-$$P_{*} = \Omega$$$\Omega$ is the unconditional covariance of the state
-array; it is computed by means of the auto-covariance function of the
-model
+``` math
+ P_{*} = \Omega 
+```
+$`\Omega`$ is the unconditional covariance of the state array; it is
+computed by means of the auto-covariance function of the model
 
-$$\Omega_{t} = \begin{pmatrix}
-\gamma_{0} & \gamma_{1} & \cdots & \gamma_{p} & \\
-\gamma_{1} & \gamma_{0} & \gamma_{1} & \cdots & \\
-\vdots & \ddots & \ddots & \vdots & \\
-\gamma_{p} & \cdots & \gamma_{1} & \gamma_{0} & 
-\end{pmatrix}$$
+``` math
+ \Omega_t = \begin{pmatrix}\gamma_0 & \gamma_1 & \cdots  & \gamma_p  \\
+                        \gamma_1 & \gamma_0 & \gamma_1 &  \cdots &     \\ 
+                        \vdots     &  \ddots & \ddots & \vdots\\ 
+                        \gamma_p & \cdots & \gamma_1  & \gamma_0  \end{pmatrix}
+```
 
 #### R code
 
-The “ar” block is defined by specifying the coefficients $\phi_{i}$ of
+The “ar” block is defined by specifying the coefficients $`\phi_i`$ of
 the ar polynomial and the innovation variance. More exactly, they
 correspond to the equation
 
-$$y_{t} = \phi_{1}y_{t - 1} + \phi_{2}y_{t - 2} + \ldots + \phi_{p}y_{t - p} + \epsilon_{t}$$
+``` math
+ y_t = \phi_1 y_{t-1} +  \phi_2 y_{t-2} + \dots + \phi_p y_{t-p} + \epsilon_t
+```
 
 The coefficients and/or the variance can be fixed
 
 ``` r
+
 b_ar<-ar("ar", c(.7,-.4, .2), nlags=5, variance=1)
 
 cat("T\n")
@@ -173,94 +190,103 @@ An alternative representation of the auto-regressive block will be very
 useful for the purposes of reflecting expectations. The process is
 defined as above:
 
-$$\Phi(B)y_{t} = \epsilon_{t}$$
+``` math
+\Phi\left(B\right)y_t=\epsilon_t 
+```
 
 where:
 
-$$\Phi(B) = 1 + \varphi_{1}B + \cdots + \varphi_{p}B^{p}$$
+``` math
+\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p 
+```
 
 is an auto-regressive polynomial. However, modeling data that refers to
 expectations may require including conditional expectations in the state
 vector. Thus, the same type of representation that is used for the ARMA
 model will be considered here.
 
-Let $\gamma_{i}$ be the autocovariances of the model. We also define the
-size of our state vector as $r0 = max(p,h + 1)$, where $h$ is the
-forecast horizon desired by the user. If the user needs to use $nlags$
+Let $`\gamma_i`$ be the autocovariances of the model. We also define the
+size of our state vector as $`r0=max(p,h+1)`$, where $`h`$ is the
+forecast horizon desired by the user. If the user needs to use $`nlags`$
 lagged values, whose default value is zero. Then the size of the state
-vector will be $r = r0 + nlags$
+vector will be $`r=r0+nlags`$
 
 Using those notations, the state-space model can be written as follows :
 
 #### State block:
 
-$$\alpha_{t} = \begin{pmatrix}
-y_{t - nlags} \\
-\vdots \\
-y_{t - 1} \\
-y_{t} \\
-y_{t + 1|t} \\
-\vdots \\
-y_{t + h|t}
-\end{pmatrix}$$
+``` math
+ \alpha_t= \begin{pmatrix} 
+y_{t-nlags} \\ 
+\vdots  \\ 
+y_{t-1}  \\ 
+\hline
+y_{t}  \\ 
+y_{t+1|t} \\ 
+\vdots \\ 
+y_{t+h|t} 
+\end{pmatrix}
+```
 
-where $y_{t + i|t}$ is the orthogonal projection of $y_{t + i}$ on the
-subspace generated by $y(s):s \leq t$. Thus, it is the forecast function
-with respect to the semi-infinite sample. We also have that
-$y_{t + i|t} = \sum_{j = i}^{\infty}{\psi_{j}\epsilon_{t + i - j}}$
+where $`y_{t+i|t}`$ is the orthogonal projection of $`y_{t+i}`$ on the
+subspace generated by $`{y\left(s\right):s \leq t}`$. Thus, it is the
+forecast function with respect to the semi-infinite sample. We also have
+that $`y_{t+i|t} = \sum_{j=i}^\infty {\psi_j \epsilon_{t+i-j}}`$
 
 #### Dynamics
 
-$$T_{t} = \begin{pmatrix}
-0 & 1 & 0 & \cdots & 0 \\
-0 & 0 & 1 & \cdots & 0 \\
-\vdots & \vdots & \vdots & \ddots & \vdots \\
-0 & 0 & 0 & \cdots & 1 \\
-{- \varphi_{r}} & \cdots & \cdots & \cdots & {- \varphi_{1}}
-\end{pmatrix}$$
+``` math
+ T_t = \begin{pmatrix} 0 &1 & 0 & \cdots & 0  \\0& 0 & 1 & \cdots & 0\\ \vdots & \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & 0 & \cdots & 1\\
+-\varphi_r & \cdots  & \cdots & \cdots &-\varphi_1 \end{pmatrix}
+```
 
-with $\varphi_{j} = 0$ for $j > p$
+with $`\varphi_{j}=0`$ for $`j>p`$
 
-$$S_{t} = \sigma_{ar}\begin{pmatrix}
-0 \\
+``` math
+ S_t = \sigma_{ar} \begin{pmatrix} 0 \\  
 \vdots \\
-0 \\
-1 \\
-\psi_{1} \\
-\vdots \\
-\psi_{s}
-\end{pmatrix}$$
+0\\
+\hline
+1 \\ \psi_1 \\ \vdots\\ \psi_s \end{pmatrix} 
+```
 
-$$V_{t} = SS\prime$$
+``` math
+ V_t = S S' 
+```
 
 #### Default loading
 
-$$Z_{t} = \begin{pmatrix}
-0 & \cdots & 0 & | & 1 & 0 & \cdots & 0
-\end{pmatrix}$$
+``` math
+ Z_t = \begin{pmatrix} 0 & \cdots  &0  & | & 1 & 0 & \cdots & 0\end{pmatrix}
+```
 
 #### Initialization
 
-$$\alpha_{- 1} = \begin{pmatrix}
-0 \\
+``` math
+ \alpha_{-1}  = \begin{pmatrix} 0 \\  
 \vdots \\
-0 \\
-0 \\
-0 \\
-\vdots \\
-0
-\end{pmatrix}$$
+0\\
+\hline
+0 \\ 0 \\ \vdots\\ 0 \end{pmatrix} 
+```
 
-$$P_{*} = \Omega$$
+``` math
+ P_{*} = \Omega 
+```
 
-$\Omega$ is the unconditional covariance of the state array; it can be
+$`\Omega`$ is the unconditional covariance of the state array; it can be
 easily derived using the MA representation. We have:
 
-$$\Omega(i,0) = \gamma_{i}$$
+``` math
+ \Omega\left(i,0\right) = \gamma_i 
+```
 
-$$\Omega(i,j) = \Omega(i - 1,j - 1) - \psi_{i}\psi_{j}$$
+``` math
+ \Omega\left(i,j\right) = \Omega\left(i-1,j-1\right)-\psi_i \psi_j 
+```
 
 ``` r
+
 b_ar2<-ar2("ar2", c(-.2, .4, -.1), nlags=3, nfcasts=2)
 knit_print(block_t(b_ar2))
 #>      [,1] [,2] [,3] [,4] [,5] [,6]
@@ -278,83 +304,86 @@ knit_print(block_t(b_ar2))
 
 The arma block is defined by
 
-$$\Phi(B)y_{t} = \Theta(B)\epsilon_{t}$$
+``` math
+\Phi\left(B\right)y_t=\Theta\left(B\right)\epsilon_t 
+```
 
 where:
 
-$$\Phi(B) = 1 + \varphi_{1}B + \cdots + \varphi_{p}B^{p}$$
+``` math
+\Phi\left(B\right)=1+\varphi_1 B + \cdots + \varphi_p B^p 
+```
 
-$$\Theta(B) = 1 + \theta_{1}B + \cdots + \theta_{q}B^{q}$$
+``` math
+\Theta\left(B\right)=1+\theta_1 B + \cdots + \theta_q B^q 
+```
 
 are the auto-regressive and the moving average polynomials.
 
 The MA representation of the process is
-$y_{t} = \sum_{i = 0}^{\infty}{\psi_{i}\epsilon_{t - i}}$. Let
-$\gamma_{i}$ be the autocovariances of the model. We also define:
-$r = \max(p,q + 1),\quad s = r - 1$.
+$`y_t=\sum_{i=0}^\infty {\psi_i \epsilon_{t-i}}`$. Let $`\gamma_i`$ be
+the autocovariances of the model. We also define:
+$`r=\max\left(p, q+1\right), \quad s=r-1`$.
 
 Using those notations, the state-space block can be written as follows :
 
 #### State block:
 
-$$\alpha_{t} = \begin{pmatrix}
-y_{t} \\
-y_{t + 1|t} \\
-\vdots \\
-y_{t + s|t}
-\end{pmatrix}$$
+``` math
+ \alpha_t= \begin{pmatrix} y_t \\ y_{t+1|t} \\ \vdots \\ y_{t+s|t} \end{pmatrix}
+```
 
-where $y_{t + i|t}$ is the orthogonal projection of $y_{t + i}$ on the
-subspace generated by $y(s):s \leq t$.Thus, it is the forecast function
-with respect to the semi-infinite sample. We also have that
-$y_{t + i|t} = \sum_{j = i}^{\infty}{\psi_{j}\epsilon_{t + i - j}}$
+where $`y_{t+i|t}`$ is the orthogonal projection of $`y_{t+i}`$ on the
+subspace generated by $`{y\left(s\right):s \leq t}`$.Thus, it is the
+forecast function with respect to the semi-infinite sample. We also have
+that $`y_{t+i|t} = \sum_{j=i}^\infty {\psi_j \epsilon_{t+i-j}}`$
 
 #### Dynamics
 
-$$T_{t} = \begin{pmatrix}
-0 & 1 & 0 & \cdots & 0 \\
-0 & 0 & 1 & \cdots & 0 \\
-\vdots & \vdots & \vdots & \ddots & \vdots \\
-0 & 0 & 0 & \cdots & 1 \\
-{- \varphi_{r}} & \cdots & \cdots & \cdots & {- \varphi_{1}}
-\end{pmatrix}$$
+``` math
+ T_t = \begin{pmatrix}0 &1 & 0 & \cdots & 0  \\0& 0 & 1 & \cdots & 0\\ \vdots & \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & 0 & \cdots & 1\\
+-\varphi_r & \cdots  & \cdots & \cdots &-\varphi_1 \end{pmatrix}
+```
 
-with $\varphi_{j} = 0$ for $j > p$
+with $`\varphi_{j}=0`$ for $`j>p`$
 
-$$S_{t} = \begin{pmatrix}
-1 \\
-\psi_{1} \\
-\vdots \\
-\psi_{s}
-\end{pmatrix}$$
+``` math
+ S_t = \begin{pmatrix}1 \\ \psi_1 \\ \vdots\\ \psi_s \end{pmatrix} 
+```
 
-$$V_{t} = SS\prime$$
+``` math
+ V_t = S S' 
+```
 
 #### Default loading
 
-$$Z_{t} = \begin{pmatrix}
-1 & 0 & \cdots & 0
-\end{pmatrix}$$
+``` math
+ Z_t = \begin{pmatrix} 1 & 0 & \cdots & 0\end{pmatrix}
+```
 
 #### Initialization
 
-$$\alpha_{- 1} = \begin{pmatrix}
-0 \\
-0 \\
-\vdots \\
-0
-\end{pmatrix}$$
+``` math
+ \alpha_{-1} = \begin{pmatrix}0 \\ 0 \\ \vdots\\ 0 \end{pmatrix} 
+```
 
-$$P_{*} = \Omega$$
+``` math
+ P_{*} = \Omega 
+```
 
-$\Omega$ is the unconditional covariance of the state array; it can be
+$`\Omega`$ is the unconditional covariance of the state array; it can be
 easily derived using the MA representation. We have:
 
-$$\Omega(i,0) = \gamma_{i}$$
+``` math
+ \Omega\left(i,0\right) = \gamma_i 
+```
 
-$$\Omega(i,j) = \Omega(i - 1,j - 1) - \psi_{i}\psi_{j}$$
+``` math
+ \Omega\left(i,j\right) = \Omega\left(i-1,j-1\right)-\psi_i \psi_j 
+```
 
 ``` r
+
 b_arma<-arma("arma", ar=c(-.2, .4, -.1), ma=c(.3, .6))
 knit_print(block_t(b_arma))
 #>      [,1] [,2] [,3]

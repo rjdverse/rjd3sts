@@ -6,6 +6,7 @@ The state space framework allows an easy estimation of time-varying
 trading days effects.
 
 ``` r
+
 # take a (transformed) series
 s<-log(rjd3toolkit::ABS$X0.2.09.10.M)
 ```
@@ -32,6 +33,7 @@ the series.
 
 ``` r
 
+
 # create the model
 model<-rjd3sts::model()
 
@@ -55,6 +57,7 @@ The results can be retrieved through the “result” function. All the
 available information are displayed by means of the “dictionary” method
 
 ``` r
+
 print(rjd3toolkit::dictionary(rslt))
 #>  [1] "likelihood.ll"                   "likelihood.ser"                 
 #>  [3] "likelihood.residuals"            "scalingfactor"                  
@@ -83,6 +86,7 @@ Time varying trading days
 
 ``` r
 
+
 colfunc<-colorRampPalette(c("red","blue","green","#196F3D"))
 colors <- (colfunc(7))
 
@@ -101,6 +105,7 @@ lines(-rowSums(ss[,pos[2]+(1:6)]), col=colors[7])
 ### BSM + TDvar
 
 ``` r
+
 # take a (transformed) series
 s<-log(rjd3toolkit::ABS$X0.2.09.10.M)
 
@@ -128,6 +133,7 @@ vss<-rjd3toolkit::result(rslt, "ssf.smoothing.vstates")
 Time varying trading days
 
 ``` r
+
 
 colfunc<-colorRampPalette(c("red","blue","green","#196F3D"))
 colors <- (colfunc(7))

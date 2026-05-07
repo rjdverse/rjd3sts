@@ -8,6 +8,7 @@ provided in rjd3sts
 The *sutse* function computes simple SUTSE models for wo series
 
 ``` r
+
 sutse<-function(st){
     if (! inherits(st, "ts") || ! inherits(st, "matrix"))
         stop(st, " is not a ts matrix")
@@ -180,6 +181,7 @@ print.JD3_SUTSE<-function(q){
 ```
 
 ``` r
+
 
 q<-sutse(ts.union(log(Retail$RetailSalesTotal), log(Retail$BookStores)))
 print(q)

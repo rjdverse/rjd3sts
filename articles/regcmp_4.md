@@ -19,6 +19,7 @@ the state space representations of those approaches are not always the
 same.
 
 ``` r
+
 # create the UCARIMA model
 model1<-rjd3sts::model()
 # create the components and add them to the model
@@ -40,19 +41,20 @@ rslt2<-rjd3sts::estimate(model2, nile)
 
 #### UCARIMA model
 
-$\sigma_{1}^{2} =$ 1469.1797008
+$`\sigma_1^2=`$ 1469.1797008
 
-$\sigma_{2}^{2} =$ 15098.5122425
+$`\sigma_2^2=`$ 15098.5122425
 
 #### BSM model
 
-$\sigma_{1}^{2} =$ 1469.1797108
+$`\sigma_1^2=`$ 1469.1797108
 
-$\sigma_{2}^{2} =$ 15098.5122242
+$`\sigma_2^2=`$ 15098.5122242
 
 ### Trend estimates
 
 ``` r
+
 q1<-rjd3sts::smoothed_components(rslt1)
 qe1<-rjd3sts::smoothed_components_stdev(rslt1)
 

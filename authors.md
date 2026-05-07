@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/rjdverse/rjd3sts/blob/develop/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/rjdverse/rjd3sts/blob/main/DESCRIPTION)
 
 Palate J (2026). *rjd3sts: State Space Framework and Structural Time
 Series with 'JDemetra+ 3.x'*. R package version 2.4.1,
