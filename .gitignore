@@ -58,3 +58,6 @@ rsconnect/
 README.html
 
 pom.xml.versionsBackup
+/doc/
+/Meta/
+.positai

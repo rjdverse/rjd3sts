@@ -142,16 +142,17 @@ loadings<-function(object, var=1){
   }
 }
 
-#' Title
+#' Adds a state block or a measurement equation to a given state space model
 #'
 #' @param model A state space model
-#' @param item An equation or a state block
+#' @param item A state block or a measurement equation
 #'
-#' @return
 #' @export
 #'
 #' @examples
-#' @importFrom methods is
+#' model<-model()
+#' llt<-locallineartrend("llt")
+#' add(model,llt)
 add<-function(model, item){
   if (! is(model, MODEL))
     stop("Not a model")

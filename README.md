@@ -17,7 +17,7 @@ built](https://github.com/rjdverse/rjd3sts/actions/workflows/pkgdown.yaml/badge.
 
 ## Installation
 
-Running rjd3 packages requires **Java 17 or higher**. How to set up such
+Running rjd3 packages requires **Java 21 or higher**. How to set up such
 a configuration in R is explained
 [here](https://jdemetra-new-documentation.netlify.app/#Rconfig)
 

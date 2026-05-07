@@ -8,16 +8,26 @@ p2r_diffuselikelihood<-function(p){
 }
 
 
+#' Title
+#'
+#' @param jrslt
+#' @param prefix
+#'
+#' @returns
+#' @export
+#'
+#' @examples
 .proc_diffuselikelihood<-function(jrslt, prefix){
-  return(list(
+  return(structure(list(
     ll=rjd3toolkit::.proc_numeric(jrslt, paste(prefix,"ll", sep="")),
     adjustedll=rjd3toolkit::.proc_numeric(jrslt, paste(prefix,"adjustedll", sep="")),
     ssq=rjd3toolkit::.proc_numeric(jrslt, paste(prefix,"ssqerr", sep="")),
     nobs=rjd3toolkit::.proc_int(jrslt, paste(prefix,"nobs", sep="")),
 #    ndiffuse=rjd3toolkit::.proc_int(jrslt, paste(prefix,"ndiffuse", sep="")),
     nparams=rjd3toolkit::.proc_int(jrslt, paste(prefix,"nparams", sep="")),
-    df=rjd3toolkit::.proc_int(jrslt, paste(prefix,"df", sep="")))
-  )
+    df=rjd3toolkit::.proc_int(jrslt, paste(prefix,"df", sep="")),
+class = "JD3DIFFUSELIKELIHOOD"))
+    )
 }
 
 # TO SUPPRESS IN NEXT RELEASE (EXPORTED FROM RJD3TOOLKIT 3.2.2)
