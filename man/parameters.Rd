@@ -6,9 +6,6 @@
 \usage{
 parameters(model)
 }
-\arguments{
-\item{model}{}
-}
 \description{
 Get Parameters of SSF Model
 }

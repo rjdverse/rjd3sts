@@ -40,8 +40,6 @@ For instance, usual trading days are defined by \code{c(1,2,3,4,5,6,0)}, week da
 
 \item{ao, ls, so}{boolean indicating if additive outliers (\code{ao}), level shift (\code{ls}) and seasonal
 outliers (\code{so}) should be detected.}
-
-\item{estimation.backward}{}
 }
 \description{
 Title

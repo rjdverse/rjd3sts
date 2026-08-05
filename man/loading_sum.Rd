@@ -6,9 +6,6 @@
 \usage{
 loading_sum(length = 0)
 }
-\arguments{
-\item{length}{}
-}
 \description{
 Title
 }

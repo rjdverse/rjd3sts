@@ -6,9 +6,6 @@
 \usage{
 ssf(initialization, dynamics, measurement)
 }
-\arguments{
-\item{measurement}{}
-}
 \description{
 Title
 }

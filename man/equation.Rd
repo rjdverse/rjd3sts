@@ -6,9 +6,6 @@
 \usage{
 equation(name, variance = 0, fixed = TRUE)
 }
-\arguments{
-\item{fixed}{}
-}
 \description{
 Create equation
 }
