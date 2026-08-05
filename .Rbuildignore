@@ -50,6 +50,7 @@ cran-comments.md
 
 ^man-roxygen$
 ^organisation.yml$
+
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^heylogs\.properties$
@@ -60,4 +61,3 @@ cran-comments.md
 ^\.claude$
 
 ^why\.md$
-^why\.Rmd$

@@ -2,15 +2,20 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{add}
 \alias{add}
-\title{Title}
+\title{Adds a state block or a measurement equation to a given state space model}
 \usage{
 add(model, item)
 }
 \arguments{
 \item{model}{A state space model}
 
-\item{item}{An equation or a state block}
+\item{item}{A state block or a measurement equation}
 }
 \description{
-Title
+Adds a state block or a measurement equation to a given state space model
+}
+\examples{
+model<-model()
+llt<-locallineartrend("llt")
+add(model,llt)
 }

@@ -1,6 +1,122 @@
 #' @include utils.R jd3_ssf.R
 NULL
 
+JD3_BSM = "JD3_BasicStructuralModel"
+
+#' Title
+#'
+#' @param period
+#' @param noise.var
+#' @param level.var
+#' @param slope.var
+#' @param seasonal.var
+#' @param seasonal.model
+#' @param cycle.var
+#' @param cycle.dumpingfactor
+#' @param cycle.length
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+bsm_model<-function(period, noise.var=1, level.var=1, slope.var=NULL, seasonal.var=1, seasonal.model=c("HarrisonStevens", "Trigonometric", "Dummy", "Crude", "Fixed")
+                     , cycle.var=NULL, cycle.dumpingfactor=.9, cycle.length=6){
+    seasonal.model<-match.arg(seasonal.model)
+
+    if (is.null(seasonal.var))
+        seasonal=NULL
+    else
+        seasonal = list(var=seasonal.var, model=seasonal.model)
+    if (is.null(cycle.var))
+        cycle=NULL
+    else
+        cycle=list(var=cycle.var, dumping_factor=cycle.dumpingfactor, length=cycle.length)
+    return (structure(
+        list(
+            period=period,
+            noise=noise.var,
+            level=level.var,
+            slope=slope.var,
+            seasonal=seasonal,
+            cycle=cycle
+        )
+        , class = JD3_BSM))
+}
+
+#' Title
+#'
+#' @param bsm
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+.r2jd_bsm<-function(bsm){
+    if (! inherits(bsm, JD3_BSM))
+        stop('Invalid model')
+
+    if (is.null(bsm$noise)){nv<--1} else {nv<-as.numeric(bsm$noise)}
+    if (is.null(bsm$level)){lv<--1} else {lv<-as.numeric(bsm$level)}
+    if (is.null(bsm$slope)){sv<--1} else {sv<-as.numeric(bsm$slope)}
+    if (is.null(bsm$seasonal)){seasv=-1; seasm="HarrisonStevens"} else{seasv<-as.numeric(bsm$seasonal$var); seasm<-bsm$seasonal$model}
+    if (is.null(bsm$cycle)){cv<--1; cdump=0.9; clength<-6} else{
+        cv<-as.numeric(bsm$cycle$var);cdum<-as.numeric(bsm$cycle$dumping_factor);clength<-as.numeric(bsm$cycle$length)}
+
+    return (.jcall("jdplus/sts/base/r/Bsm", "Ljdplus/sts/base/core/BsmData;", "bsm",
+        as.integer(bsm$period), nv, lv, sv, seasv, seasm, cv, cdump, clength))
+}
+
+
+#' Title
+#'
+#' @param jbsm
+#' @param normalized
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+#' bsm<-bsm_model(12)
+#' jbsm<-.r2jd_bsm(bsm)
+#' jucm<-.bsm2ucm(jbsm)
+.bsm2ucm<-function(jbsm, normalized=TRUE){
+    return (.jcall("jdplus/sts/base/core/BsmUtility", "Ljdplus/toolkit/base/core/ucarima/UcarimaModel;", "ucm", jbsm, as.logical(normalized)))
+}
+
+#' Title
+#'
+#' @param jbsm
+#' @param fixed
+#' @param fixedCycle
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+#' bsm<-bsm_model(12)
+#' jbsm<-.r2jd_bsm(bsm)
+#' jspec<-.bsm2spec(jbsm)
+.bsm2spec<-function(jbsm, fixed=FALSE, fixedCycle=TRUE){
+    return (.jcall("jdplus/sts/base/r/Bsm", "Ljdplus/sts/base/api/BsmSpec;", "specOf", jbsm, as.logical(fixed), as.logical(fixedCycle)))
+}
+
+
+#' Title
+#'
+#' @param bsm
+#' @param normalized
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+bsm_to_ucm<-function(bsm, normalized=TRUE){
+    jbsm<-.r2jd_bsm(bsm)
+    jucm<-.bsm2ucm(jbsm, normalized = normalized)
+    return (rjd3toolkit::.jd2r_ucarima(jucm))
+}
+
+
 #' Title
 #'
 #' @inheritParams seasonalbreaks
@@ -101,11 +217,11 @@ sts_raw<-function(y, period=NA, X=NULL, X.td=NULL, level=1, slope=1, cycle=-1, n
 #' @param y Series
 #' @param model Model for calendar effects
 #' \itemize{
-#'   \item{td2: }{leap year + week days (week-end derived)}
-#'   \item{td3: }{leap year + week days + saturdays (sundays derived)}
-#'   \item{td7: }{leap year + all days (sundays derived)}
-#'   \item{full: }{td3 + easter effect}
-#'   \item{none: }{no calendar effect}
+#'   \item{td2: leap year + week days (week-end derived)}
+#'   \item{td3: leap year + week days + saturdays (sundays derived)}
+#'   \item{td7: leap year + all days (sundays derived)}
+#'   \item{full: td3 + easter effect}
+#'   \item{none: no calendar effect}
 #'   }
 #' @param nf number of forecasts
 #'
