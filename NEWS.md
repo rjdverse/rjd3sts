@@ -8,20 +8,36 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 
+## [2.3.0] - 2025-04-10
+
+### Changed
+
+* New JARS related to version [2.3.0](https://github.com/jdemetra/jdplus-incubator/releases/tag/v2.3.0)
+
+
 ## [2.1.1] - 2024-07-12
 
-### Added
+### Changed
 
-* New .jar files added (related to [v2.2.0](https://github.com/jdemetra/jdplus-incubator/releases/tag/v2.2.0))
+* New JARS related to version [2.2.0](https://github.com/jdemetra/jdplus-incubator/releases/tag/v2.2.0)
 
 
 ## [2.1.0] - 2024-04-18
 
+### Changed
+
+* New JARS related to version [2.1.0](https://github.com/jdemetra/jdplus-incubator/releases/tag/v2.1.0)
+
 
 ## [2.0.0] - 2023-12-12
 
+### Changed
 
-[Unreleased]: https://github.com/rjdverse/rjd3sts/compare/v2.1.1...HEAD
+* New JARS related to version [2.0.0](https://github.com/jdemetra/jdplus-incubator/releases/tag/v2.0.0)
+
+
+[Unreleased]: https://github.com/rjdverse/rjd3sts/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/rjdverse/rjd3sts/compare/v2.1.1...v2.3.0
 [2.1.1]: https://github.com/rjdverse/rjd3sts/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/rjdverse/rjd3sts/compare/v2.0.0...v2.0.0
 [2.0.0]: https://github.com/rjdverse/rjd3sts/releases/tag/v2.0.0

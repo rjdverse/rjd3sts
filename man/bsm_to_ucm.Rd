@@ -6,9 +6,6 @@
 \usage{
 bsm_to_ucm(bsm, normalized = TRUE)
 }
-\arguments{
-\item{normalized}{}
-}
 \description{
 Title
 }

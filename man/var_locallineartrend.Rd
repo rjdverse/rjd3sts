@@ -14,9 +14,6 @@ var_locallineartrend(
   fixedSlopeScale = FALSE
 )
 }
-\arguments{
-\item{fixedSlopeScale}{}
-}
 \description{
 Title
 }

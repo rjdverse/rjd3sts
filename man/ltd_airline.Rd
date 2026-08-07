@@ -17,9 +17,6 @@ ltd_airline(
   fixedvariance = FALSE
 )
 }
-\arguments{
-\item{fixedvariance}{}
-}
 \description{
 Title
 }

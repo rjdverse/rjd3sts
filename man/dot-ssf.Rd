@@ -6,9 +6,6 @@
 \usage{
 .ssf(component, loading, evar = 0)
 }
-\arguments{
-\item{evar}{}
-}
 \description{
 Title
 }

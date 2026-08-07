@@ -6,9 +6,6 @@
 \usage{
 .ssf_B(x)
 }
-\arguments{
-\item{x}{}
-}
 \description{
 Title
 }

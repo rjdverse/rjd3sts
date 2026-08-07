@@ -6,9 +6,6 @@
 \usage{
 .mssf(component, measurements)
 }
-\arguments{
-\item{measurements}{}
-}
 \description{
 Title
 }
