@@ -8,11 +8,11 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rjd3sts)](https://CRAN.R-project.org/package=rjd3sts)
 
-[![R-CMD-check](https://github.com/rjdverse/rjd3sts/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/R-CMD-check.yaml)
-[![lint](https://github.com/rjdverse/rjd3sts/actions/workflows/lint.yaml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/lint.yaml)
+[![R-CMD-check](https://github.com/rjdverse/rjd3sts/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/R-CMD-check.yml)
+[![lint](https://github.com/rjdverse/rjd3sts/actions/workflows/lint.yml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/lint.yml)
 
 [![GH Pages
-built](https://github.com/rjdverse/rjd3sts/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/pkgdown.yaml)
+built](https://github.com/rjdverse/rjd3sts/actions/workflows/pkgdown.yml/badge.svg)](https://github.com/rjdverse/rjd3sts/actions/workflows/pkgdown.yml)
 <!-- badges: end -->
 
 ## Installation
