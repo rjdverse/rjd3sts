@@ -7,7 +7,3 @@ Title
 ``` r
 cumul(name, core, period, start = 0)
 ```
-
-## Arguments
-
-- start:

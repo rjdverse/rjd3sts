@@ -7,7 +7,3 @@ Create equation
 ``` r
 equation(name, variance = 0, fixed = TRUE)
 ```
-
-## Arguments
-
-- fixed:

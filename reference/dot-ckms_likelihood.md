@@ -7,7 +7,3 @@ Title
 ``` r
 .ckms_likelihood(ssf, data, rescalingFactor = TRUE)
 ```
-
-## Arguments
-
-- rescalingFactor:

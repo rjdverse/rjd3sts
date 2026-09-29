@@ -15,7 +15,3 @@ splines_regular(
   fixed = FALSE
 )
 ```
-
-## Arguments
-
-- fixed:

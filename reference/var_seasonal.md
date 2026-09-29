@@ -14,7 +14,3 @@ var_seasonal(
   fixed = FALSE
 )
 ```
-
-## Arguments
-
-- fixed:

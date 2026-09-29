@@ -7,7 +7,3 @@ Title
 ``` r
 block_t(block, pos = 0)
 ```
-
-## Arguments
-
-- pos:

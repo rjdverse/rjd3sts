@@ -46,9 +46,33 @@ estimate(
 
   initialization method.
 
+- optimizer:
+
+  Optimizer used to estimate the parameters (by ML).
+
 - precision:
 
   indicating the largest likelihood deviations that make the algorithm
   stop.
 
 - initialParameters:
+
+  Initial parameters
+
+## Value
+
+An object of the class "JD3_SsfModelEstimation"
+
+## Examples
+
+``` r
+model<-model()
+llt<-locallineartrend("llt")
+seas<-seasonal("seas", 12, "HarrisonStevens")
+n<-noise("n")
+add(model,llt)
+add(model,seas)
+add(model,n)
+y<-rjd3toolkit::Retail$BookStores
+emodel<-estimate(model, y)
+```

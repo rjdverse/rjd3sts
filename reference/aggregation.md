@@ -7,7 +7,3 @@ Title
 ``` r
 aggregation(name, components)
 ```
-
-## Arguments
-
-- components:

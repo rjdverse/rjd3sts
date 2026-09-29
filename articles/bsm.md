@@ -8,6 +8,13 @@ model. We present below some of them.
 To compare the results (more precisely the likelihood) of the different
 approaches, it is important to compute the marginal likelihood.
 
+    ## 
+    ## Attaching package: 'rjd3sts'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     ar, arima, cycle, loadings
+
 ``` r
 
 s<-log(Retail$BookStores)

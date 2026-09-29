@@ -6,7 +6,7 @@ components corresponding to a given equation (multivariate case)
 ## Usage
 
 ``` r
-smoothed_components(model, equation = 1, fast = TRUE)
+smoothed_components(model, equation = 1, fast = FALSE)
 ```
 
 ## Arguments

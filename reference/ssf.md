@@ -7,7 +7,3 @@ Title
 ``` r
 ssf(initialization, dynamics, measurement)
 ```
-
-## Arguments
-
-- measurement:

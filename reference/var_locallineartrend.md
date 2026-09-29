@@ -15,7 +15,3 @@ var_locallineartrend(
   fixedSlopeScale = FALSE
 )
 ```
-
-## Arguments
-
-- fixedSlopeScale:

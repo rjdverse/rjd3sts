@@ -13,5 +13,3 @@ msignal(object, m, pos = NULL, stdev = FALSE)
 - object:
 
   Estimated model
-
-- stdev:

@@ -25,6 +25,7 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/bsm_model.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/bsm_to_ucm.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/components_pos.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/compute.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/cumul.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/cycle.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/dot-airline.html</loc></url>
@@ -69,6 +70,7 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/filtered_states_stdev.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/filtering_states.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/filtering_states_stdev.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/get_sts_option.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/index.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/loading.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/loading_cyclical.html</loc></url>
@@ -102,6 +104,7 @@
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/ssf.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/sts.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/sts_forecast.html</loc></url>
+<url><loc>https://rjdverse.github.io/rjd3sts/reference/sts_option.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/sts_outliers.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/sts_raw.html</loc></url>
 <url><loc>https://rjdverse.github.io/rjd3sts/reference/tdairline_estimation.html</loc></url>

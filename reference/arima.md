@@ -7,7 +7,3 @@ Autoregressive Integrated Moving Average (ARIMA) Model
 ``` r
 arima(name, ar, diff, ma, var = 1, fixed = FALSE)
 ```
-
-## Arguments
-
-- fixed:

@@ -15,7 +15,3 @@ splines_generic(
   fixed = FALSE
 )
 ```
-
-## Arguments
-
-- fixed:

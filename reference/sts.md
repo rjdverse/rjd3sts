@@ -47,8 +47,6 @@ sts(
 
   Seasonal model
 
-- tol:
-
 ## Examples
 
 ``` r
@@ -60,7 +58,7 @@ sts(
 #> level:  135.5975 
 #> slope:  0.156252 
 #> seasonal:  52.25239 
-#> noise:  174.5098 
+#> noise:  174.5099 
 #> 
 #> LogLikelihood:  -1233.544 
 #> AIC:  2467.089 

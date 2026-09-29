@@ -7,7 +7,3 @@ Title
 ``` r
 .composite(cmps)
 ```
-
-## Arguments
-
-- cmps:

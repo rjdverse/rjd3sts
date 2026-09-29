@@ -7,7 +7,3 @@ Title
 ``` r
 filtering_states_stdev(model)
 ```
-
-## Arguments
-
-- model:

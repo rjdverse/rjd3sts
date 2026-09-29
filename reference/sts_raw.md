@@ -19,7 +19,3 @@ sts_raw(
   tol = 1e-09
 )
 ```
-
-## Arguments
-
-- tol:

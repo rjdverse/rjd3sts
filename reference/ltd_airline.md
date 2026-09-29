@@ -18,7 +18,3 @@ ltd_airline(
   fixedvariance = FALSE
 )
 ```
-
-## Arguments
-
-- fixedvariance:

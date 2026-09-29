@@ -16,7 +16,3 @@ sarima(
   fixedvariance = FALSE
 )
 ```
-
-## Arguments
-
-- fixedvariance:

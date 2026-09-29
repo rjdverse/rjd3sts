@@ -7,7 +7,3 @@ Title
 ``` r
 smoothed_states(model)
 ```
-
-## Arguments
-
-- model:

@@ -31,5 +31,5 @@ ssf2<-.ssf_as_time_invariant(ssf1)
 ll1<-.akf_likelihood(ssf1, rjd3toolkit::ABS$X0.2.09.10.M)
 ll2<-.akf_likelihood(ssf2, rjd3toolkit::ABS$X0.2.09.10.M)
 print(ll1$ll-ll2$ll)
-#> [1] 4.547474e-13
+#> [1] -4.547474e-13
 ```

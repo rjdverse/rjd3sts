@@ -7,7 +7,3 @@ Title
 ``` r
 var_loading(pos, weights)
 ```
-
-## Arguments
-
-- weights:

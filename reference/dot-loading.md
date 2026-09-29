@@ -7,7 +7,3 @@ Title
 ``` r
 .loading(pos, weights = NULL)
 ```
-
-## Arguments
-
-- weights:

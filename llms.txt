@@ -94,7 +94,7 @@ Licence
 - [`add()`](https://rjdverse.github.io/rjd3sts/reference/add.md) : Adds
   a state block or a measurement equation to a given state space model
 - [`add_equation()`](https://rjdverse.github.io/rjd3sts/reference/add_equation.md)
-  : Add a building block to the considered equation
+  : Adds a building block to the considered equation.
 - [`aggregation()`](https://rjdverse.github.io/rjd3sts/reference/aggregation.md)
   : Title
 - [`ar()`](https://rjdverse.github.io/rjd3sts/reference/ar.md)
@@ -118,6 +118,8 @@ Licence
   : Title
 - [`components_pos()`](https://rjdverse.github.io/rjd3sts/reference/components_pos.md)
   : Position of the components
+- [`compute()`](https://rjdverse.github.io/rjd3sts/reference/compute.md)
+  : Computes a model, for given parameters
 - [`cumul()`](https://rjdverse.github.io/rjd3sts/reference/cumul.md) :
   Title
 - [`cycle()`](https://rjdverse.github.io/rjd3sts/reference/cycle.md) :
@@ -213,6 +215,8 @@ Licence
   : Title
 - [`filtering_states_stdev()`](https://rjdverse.github.io/rjd3sts/reference/filtering_states_stdev.md)
   : Title
+- [`get_sts_option()`](https://rjdverse.github.io/rjd3sts/reference/get_sts_option.md)
+  : Set an option for sts
 - [`loading()`](https://rjdverse.github.io/rjd3sts/reference/loading.md)
   : Title
 - [`loading_cyclical()`](https://rjdverse.github.io/rjd3sts/reference/loading_cyclical.md)
@@ -257,7 +261,8 @@ Licence
 - [`seasonalbreaks()`](https://rjdverse.github.io/rjd3sts/reference/seasonalbreaks.md)
   : Title
 - [`signal()`](https://rjdverse.github.io/rjd3sts/reference/signal.md) :
-  Title
+  Computes the signal, which is defined by the scalar product between
+  the rows of the smoothed states and of a given matrix.
 - [`smoothed_components()`](https://rjdverse.github.io/rjd3sts/reference/smoothed_components.md)
   : Retrieves the components of the model (univariate case) or the
   components corresponding to a given equation (multivariate case)
@@ -279,6 +284,8 @@ Licence
 - [`sts()`](https://rjdverse.github.io/rjd3sts/reference/sts.md) : Title
 - [`sts_forecast()`](https://rjdverse.github.io/rjd3sts/reference/sts_forecast.md)
   : Forecast with STS model
+- [`sts_option()`](https://rjdverse.github.io/rjd3sts/reference/sts_option.md)
+  : Set an option for sts
 - [`sts_outliers()`](https://rjdverse.github.io/rjd3sts/reference/sts_outliers.md)
   : Title
 - [`sts_raw()`](https://rjdverse.github.io/rjd3sts/reference/sts_raw.md)

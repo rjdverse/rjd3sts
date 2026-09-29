@@ -7,7 +7,3 @@ Title
 ``` r
 filtered_states(model)
 ```
-
-## Arguments
-
-- model:

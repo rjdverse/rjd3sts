@@ -192,27 +192,27 @@ print(q)
 #> Variances of series 1
 #> 
 #>              variance
-#> level    9.697043e-05
-#> slope    3.047241e-08
-#> seasonal 2.005323e-06
-#> noise    1.860062e-04
+#> level    9.697053e-05
+#> slope    3.047615e-08
+#> seasonal 2.005189e-06
+#> noise    1.860087e-04
 #> 
 #> 
 #> Variances of series 2
 #> 
 #>              variance
-#> level    5.169842e-05
-#> slope    1.539884e-07
-#> seasonal 1.130941e-04
-#> noise    5.416631e-04
+#> level    5.170025e-05
+#> slope    1.539950e-07
+#> seasonal 1.130986e-04
+#> noise    5.416294e-04
 #> 
 #> 
 #> Correlations between innovations of the two series
 #>           variance
-#> level    0.5106498
+#> level    0.5106453
 #> slope    1.0000000
-#> seasonal 0.5894592
-#> noise    0.2847975
+#> seasonal 0.5895226
+#> noise    0.2847789
 plot(q)
 ```
 

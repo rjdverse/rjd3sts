@@ -21,5 +21,3 @@ var_ar(
 - name:
 
   Name of the block
-
-- zeroinit:

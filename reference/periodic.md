@@ -13,5 +13,3 @@ periodic(name, period, harmonics, variance = 0.01, fixedvariance = FALSE)
 - name:
 
   Name of the block
-
-- fixedvariance:

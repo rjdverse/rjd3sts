@@ -17,7 +17,3 @@ bsm_model(
   cycle.length = 6
 )
 ```
-
-## Arguments
-
-- cycle.length:

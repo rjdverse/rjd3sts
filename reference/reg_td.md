@@ -16,7 +16,3 @@ reg_td(
   fixed = FALSE
 )
 ```
-
-## Arguments
-
-- fixed:

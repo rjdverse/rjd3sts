@@ -7,7 +7,3 @@ Title
 ``` r
 .mssf(component, measurements)
 ```
-
-## Arguments
-
-- measurements:

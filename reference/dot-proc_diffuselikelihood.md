@@ -7,7 +7,3 @@ Title
 ``` r
 .proc_diffuselikelihood(jrslt, prefix)
 ```
-
-## Arguments
-
-- prefix:

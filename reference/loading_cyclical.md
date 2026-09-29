@@ -7,7 +7,3 @@ Title
 ``` r
 loading_cyclical(period, startpos)
 ```
-
-## Arguments
-
-- startpos:

@@ -8,10 +8,6 @@ Title
 .bsm2spec(jbsm, fixed = FALSE, fixedCycle = TRUE)
 ```
 
-## Arguments
-
-- fixedCycle:
-
 ## Examples
 
 ``` r

@@ -7,7 +7,3 @@ Title
 ``` r
 .ssf_B(x)
 ```
-
-## Arguments
-
-- x:

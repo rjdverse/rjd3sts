@@ -13,5 +13,3 @@ sae(name, ar, fixedar = FALSE, lag = 1, zeroinit = FALSE)
 - name:
 
   Name of the block
-
-- zeroinit:

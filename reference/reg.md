@@ -13,5 +13,3 @@ reg(name, x, var = NULL, fixed = FALSE)
 - x:
 
   matrix containing the regressors
-
-- fixed:

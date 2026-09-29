@@ -8,10 +8,6 @@ Title
 .bsm2ucm(jbsm, normalized = TRUE)
 ```
 
-## Arguments
-
-- normalized:
-
 ## Examples
 
 ``` r

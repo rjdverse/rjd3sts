@@ -7,7 +7,3 @@ Get Parameters of SSF Model
 ``` r
 parameters(model)
 ```
-
-## Arguments
-
-- model:

@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="BSM">
 </head>
@@ -70,7 +70,7 @@
                         <h4 data-toc-skip class="author">Jean
 Palate</h4>
             
-            <h4 data-toc-skip class="date">2026-05-08</h4>
+            <h4 data-toc-skip class="date">2026-09-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rjdverse/rjd3sts/blob/develop/vignettes/bsm.Rmd" class="external-link"><code>vignettes/bsm.Rmd</code></a></small>
       <div class="d-none name"><code>bsm.Rmd</code></div>
@@ -86,12 +86,17 @@ structural model. We present below some of them.</p>
 <p>To compare the results (more precisely the likelihood) of the
 different approaches, it is important to compute the marginal
 likelihood.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Attaching package: 'rjd3sts'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     ar, arima, cycle, loadings</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">Retail</span><span class="op">$</span><span class="va">BookStores</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="standard-definition-noise-in-the-state">Standard definition, noise in the state<a class="anchor" aria-label="anchor" href="#standard-definition-noise-in-the-state"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create the model</span></span>
 <span><span class="va">bsm</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/model.html">model</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># create the components and add them to the model</span></span>
@@ -107,7 +112,7 @@ likelihood.</p>
 <div class="section level3">
 <h3 id="standard-definition-noise-in-the-measurement">Standard definition, noise in the measurement<a class="anchor" aria-label="anchor" href="#standard-definition-noise-in-the-measurement"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create the model</span></span>
 <span><span class="va">bsm</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/model.html">model</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># create the components and add them to the model</span></span>
@@ -128,7 +133,7 @@ likelihood.</p>
 <h3 id="components-with-fixed-variances-aggregated-with-diffuse-weights-noise-in-the-state">components with fixed variances, aggregated with diffuse weights
 (noise in the state)<a class="anchor" aria-label="anchor" href="#components-with-fixed-variances-aggregated-with-diffuse-weights-noise-in-the-state"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create the model</span></span>
 <span><span class="va">bsm</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/model.html">model</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="co"># create the components, with fixed variances, and add them to the model</span></span>
@@ -165,7 +170,7 @@ likelihood.</p>
 <div class="section level3">
 <h3 id="bsm-with-long-term-trend-and-cycle">bsm with long term trend and cycle<a class="anchor" aria-label="anchor" href="#bsm-with-long-term-trend-and-cycle"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create the model</span></span>
 <span><span class="va">bsm</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/model.html">model</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="co"># create the components and add them to the model</span></span>
@@ -180,7 +185,7 @@ likelihood.</p>
 <li>Likelihood = 349.1426991</li>
 <li>Parameters = 0.168604, 0.000000, 0.000382, 0.271294, 1.000000</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ss</span><span class="op">&lt;-</span><span class="fu"><a href="../reference/smoothed_states.html">smoothed_states</a></span><span class="op">(</span><span class="va">rslt</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ss</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="va">ss</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, type<span class="op">=</span><span class="st">'l'</span>, col<span class="op">=</span><span class="st">'blue'</span>, ylab<span class="op">=</span><span class="st">'trends'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">ss</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, col<span class="op">=</span><span class="st">'red'</span><span class="op">)</span></span></code></pre></div>
@@ -198,7 +203,7 @@ likelihood.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

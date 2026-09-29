@@ -1,6 +1,6 @@
-# Add a building block to the considered equation
+# Adds a building block to the considered equation.
 
-Add a building block to the considered equation
+Adds a building block to the considered equation.
 
 ## Usage
 
@@ -12,7 +12,7 @@ add_equation(equation, item, coeff = 1, fixed = TRUE, loading = NULL)
 
 - equation:
 
-  the equation
+  the equation.
 
 - item:
 
@@ -28,11 +28,11 @@ add_equation(equation, item, coeff = 1, fixed = TRUE, loading = NULL)
 - fixed:
 
   logical that triggers estimation of coeff (FALSE) or fixes it (TRUE)
-  to a pre-specified value
+  to a pre-specified value.
 
 - loading:
 
-  the loading that links the block to the observations
+  the loading that links the block to the observations.
 
 ## Examples
 

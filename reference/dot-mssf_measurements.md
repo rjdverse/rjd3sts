@@ -7,7 +7,3 @@ Title
 ``` r
 .mssf_measurements(Z, H)
 ```
-
-## Arguments
-
-- H:

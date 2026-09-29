@@ -7,7 +7,3 @@ Title
 ``` r
 loading_sum(length = 0)
 ```
-
-## Arguments
-
-- length:
