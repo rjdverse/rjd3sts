@@ -6,9 +6,6 @@
 \usage{
 .mssf_measurements(Z, H)
 }
-\arguments{
-\item{H}{}
-}
 \description{
 Title
 }

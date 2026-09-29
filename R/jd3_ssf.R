@@ -1010,7 +1010,7 @@ smoothed_states<-function(model){
 #' low<-scmp[,c(2,3)]
 #' matplot(high, type='l')
 #' matplot(low, type='l')
-smoothed_components<-function(model, equation=1, fast=TRUE){
+smoothed_components<-function(model, equation=1, fast=FALSE){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
   if (is.jnull(model$internal)){

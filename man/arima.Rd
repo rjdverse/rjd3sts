@@ -6,9 +6,6 @@
 \usage{
 arima(name, ar, diff, ma, var = 1, fixed = FALSE)
 }
-\arguments{
-\item{fixed}{}
-}
 \description{
 Autoregressive Integrated Moving Average (ARIMA) Model
 }

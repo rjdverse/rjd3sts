@@ -6,9 +6,6 @@
 \usage{
 smoothed_states(model)
 }
-\arguments{
-\item{model}{}
-}
 \description{
 Title
 }

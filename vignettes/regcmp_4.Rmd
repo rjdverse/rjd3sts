@@ -8,6 +8,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+```{r}
+
+```
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(

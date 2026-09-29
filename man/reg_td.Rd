@@ -15,9 +15,6 @@ reg_td(
   fixed = FALSE
 )
 }
-\arguments{
-\item{fixed}{}
-}
 \description{
 Title
 }

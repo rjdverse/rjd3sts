@@ -6,9 +6,6 @@
 \usage{
 .bsm2ucm(jbsm, normalized = TRUE)
 }
-\arguments{
-\item{normalized}{}
-}
 \description{
 Title
 }

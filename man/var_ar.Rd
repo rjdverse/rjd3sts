@@ -16,8 +16,6 @@ var_ar(
 }
 \arguments{
 \item{name}{Name of the block}
-
-\item{zeroinit}{}
 }
 \description{
 Title

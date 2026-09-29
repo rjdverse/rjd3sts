@@ -6,9 +6,6 @@
 \usage{
 loading_periodic(period, startpos)
 }
-\arguments{
-\item{startpos}{}
-}
 \description{
 Title
 }

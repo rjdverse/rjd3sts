@@ -13,9 +13,6 @@ var_seasonal(
   fixed = FALSE
 )
 }
-\arguments{
-\item{fixed}{}
-}
 \description{
 Title
 }

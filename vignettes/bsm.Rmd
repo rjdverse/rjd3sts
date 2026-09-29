@@ -20,9 +20,8 @@ it is important to compute the marginal likelihood.
 ```{r echo=FALSE}
 
 suppressPackageStartupMessages(library(rjd3toolkit))
-suppressPackageStartupMessages(library(rjd3sts))
+library(rjd3sts)
 library(knitr)
-
 
 ```
 

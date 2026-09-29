@@ -14,9 +14,6 @@ splines_regular(
   fixed = FALSE
 )
 }
-\arguments{
-\item{fixed}{}
-}
 \description{
 Title
 }
