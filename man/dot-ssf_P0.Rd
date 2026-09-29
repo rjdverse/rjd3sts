@@ -6,9 +6,6 @@
 \usage{
 .ssf_P0(x)
 }
-\arguments{
-\item{x}{}
-}
 \description{
 Title
 }

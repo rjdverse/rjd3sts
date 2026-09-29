@@ -6,9 +6,6 @@
 \usage{
 .loading(pos, weights = NULL)
 }
-\arguments{
-\item{weights}{}
-}
 \description{
 Title
 }

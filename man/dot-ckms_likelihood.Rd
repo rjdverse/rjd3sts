@@ -6,9 +6,6 @@
 \usage{
 .ckms_likelihood(ssf, data, rescalingFactor = TRUE)
 }
-\arguments{
-\item{rescalingFactor}{}
-}
 \description{
 Title
 }

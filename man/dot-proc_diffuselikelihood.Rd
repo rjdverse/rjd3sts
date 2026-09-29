@@ -6,9 +6,6 @@
 \usage{
 .proc_diffuselikelihood(jrslt, prefix)
 }
-\arguments{
-\item{prefix}{}
-}
 \description{
 Title
 }

@@ -5,7 +5,7 @@
 \title{Retrieves the components of the model (univariate case) or the
 components corresponding to a given equation (multivariate case)}
 \usage{
-smoothed_components(model, equation = 1, fast = TRUE)
+smoothed_components(model, equation = 1, fast = FALSE)
 }
 \arguments{
 \item{model}{Estimated state space model}

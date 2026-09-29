@@ -29,10 +29,26 @@ on a non-stationary latent variable and the loading coefficient needs to be esti
 
 \item{initialization}{initialization method.}
 
+\item{optimizer}{Optimizer used to estimate the parameters (by ML).}
+
 \item{precision}{indicating the largest likelihood deviations that make the algorithm stop.}
 
-\item{initialParameters}{}
+\item{initialParameters}{Initial parameters}
+}
+\value{
+An object of the class "JD3_SsfModelEstimation"
 }
 \description{
 Estimate a SSF Model
+}
+\examples{
+model<-model()
+llt<-locallineartrend("llt")
+seas<-seasonal("seas", 12, "HarrisonStevens")
+n<-noise("n")
+add(model,llt)
+add(model,seas)
+add(model,n)
+y<-rjd3toolkit::Retail$BookStores
+emodel<-estimate(model, y)
 }

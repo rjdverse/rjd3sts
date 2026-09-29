@@ -6,9 +6,6 @@
 \usage{
 cumul(name, core, period, start = 0)
 }
-\arguments{
-\item{start}{}
-}
 \description{
 Title
 }

@@ -6,9 +6,6 @@
 \usage{
 block_v(block, pos = 0)
 }
-\arguments{
-\item{block}{}
-}
 \description{
 Title
 }

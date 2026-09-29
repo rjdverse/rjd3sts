@@ -18,9 +18,6 @@ sts_raw(
   tol = 1e-09
 )
 }
-\arguments{
-\item{tol}{}
-}
 \description{
 Title
 }
