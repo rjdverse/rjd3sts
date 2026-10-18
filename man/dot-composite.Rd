@@ -6,9 +6,6 @@
 \usage{
 .composite(cmps)
 }
-\arguments{
-\item{cmps}{}
-}
 \description{
 Title
 }

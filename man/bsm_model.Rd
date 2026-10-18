@@ -16,9 +16,6 @@ bsm_model(
   cycle.length = 6
 )
 }
-\arguments{
-\item{cycle.length}{}
-}
 \description{
 Title
 }

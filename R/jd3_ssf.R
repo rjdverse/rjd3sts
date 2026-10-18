@@ -8,13 +8,13 @@ MODELESTIMATION<-'JD3_SsfModelEstimation'
 MODEL<-'JD3_SsfModel'
 STATEBLOCK<-'JD3_SsfStateBlock'
 
-#' Add a building block to the considered equation
+#' Adds a building block to the considered equation.
 #'
-#' @param equation the equation
+#' @param equation the equation.
 #' @param item the block of the state array that will be linked to the observation corresponding to this equation through the specified loading and coefficient
 #' @param coeff the value of the coefficient associated to the block of latent variables defined by `item`.
-#' @param fixed logical that triggers estimation of coeff (FALSE) or fixes it (TRUE) to a pre-specified value
-#' @param loading the loading that links the block to the observations
+#' @param fixed logical that triggers estimation of coeff (FALSE) or fixes it (TRUE) to a pre-specified value.
+#' @param loading the loading that links the block to the observations.
 #'
 #' @return
 #' @export
@@ -40,17 +40,18 @@ add_equation<-function(equation, item, coeff=1, fixed=TRUE, loading=NULL){
 }
 
 
-#' Title
+#' Computes the signal, which is defined by the scalar product between the rows of the smoothed states
+#' and of a given matrix.
 #'
-#' @param object
-#' @param obs
-#' @param pos
-#' @param loading
-#' @param stdev
 #'
-#' @return
+#' @param object A model estimation
+#' @param pos The selection of the elements of the states; NULL if we select all the items.
+#' @param loading The matrix that will multiply (a selection of) the smoothed states. If NULL, we just sum the selected items.
+#' @param stdev True if we compute the standard deviation of the signal, false otherwise
+#'
+#' @return An array of data
 #' @export
-signal<-function(object, obs=1, pos=NULL, loading=NULL, stdev=FALSE){
+signal<-function(object, pos=NULL, loading=NULL, stdev=FALSE){
   if (! is(object, MODELESTIMATION))
     stop("Not a model estimation")
   if (is.jnull(object$internal)){
@@ -68,9 +69,9 @@ signal<-function(object, obs=1, pos=NULL, loading=NULL, stdev=FALSE){
       else
         jpos<-.jarray(as.integer(pos-1))
       if (stdev){
-        return(.jcall(object$internal, "[D", "stdevSignal", as.integer(obs-1), jpos))
+        return(.jcall(object$internal, "[D", "stdevSignal", jpos))
       } else {
-        return(.jcall(object$internal, "[D", "signal", as.integer(obs-1), jpos))
+        return(.jcall(object$internal, "[D", "signal", jpos))
       }
     }
   }
@@ -175,14 +176,23 @@ add<-function(model, item){
 #' on a non-stationary latent variable and the loading coefficient needs to be estimated.
 #' @param concentrated logical value used to specify whether the likelihood is concentrated (TRUE) or not (FALSE) during the optimization
 #' @param initialization initialization method.
-#' @param optimizer
+#' @param optimizer Optimizer used to estimate the parameters (by ML).
 #' @param precision indicating the largest likelihood deviations that make the algorithm stop.
-#' @param initialParameters
+#' @param initialParameters Initial parameters
 #'
-#' @return
+#' @return An object of the class "JD3_SsfModelEstimation"
 #' @export
 #'
 #' @examples
+#' model<-model()
+#' llt<-locallineartrend("llt")
+#' seas<-seasonal("seas", 12, "HarrisonStevens")
+#' n<-noise("n")
+#' add(model,llt)
+#' add(model,seas)
+#' add(model,n)
+#' y<-rjd3toolkit::Retail$BookStores
+#' emodel<-estimate(model, y)
 estimate<-function(model, data, marginal=FALSE, concentrated=TRUE,
               initialization=c("Augmented_Robust", "Diffuse", "SqrtDiffuse", "Augmented", "Augmented_NoCollapsing"), optimizer=c("LevenbergMarquardt", "MinPack", "BFGS", "LBFGS"), precision=1e-15, initialParameters=NULL){
   initialization <- match.arg(initialization)
@@ -201,6 +211,20 @@ estimate<-function(model, data, marginal=FALSE, concentrated=TRUE,
   }
 }
 
+#' Computes a model, for given parameters
+#'
+#' @param model the model
+#' @param data a matrix containing the data (one time series per column, time series dimension on the rows)
+#' @param parameters Parameters of the model
+#' @param marginal logical value used to specify whether the marginal likelihood definition is used (TRUE) or
+#' not (FALSE) during the optimization. The marginal likelihood is recommended when there is at least one variable that loads
+#' on a non-stationary latent variable and the loading coefficient needs to be estimated.
+#' @param concentrated logical value used to specify whether the likelihood is concentrated (TRUE) or not (FALSE) during the optimization
+#'
+#' @returns An object of the class "JD3_SsfModelEstimation"
+#' @export
+#'
+#' @examples
 compute<-function(model, data, parameters, marginal=FALSE, concentrated=TRUE){
   if (! is(model, MODEL))
     stop("Not a model")
@@ -986,7 +1010,7 @@ smoothed_states<-function(model){
 #' low<-scmp[,c(2,3)]
 #' matplot(high, type='l')
 #' matplot(low, type='l')
-smoothed_components<-function(model, equation=1, fast=TRUE){
+smoothed_components<-function(model, equation=1, fast=FALSE){
   if (! is(model, MODELESTIMATION))
     stop("Not a model")
   if (is.jnull(model$internal)){

@@ -6,9 +6,6 @@
 \usage{
 filtering_states_stdev(model)
 }
-\arguments{
-\item{model}{}
-}
 \description{
 Title
 }

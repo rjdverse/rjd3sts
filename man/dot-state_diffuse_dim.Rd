@@ -6,9 +6,6 @@
 \usage{
 .state_diffuse_dim(x)
 }
-\arguments{
-\item{x}{}
-}
 \description{
 Title
 }

@@ -6,9 +6,6 @@
 \usage{
 .r2jd_bsm(bsm)
 }
-\arguments{
-\item{bsm}{}
-}
 \description{
 Title
 }

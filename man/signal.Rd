@@ -2,13 +2,24 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{signal}
 \alias{signal}
-\title{Title}
+\title{Computes the signal, which is defined by the scalar product between the rows of the smoothed states
+and of a given matrix.}
 \usage{
-signal(object, obs = 1, pos = NULL, loading = NULL, stdev = FALSE)
+signal(object, pos = NULL, loading = NULL, stdev = FALSE)
 }
 \arguments{
-\item{stdev}{}
+\item{object}{A model estimation}
+
+\item{pos}{The selection of the elements of the states; NULL if we select all the items.}
+
+\item{loading}{The matrix that will multiply (a selection of) the smoothed states. If NULL, we just sum the selected items.}
+
+\item{stdev}{True if we compute the standard deviation of the signal, false otherwise}
+}
+\value{
+An array of data
 }
 \description{
-Title
+Computes the signal, which is defined by the scalar product between the rows of the smoothed states
+and of a given matrix.
 }

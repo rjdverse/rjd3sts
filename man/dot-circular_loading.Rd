@@ -6,9 +6,6 @@
 \usage{
 .circular_loading(period, start = 0)
 }
-\arguments{
-\item{start}{}
-}
 \description{
 Title
 }

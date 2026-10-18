@@ -30,8 +30,6 @@ For instance, usual trading days are defined by \code{c(1,2,3,4,5,6,0)}, week da
 \item{level}{-1 = no level, 0 = fixed level, 1 = sotchastic level}
 
 \item{seasonal}{Seasonal model}
-
-\item{tol}{}
 }
 \description{
 Title

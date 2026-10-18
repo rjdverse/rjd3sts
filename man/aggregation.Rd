@@ -6,9 +6,6 @@
 \usage{
 aggregation(name, components)
 }
-\arguments{
-\item{components}{}
-}
 \description{
 Title
 }

@@ -6,9 +6,6 @@
 \usage{
 .bsm2spec(jbsm, fixed = FALSE, fixedCycle = TRUE)
 }
-\arguments{
-\item{fixedCycle}{}
-}
 \description{
 Title
 }

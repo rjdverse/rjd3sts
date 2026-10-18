@@ -2,23 +2,23 @@
 % Please edit documentation in R/jd3_ssf.R
 \name{add_equation}
 \alias{add_equation}
-\title{Add a building block to the considered equation}
+\title{Adds a building block to the considered equation.}
 \usage{
 add_equation(equation, item, coeff = 1, fixed = TRUE, loading = NULL)
 }
 \arguments{
-\item{equation}{the equation}
+\item{equation}{the equation.}
 
 \item{item}{the block of the state array that will be linked to the observation corresponding to this equation through the specified loading and coefficient}
 
 \item{coeff}{the value of the coefficient associated to the block of latent variables defined by \code{item}.}
 
-\item{fixed}{logical that triggers estimation of coeff (FALSE) or fixes it (TRUE) to a pre-specified value}
+\item{fixed}{logical that triggers estimation of coeff (FALSE) or fixes it (TRUE) to a pre-specified value.}
 
-\item{loading}{the loading that links the block to the observations}
+\item{loading}{the loading that links the block to the observations.}
 }
 \description{
-Add a building block to the considered equation
+Adds a building block to the considered equation.
 }
 \examples{
 eq<- equation('eq1')

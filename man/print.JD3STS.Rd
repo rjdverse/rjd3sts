@@ -6,9 +6,6 @@
 \usage{
 \method{print}{JD3STS}(x, ...)
 }
-\arguments{
-\item{...}{}
-}
 \description{
 Title
 }

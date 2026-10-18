@@ -15,9 +15,6 @@ sarima(
   fixedvariance = FALSE
 )
 }
-\arguments{
-\item{fixedvariance}{}
-}
 \description{
 Title
 }

@@ -6,9 +6,6 @@
 \usage{
 var_noise(name, std, scale = 1, fixed = FALSE)
 }
-\arguments{
-\item{fixed}{}
-}
 \description{
 Title
 }

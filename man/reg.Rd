@@ -8,8 +8,6 @@ reg(name, x, var = NULL, fixed = FALSE)
 }
 \arguments{
 \item{x}{matrix containing the regressors}
-
-\item{fixed}{}
 }
 \description{
 Time Varying Regressors

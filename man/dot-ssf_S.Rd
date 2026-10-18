@@ -6,9 +6,6 @@
 \usage{
 .ssf_S(x, pos = 0)
 }
-\arguments{
-\item{pos}{}
-}
 \description{
 Title
 }

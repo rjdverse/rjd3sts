@@ -6,9 +6,6 @@
 \usage{
 arma(name, ar, fixedar = FALSE, ma, fixedma = FALSE, var = 1, fixedvar = FALSE)
 }
-\arguments{
-\item{fixedvar}{}
-}
 \description{
 Autoregressive Moving Average (ARMA) Model
 }
